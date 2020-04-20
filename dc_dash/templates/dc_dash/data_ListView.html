@@ -1,0 +1,454 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+
+{% load static %}
+{% block jumbotron %}
+{% load micawber_tags %} 
+
+
+   
+        
+<style>
+
+/*Dhankar --- */
+.popover-title {
+    background-color: rgb(143, 197, 150) !important;
+    margin: 0 5px;
+    font-weight: bold;
+    /*color: #505458 !important;*/
+    color:rgb(9, 4, 75) !important;
+    text-align: left;
+    padding: 2px 5px;
+    font-weight: 300;
+    border-bottom: 1px solid #f7f7f7;
+} 
+
+/* Dhankar --- Popover Body */
+.popover-content {
+    background-color:rgb(12, 189, 36) !important;
+    color: rgb(9, 4, 75) !important;
+    padding: 25px;
+}
+
+
+.well {
+    background: rgb(22, 105, 173);
+}    
+
+.well.custom-well-small { 
+    width: 200px; 
+    height: 50px;
+    margin: 0 auto; 
+    /*background: grey;*/
+    /*background: rgb(255, 140, 0); */
+    }    
+    
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ccccff;
+}
+
+    
+    
+body {
+    color: black;
+}
+    
+
+h1 {
+    text-align: center;
+        color: black;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+    
+    
+table {
+    border-collapse: collapse;
+    width: 100%;        
+}
+
+table, th, td {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid grey;
+    padding: 15px;
+    height: 25px;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    text-align: justify;
+   
+}
+    
+tr:hover {background-color:#ffdb99}
+ 
+th {
+  background-color:#0b0e25;  
+    color: white;
+}
+    
+    .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ccccff;
+}
+
+    
+    
+body {
+    color: grey;
+}
+    
+
+h1 {
+    text-align: center;
+        color: black;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+    
+    
+table {
+    border-collapse: collapse;
+    width: 100%;        
+}
+
+table, th, td {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid grey;
+    padding: 15px;
+    height: 25px;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    text-align: justify;
+    font-size:13px !important;
+   
+}
+    
+tr:hover {background-color:#ffdb99}
+    
+    
+</style>
+    
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+
+<title>Digital Cognition</title>
+
+<!-- Bootstrap core CSS -->
+<!-- DHANKAR define paths to local STATIC -->
+<!-- DHANKAR - All original Comments from Original Boot template have been retained -->
+
+<link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">      
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">      
+<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="{% static 'dist/css/dashboard.css' %}" rel="stylesheet">    
+
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- === DHANKAR=== bootstrap-table Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.0/bootstrap-table.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.0/bootstrap-table.min.js"></script>
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.0/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- == DHANKAR= other BOOTSTRAP CDN Imports recommended by - bootstrap-table -done above from STATIC DIR OWN == -->
+<!-- == bootstrap-table/dist/bootstrap-table.js = Got from GITHUB placed within STATIC DIR == /static_in_pro/our_static/js == -->
+<!-- == https://raw.githubusercontent.com/wenzhixin/bootstrap-table/develop/dist/bootstrap-table.js == -->
+<!-- == bootstrap-table/dist/bootstrap-table.css = Got from GITHUB placed within STATIC DIR == /static_in_pro/our_static/css == -->
+<!-- == https://raw.githubusercontent.com/wenzhixin/bootstrap-table/develop/dist/bootstrap-table.css == -->
+<!-- == bootstrap-table.min.css == ALSO == bootstrap-table.min.js == -->
+<link href="{% static 'css/bootstrap-table.min.css' %}" rel="stylesheet">  
+<link href="{% static 'css/bootstrap-table.css' %}" rel="stylesheet">  
+
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table.js"></script>
+
+<!-- === DHANKAR=== bootstrap-table ==== ALLL CDN imports Above here=== -->
+
+<!-- PopOver CSS and JS DHANKAR Starts-->       
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- PopOver CSS and JS DHANKAR Ends-->       
+
+</head>
+
+    
+    
+    
+    
+<body>
+
+    
+
+
+
+
+
+
+
+
+
+
+<!-- == DIV Class for Push Towards the RIGHT so we have SIDEBAR on LEFT ==-->           
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">                    
+                        
+               
+
+<!-- Top Pagination OK Dont Change-->    
+{% if is_paginated %}
+<ul class="pagination">
+{% if page_obj.has_previous %}
+<li>
+<span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+</li>
+{% endif %}
+<li class="">
+<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+</li>
+{% if page_obj.has_next %}
+<li>
+<span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+</li>
+{% endif %}
+</ul>
+{% else %}
+<h3> This Data Table Has Only These Many Records  </h3>
+<p> Come back later for more Tweets</p>
+{% endif %}
+<!-- Top Pagination - Ends OK Dont Change-->        
+
+
+
+
+    
+<!-- Dhankar - Original PopOver Code 
+{% for entry in list_targetSearchTerm %}
+<a  href="#" role="button" class="btn popovers" data-toggle="popover" title="" 
+data-content= "{{ entry.initSearchStr }}" 
+data-original-title="Search Term Results">Results for Search Term :- </a>
+{% endfor %} -->
+
+
+<!-- PopOver DHANKAR Starts-->   
+<!-- <script>
+    $(document).ready(function()
+    {
+
+    //$('[data-toggle="popover"]').popover();  
+    //$('[data-toggle="popover"]').popover({title: "Header", content: "Blabla", trigger: "hover"});   
+    $('[data-toggle="popover"]').popover({trigger: "hover"});   
+
+    //$(this).attr('data-content',strData);
+
+    });
+</script> -->
+
+<!-- PopOver DHANKAR Ends -->        
+
+
+
+
+
+
+
+<table data-pagination="true" data-search="true" data-toggle="table">
+
+        <div class="form-inline">
+                <button type="button" 
+                        class="btn btn-default mybtn-top">
+                    Scroll to top
+                </button>
+                <button type="button" 
+                        class="btn btn-default mybtn-row">
+                    Scroll to row index: 
+                </button>
+                    <input type="number" 
+                           class="form-control row-index" 
+                           value="3" min="0">
+                <button type="button" 
+                        class="btn btn-default mybtn-btm">
+                    Scroll to bottom
+                </button>
+                
+                {% for entry in list_targetSearchTerm %}
+                <button type="button" 
+                class="btn popovers" 
+                data-toggle="popover"
+                data-content= "{{ entry.initSearchStr }}" 
+                data-original-title="Search Term Results">
+                    Hover for Search Term
+                </button>
+                {% endfor %}
+
+            </div>
+
+
+<table id="TW11">  
+
+<thead>
+<tr>
+  <th>Start Up Name</th>
+  <th>Website</th>
+  <th>LinkedIn</th>      
+  <th>Stage</th>  
+  <th>Industry</th>  
+  <th>Location</th>  
+
+</tr>
+
+{% for entry in list_mod_4 %}
+  
+<tr>
+      <td style='color:black;'>{{ entry.ORG_Name }}</td>
+      <td style='color:black;'>{{ entry.ORG_URL|oembed_html:"600x600"}}</td>
+      <td style='color:black;'>{{ entry.LinkedIn_URL|oembed_html:"600x600"}}</td>                  
+      <td style='color:black;'>{{ entry.COY_Stage|oembed_html:"600x600"}}</td>   
+      <td style='color:black;'>{{ entry.ORG_Industry|oembed_html:"600x600"}}</td>   
+      <td style='color:black;'>{{ entry.ORG_loca|oembed_html:"600x600"}}</td>   
+
+</tr>
+
+{% endfor %}
+
+</table>
+    
+   
+</ul>
+ 
+</div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+ {% if is_paginated %}
+<ul class="pagination">
+{% if page_obj.has_previous %}
+    <li>
+        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+    </li>
+{% endif %}
+    <li class="">
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+    </li>
+{% if page_obj.has_next %}
+    <li>
+        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+    </li>
+{% endif %}
+</ul>
+{% else %}
+    <h3> This Twitter Handle Has Only These Many Tweets  </h3>
+    <p> Come back later for more Tweets</p>
+{% endif %}
+
+
+</body>
+    
+    {% endblock %}
+</html>

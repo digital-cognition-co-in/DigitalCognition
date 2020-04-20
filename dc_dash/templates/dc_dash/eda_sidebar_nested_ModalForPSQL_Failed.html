@@ -1,0 +1,1458 @@
+<style>
+
+        body {
+        background-color: lightblue;
+            }
+      
+      body.modal-open {
+          overflow: hidden;
+      }
+      /* When MODAL OPens - BootStrap adds a Class == .modal-open to Body   === Didnt Work ??  */
+      /* Source SO == https://stackoverflow.com/questions/9538868/prevent-body-from-scrolling-when-a-modal-is-opened */
+      
+      /* dhankar - form input textbox  */
+      input[type="text"] {
+          width: 130px;
+      }
+      
+              .elnt_container{
+                padding: 6px 8px;
+              }
+              #conditional_part{
+                padding: 6px 4px;
+                display:none;
+              }
+              
+              #conditional_part_more-info_initSearch{
+                padding: 6px 4px;
+                display:none;
+              }
+              
+              
+              /*
+               * DHANKAR --- Off Canvas SIDEBAR for Mobile 
+               * ---------------------------------------------
+               SOURCE == https://stackoverflow.com/questions/22985370/making-the-bootstrap-dashboard-example-sidebar-visible-available-on-mobile
+               -----
+               */
+               @media screen and (max-width: 768px) {
+                .row-offcanvas {
+                  position: relative;
+                  -webkit-transition: all 0.25s ease-out;
+                  -moz-transition: all 0.25s ease-out;
+                  transition: all 0.25s ease-out;
+                }
+              
+                .row-offcanvas-left
+                .sidebar-offcanvas {
+                  left: -33%;
+                }
+              
+                .row-offcanvas-left.active {
+                  left: 33%;
+                }
+              
+                .sidebar-offcanvas {
+                  position: absolute;
+                  top: 0;
+                  width: 33%;
+                  margin-left: 10px;
+                }
+              }
+              
+              /* Sidebar navigation */
+              .nav-sidebar {
+                background-color: #f5f5f5;
+                margin-right: -15px;
+                margin-bottom: 20px;
+                margin-left: -15px;
+              }
+              .nav-sidebar > li > a {
+                padding-right: 20px;
+                padding-left: 20px;
+              }
+              .nav-sidebar > .active > a {
+                color: #fff;
+                background-color: #428bca;
+              }
+              
+              /* ##DHANKAR# Toggle SIDEBAR ENDS  */
+              
+              
+              
+              
+              
+              
+              /* Center the loader */
+              #loader {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                z-index: 1;
+                width: 550px;
+                height: 150px;
+                margin: -75px 0 0 -75px;
+                border: 16px solid #54e610;
+                /* border: 16px solid #f3f3f3; */
+                border-radius: 50%;
+                border-top: 16px solid #3498db;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 2s linear infinite;
+                animation: spin 2s linear infinite;
+              }
+              
+              @-webkit-keyframes spin {
+                0% { -webkit-transform: rotate(0deg); }
+                100% { -webkit-transform: rotate(360deg); }
+              }
+              
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+              
+              /* Add animation to "page content" */
+              .animate-bottom {
+                position: relative;
+                -webkit-animation-name: animatebottom;
+                -webkit-animation-duration: 1s;
+                animation-name: animatebottom;
+                animation-duration: 1s
+              }
+              
+              @-webkit-keyframes animatebottom {
+                from { bottom:-100px; opacity:0 } 
+                to { bottom:0px; opacity:1 }
+              }
+              
+              @keyframes animatebottom { 
+                from{ bottom:-100px; opacity:0 } 
+                to{ bottom:0; opacity:1 }
+              }
+              
+              #myDiv {
+                /* display: none; */
+                /* text-align: center; */
+              }
+      
+      
+      
+      
+       /* Dropdown Button */
+       .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+      }
+      
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {background-color: #ddd;}
+      
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+        margin-top: 0;
+        
+      }
+      
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {background-color:  rgba(2, 30, 58, 0.966);} 
+      
+      
+      
+      
+      
+      /* STARTS Modal DataSets View_for_SQL_Queries */
+      
+      .modal_mainBody_dataSetsView_for_SQL_Queries{
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        /* top:50%;
+        left:50%; */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto;
+        border-radius: 10px;
+         /* Enable scroll if needed */
+        background-color: rgba(14, 230, 219, 0.1); /* Color and  opacity */
+      
+      }
+      
+      /* modal_content_dataSetsView_for_SQL_Queries == Content/Box */
+      .modal_content_dataSetsView_for_SQL_Queries {
+        position: fixed;
+        width: 880px; 
+        margin-left: 225px;
+        margin-top: 327px;
+        /* ORIGINAL MARGIN AUTO  */
+        /* margin: auto; */
+        /* top:50%;
+        left:50%; */
+        background-color: #fefefe;
+        padding: 0;
+        /* ORIGINAL == border: 1px solid #888; */
+        border-radius: 10px;
+        
+        /* border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      }
+      
+      .modal_header_dataSetsView_for_SQL_Queries{
+        padding: 2px 16px;
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+      }
+      
+      .modal_close_dataSetsView_for_SQL_Queries{
+        color: #aaa;
+        float: right;
+        font-size: 25px;
+        font-weight: bold;
+      }
+      
+      .modal_close_dataSetsView_for_SQL_Queries:hover,
+      .modal_close_dataSetsView_for_SQL_Queries:focus {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+      } 
+      
+      .modal_body_dataSetsView_for_SQL_Queries{
+        padding: 2px 16px;
+        /* max-height: 500px; */
+      }                               
+      
+      .modal_footer_dataSetsView_for_SQL_Queries{
+        /* padding: 2px 16px; */
+        /* NOT OK == width: 880px; */
+        /* background-color: rgba(13, 77, 77, 0.966); */
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+        text-align: right;
+      }                   
+                                                  
+      
+      
+      
+      
+      
+      
+      
+      
+      /* MODAL_Query_PSQL_Tables for _Query_PSQL_Tables CSS Starts  */
+      .modal_mainBody_Query_PSQL_Tables{
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        /* top:50%;
+        left:50%; */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto;
+         /* Enable scroll if needed */
+        background-color: rgba(14, 230, 219, 0.1); /* Color and  opacity */
+      }
+      
+      /* modal_content_Query_PSQL_Tables == Content/Box */
+      .modal_content_Query_PSQL_Tables {
+        position: fixed;
+        width: 280px; 
+        margin-left: 225px;
+        margin-top: 327px;
+        /* ORIGINAL MARGIN AUTO  */
+        /* margin: auto; */
+        /* top:50%;
+        left:50%; */
+        background-color: #fefefe;
+        padding: 0;
+        border: 1px solid #888;
+        /* DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      }
+      /* modal_content_Query_PSQL_Tables Body */
+      .modal_body_Query_PSQL_Tables {
+        padding: 2px 16px;
+        /* max-height: 500px; */
+      }
+        /* Modal Header */
+      .modal_header_Query_PSQL_Tables{
+        padding: 2px 16px;
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+      }  
+      /* modal_content_Query_PSQL_Tables --Close Button */
+      .modal_close_Query_PSQL_Tables{
+        color: #aaa;
+        float: right;
+        font-size: 25px;
+        font-weight: bold;
+      }
+      .modal_close_Query_PSQL_Tables:hover,
+      .modal_close_Query_PSQL_Tables:focus {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+      } 
+      
+      /* modal_footer_Query_PSQL_Tables */
+      .modal_footer_Query_PSQL_Tables {
+        padding: 2px 16px;
+        /* background-color: rgba(13, 77, 77, 0.966); */
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+        text-align: right;
+      }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      /* The MODAL for modal_DropDownMenu CSS Starts Added -- 02 MARCH 19 - Dhankar */
+      
+      .modal_DropDownMenu {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+      
+        /* top:50%;
+        left:50%; */
+      
+        left: 0;
+        top: 0;
+        
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto;
+         /* Enable scroll if needed */
+        
+        background-color: rgba(14, 230, 219, 0.1); /* Color and  opacity */
+        
+      
+      }
+      
+      /* modal_DropDownMenu Content/Box */
+      .modal_DropDownMenu_content {
+        
+        position: fixed;
+        width: 280px; 
+        margin-left: 225px;
+        margin-top: 327px;
+      
+        /* ORIGINAL MARGIN AUTO  */
+        /* margin: auto; */
+        
+        /* top:50%;
+        left:50%; */
+      
+        background-color: #fefefe;
+        
+        padding: 0;
+        border: 1px solid #888;
+        
+        /* DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      
+      }
+      
+      /* modal_DropDownMenu Body */
+      .modal_DropDownMenu_body {
+        padding: 2px 16px;
+        /* max-height: 500px; */
+        
+        
+        }
+      
+      
+      /* modal_DropDownMenu --Close Button */
+      .modal_DropDownMenu_close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      
+      .modal_DropDownMenu_close:hover,
+      .modal_DropDownMenu_close:focus {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+      } 
+      
+      
+       /* Modal Header */
+       .modal_DropDownMenu_header {
+        padding: 2px 16px;
+        /* background-color: rgba(13, 77, 77, 0.966); */
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+      }
+      
+      
+      /* Modal Footer */
+      .modal_DropDownMenu_footer {
+        padding: 2px 16px;
+        /* background-color: rgba(13, 77, 77, 0.966); */
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+        text-align: right;
+      }
+      
+      /* Modal Content */
+      .modal_DropDownMenu_content_NOTCHECK {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 80%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        animation-name: animatetop;
+        animation-duration: 0.4s
+      }
+      
+      /* Add Animation */
+      /* @keyframes animatetop {
+        from {top: -300px; opacity: 0}
+        to {top: 0; opacity: 1}
+      }  */
+      
+      /* The MODAL for modal_DropDownMenu CSS ENDS Added -- 02 MARCH 19 - Dhankar */
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      /* MODAL CSS Starts Added -- 01 MARCH 19 - Dhankar */
+      
+       /* The Modal (background) */
+       .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        
+        background-color: rgba(238, 148, 14, 0.7); /* Black w/ opacity */
+      }
+      
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 5px solid #888;
+        max-width: 900px;
+        /* max-height: 500px; */
+        width: 80%; /* Could be more or less, depending on screen size */
+      }
+      
+      /* Modal Body */
+      .modal-body {
+        padding: 2px 16px;
+        /* max-height: 500px; */
+        
+        
+        }
+      
+      
+      /* The Close Button */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+      } 
+      
+      
+       /* Modal Header */
+       .modal-header {
+        padding: 2px 16px;
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+      }
+      
+      
+      /* Modal Footer */
+      .modal-footer {
+        padding: 2px 16px;
+        background-color: rgba(2, 30, 58, 0.966);
+        color: white;
+      }
+      
+      /* Modal Content */
+      .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin-left: 335px;
+        margin-top: 50px;
+        /* ORIGINAL == margin: auto; */
+        padding: 0;
+        border: 1px solid #888;
+        width: 80%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        animation-name: animatetop;
+        animation-duration: 0.4s
+      }
+      
+      /* Add Animation */
+      /* @keyframes animatetop {
+        from {top: -300px; opacity: 0}
+        to {top: 0; opacity: 1}
+      }  */
+      
+      /* MODAL CSS ENDS Added -- 01 MARCH 19 - Dhankar */
+              
+              
+              </style>
+              
+              
+              <head>
+              
+                <!-- Global site tag (gtag.js) - Google Analytics -->
+              <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133322875-1"></script>
+              <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+              
+                gtag('config', 'UA-133322875-1');
+              </script>
+              
+              
+                <!-- DHANKAR == BootStrap4 includes for Custom Checkboxes START -->
+                <!-- DHANKAR == If i include this for CUTE Looking Custom Checkbox it upsets my entire BootStrap3 Layout check again  -->
+                  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+                  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
+              
+              <!-- DHANKAR == BootStrap4 includes for Custom Checkboxes START -->    
+      
+      
+      
+              <!-- JS STARTS == for dataTable within the SUMMARY Statistics Modal  -->
+              <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+              <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+              <!-- below for Columns HighLight SO COde == https://stackoverflow.com/questions/42464805/select-column-in-jquery-datatables -->
+              <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+              <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+              <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+              <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+              <script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+              <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+              <!-- JS ENDS == for dataTable within the SUMMARY Statistics Modal  -->
+      
+      
+              </head>
+              <div class="left_col scroll-view">
+                      <div class="navbar nav_title" style="border: 0;">
+                        <a href= {% url 'data_ListView_index' %} class="site_title"><i class="fa fa-home"></i> <span>Digital Cognition</span></a>
+                      </div>
+                    
+                      <div class="clearfix"></div>
+                    
+                      <!-- menu profile quick info -->
+                      <div class="profile clearfix">
+                        <div class="profile_pic">
+                              <img src="/static/img/dhankar.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                          <span>Welcome,</span>
+                          <h2>Dhankar Rohit</h2>
+                        </div>
+                      </div>
+                      <!-- /menu profile quick info -->
+                    
+                      <br />
+                    
+                      <!-- sidebar menu -->
+                      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                          <h3>Data Analyst</h3>
+                          <ul class="nav side-menu">
+                              <li><a ><i class="fa fa-laptop"></i> Exploratory Analytics <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+              
+                                            <li> 
+                                                <a href="{% url  'data_ListView'%}">Data Ingress</a> 
+                                            </li>  
+      
+                                            <li> 
+                                                <a href="{% url  'call_eda_dataset_name_listView'%}">DataSets ListView</a> 
+                                            </li>  
+      
+      
+      
+                                            <li> <!--  STARTS LI TAG == Summary_in_ModalPopUp -->
+                                              <div class="custom-control custom-checkbox mb-3"> 
+                                                <input type="checkbox" class="custom-control-input" id="Summary_in_ModalPopUp" name="Summary_in_ModalPopUp">
+                                                <label class="custom-control-label" for="Summary_in_ModalPopUp">Summary Stats</label>
+                                            </div>
+                                        
+                                            <div id="conditional_Summary_in_ModalPopUp">
+                                              
+                                                <div id="myModal" class="modal"> <!-- The Modal -->
+                                                <div class="modal-content"><!-- Modal content -->
+          
+                                                  <div class="modal-header">
+                                                      <span class="close">&times;</span> 
+                                                      <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                                      <h2>Summary Statistics</h2>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      <p>EDA -- Summary Statistics</p>
+          
+                                                    <script type="text/javascript">
+                                                        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                                                    </script>
+                                                    
+                                                    <table id="summary_dataTable" class="display" cellspacing="0" width="100%">
+                                                    </table>
+                                                    
+                                                    <script>
+                                                            var mySummaryUrl = "{% url 'call_modal_data_summary_stats' %}" //call_modal_data_summary_stats
+                                                            var dataSet;
+                                                            var my_Modalcolumns = []; // An EMPTY ARRAY 
+                                                    
+                                                            $(document).ready(function(){
+                                                                $.ajax({
+                                                                        url: mySummaryUrl,
+                                                                        type: 'GET',      // Other Option - POST 
+                                                                        dataType: 'json', 
+                                                                        success: function(dict_json_from_py) {
+          
+                                                                          //console.log(" INITIAL dict_json_from_py ==================== BELOW =============")
+                                                                          //console.log(dict_json_from_py)
+          
+                                                                          var dataSet = dict_json_from_py.data_json.columns;
+                                                                          //console.log("VAR dataSet==================== BELOW =============")
+                                                                          //console.log(dataSet)
+                                                                          
+                                                                          
+                                                                          $.each(dataSet, function( key, value ) {
+                                                                                                  var my_item = {};
+                                                                                                  my_item.data = key; 
+                                                                                                  my_item.title = value;
+                                                                                                  my_Modalcolumns.push(my_item); // We PUSH the DICT Into the EMPTY ARRAY 
+                                                                                                  return my_Modalcolumns
+                                                                                          });
+                                                  
+                                                                            assignToEventsColumns(my_Modalcolumns,dict_json_from_py);
+                                                                        }, // Close - success:
+                                                                    })    // Close - "ajax":
+                                                    
+                                                                function assignToEventsColumns(my_Modalcolumns,dict_json_from_py) {
+                                                                  console.log("======TTS TBD here ====dict_json_from_py.data_json.data==============")
+                                                                  //console.log(dict_json_from_py.data_json.data)
+                                                                  console.log(dict_json_from_py.data_json.data[0])
+                                                                  console.log("======TTS TBD here ================")
+                                                                  console.log(dict_json_from_py.data_json.data[0][0])
+                                                                  console.log(dict_json_from_py.data_json.data[0][8])
+                                                                  console.log(dict_json_from_py.data_json.data[0][9])
+      
+      
+                                                                  
+                                                                  
+      
+          
+                                                                        var table = $('#summary_dataTable').DataTable({
+                                                                            "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                                                                            "serverSide": false, // FALSE - As of NOW gets data from within DOM == clientSide
+                                                                            "select": true, // Column Select done below ...
+                                                                            "aaData": dict_json_from_py.data_json.data, 
+                                                                            "columns" : my_Modalcolumns,
+                                                    
+                                                                          
+                                                                              //} );
+                                                    
+                                                                          })// FOO Main == Closes -- $('#summary_dataTable').DataTable({
+                                                    
+                                                    
+                                                    
+                                                    
+                                                                        // Below -SO === Original Code--- On Click the - TH - TABLE HEADER 
+                                                                        $("th").on("click", function () {
+                                                                          var column_index = $(this).index();
+                                                                          if ($(this).hasClass("highlighted")) {
+                                                                              $(this).removeClass("highlighted");
+                                                                              $("tr").find("td.highlighted").each(function(k, v) {
+                                                                                console.log("V value");
+                                                                                console.log(v)
+                                                                                console.log("K value");
+                                                                                console.log(k)
+                                                                                if ($(v).index() == column_index) {
+                                                                                  $(v).removeClass("highlighted");
+                                                                                  console.log("Removed highlight in table cell with value \"" + $(v).text() + "\"");
+                                                                                }
+                                                                              });
+                                                                            } else {
+                                                                              $(this).addClass("highlighted");
+                                                                              $("tr").find("td").each(function(k, v) {
+                                                                                if ($(v).index() == column_index) {
+                                                                                  $(v).addClass("highlighted");
+                                                                                  console.log("Added highlight in table cell with value \"" + $(v).text() + "\"");
+                                                                                }
+                                                                              });
+                                                                            }
+                                                                            console.log();
+                                                                          });
+      
+      
+                                                                          // var csrftoken = Cookies.get('csrftoken'); // Not used 
+                                                                    // Below OK for Clicking --- Source -- https://datatables.net/reference/api/cell().index()
+                                                    
+                                                                    $('#summary_dataTable tbody').on( 'click', 'td', function () {
+                                                                                      var col_num = table.cell( this ).index().columnVisible; // OK works ---we get the COL INDEX of CELL
+                                                                                      
+                                                                                      //table.column(col_num).select(); // NO -- .select(); --- Not FUNC ERROR 
+                                                                                      // ERROR Above -- Uncaught TypeError: table.column(.. .).select is not a function
+                                                                                      //alert('DHANKAR - Clicked on cell in visible column: '+col_num); // OK Dhank
+                                                                                      var col_post_url = "{% url 'summaryStats_getColVal' %}" //
+                                                                                      // TEXT to Speech Starts 
+                                                                                      var name_of_col_1 = dict_json_from_py.data_json.data[0][0]
+                                                                                      var len_of_col_1 = dict_json_from_py.data_json.data[0][8]
+                                                                                      var dType_of_col_1 = dict_json_from_py.data_json.data[0][9]
+      
+                                                                                      var summaryStatsTTS = new SpeechSynthesisUtterance(" SUMMARY STATISTICS for COLUMN One " + name_of_col_1 + " , the LENGTH is  " + len_of_col_1 + " RECORDS . ");
+                                                                                      var summaryStatsTTS_1 = new SpeechSynthesisUtterance(" The DATA TYPE of COLUMN One is " + dType_of_col_1 + " , thanks.  ");
+                                                                                      summaryStatsTTS.rate = 0.90; // behaves differently on Firefox and Chrome. 
+                                                                                      summaryStatsTTS_1.rate = 0.90; // 
+                                                                                      //summaryStatsTTS.voice = chosenVoice;
+                                                                                      window.speechSynthesis.speak(summaryStatsTTS);
+                                                                                      window.speechSynthesis.speak(summaryStatsTTS_1);
+                                                                                      // TEXT to Speech ENDS
+      
+      
+                                                                                      $.ajax({
+                                                                                              url:col_post_url,
+                                                                                              type: "POST",
+                                                                                              dataType: 'json', 
+                                                                                              data: {
+                                                                                                    col_num: col_num,
+                                                                                                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                                                                    },
+                                                                                              success:function(response){
+                                                                                                  alert("success: " + response);
+                                                                                              },
+                                                                                              error:function (xhr, textStatus, thrownError){
+                                                                                                  //alert("failure: " + xhr.statusText);
+                                                                                              }
+                                                                                              }).done(function (response) {
+                                                                                                  //alert("end");
+                                                                                              });
+                                                                          }); // CLOSE-- Click on CELL FUNCTION == .on( 'click', 'td', function ()
+                                                                    
+                                                                      }
+                                                                  }); // Close - // $(document).ready(function(){
+                                                    
+                                                        </script>
+                                                    
+                                                      
+                                                      
+                                                     
+                                                      <br>
+                                                      <p> DataSet Created by :- </p> <code>  USER_NAME </code>
+                                                      <p> DataSet Created at :- </p> <code>  DATE_TIME </code>
+          
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <h3>Summary Statistics</h3>
+                                                    </div>
+          
+                                                </div> <!-- The Modal -->
+                                                  
+          
+                                              </div> <!-- ENDS ==  conditional_Summary_in_ModalPopUp -->
+          
+          
+          
+                                          <script>
+                                                  // Get the modal
+                                                  var modal = document.getElementById('myModal');
+                                                  
+                                                  // Get the <span> element that closes the modal
+                                                  var span = document.getElementsByClassName("close")[0];
+                                                  // When the user clicks on <span> (x), close the modal
+                                                  span.onclick = function() {
+                                                    modal.style.display = "none";
+                                                  }
+                                                  // // When the user clicks anywhere outside of the modal, close it
+                                                  window.onclick = function(event) {
+                                                    if (event.target == modal) {
+                                                      modal.style.display = "none";
+                                                    }
+                                                  }
+                                          </script> <!--  Modal SCRIPT ENDS -->
+          
+                                            <script>
+                                            $(document).ready(function() {
+                                                            $('#conditional_Summary_in_ModalPopUp').hide();
+                                                        });
+                                            </script>
+                                              
+                                            <script>
+                                              var modal = document.getElementById('myModal');
+          
+                                                $('#Summary_in_ModalPopUp').change(function() {
+                                                  if(this.checked != true){
+                                                      $("#conditional_Summary_in_ModalPopUp").hide();
+                                                      modal.style.display = "none"; // Modal Code Only this Line ...
+                                                      }
+                                                  else{
+                                                      $("#conditional_Summary_in_ModalPopUp").show();
+                                                      modal.style.display = "block"; // Modal Code Only this Line ...
+          
+                                                      }
+                                                      });
+                                            </script>  <!--  Ends == Query Database  -->
+          
+                                            </li> <!--  ENDS LI TAG  == Summary_in_ModalPopUp -->
+          
+                                           
+      
+      
+      
+      
+      
+        
+                                            <li> <!--  STARTS LI TAG == its just called == EDA - Column Actions == Summary_in_ModalPopUp1 -->
+                                              <div id="checkbox_for_Summary_in_ModalPopUp1" class="custom-control custom-checkbox mb-3"> 
+                                                <input type="checkbox" class="custom-control-input" id="Summary_in_ModalPopUp1" name="Summary_in_ModalPopUp1">
+                                                <label class="custom-control-label" for="Summary_in_ModalPopUp1">EDA - Column Actions</label>
+                                            </div>
+                                        
+                                            <div id="conditional_Summary_in_ModalPopUp1">
+                                              
+                                                <div id="myModal1" class="modal_DropDownMenu"> <!-- The Modal -->
+                                                <div class="modal_DropDownMenu_content"><!-- Modal content -->
+          
+                                                  <div class="modal_DropDownMenu_header">
+                                                      <span class="modal_DropDownMenu_close">&times;</span> 
+                                                      <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                                      <h2>Exploratory Data Analysis - On Column Actions </h2>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        
+      
+                                                        <div id = "checkbox_for_eda_SearchAndReplace"  class="custom-control custom-checkbox mb-3">  <!--  STARTS == EDA_SearchAndReplace -->
+                                                          <input type="checkbox" class="custom-control-input" id="EDA_SearchAndReplace" name="EDA_SearchAndReplace">
+                                                          <label class="custom-control-label" for="EDA_SearchAndReplace">Search and Replace</label>
+                                                      </div>
+                                                  
+                                                      <div id="conditional_EDA_SearchAndReplace">
+                                                          <form action=/dc/eda_actionSearchAndReplace_/ method="post" enctype="multipart/form-data">
+                                                              {% csrf_token %}
+                                                              <p>
+                                                                  <label for="eda_new_column">New Column:</label>
+                                                                    <select id="eda_new_column" name="form_input_new_column">
+                        
+                                                                      <option value="new_col">Results in New Col.</option>
+                                                                      <option value="old_col">Overwrite Chosen Col.</option>
+                                                                      
+                                                                    </select>
+                                                                  <button type="button" style="color:green;" id="choose_button" onclick="eda_newColumn()">Choose</button>
+                
+                                                                  <script>
+                                                                    document.getElementById('choose_button').onclick = changeColor; 
+                                                                    
+                                                                    function changeColor() { 
+                                                                              document.getElementById('choose_button').style.color = "red";
+                                                                        }
+                                                                    </script>
+                                  
+                                                                  <script>
+                                                                    function eda_newColumn() {
+                                                                        var choose_newColumn = document.getElementById("eda_new_column").value;
+                                                                        
+                                                                      }
+                                                                  </script>
+                                                              </p>
+                        
+                        
+                                                              <p>
+                                                                  <label for="eda_operation_type">Choose Operation:</label>
+                                                                    <select id="eda_operation_type" name="django_form_input_operation_type">
+                                                                    
+                        
+                                                                      <option value="equals">Equals(=)</option>
+                                                                      <option value="contains">Text Contains SubString</option>
+                                                                      <option value="starts_with">Text Starts With</option>
+                                                                      <option value="ends_with">Text Ends With</option>
+                                                                      <option value="regex">REGEX</option>
+                                                                    </select>
+                                                                  <button type="button" style="color:green;" id="choose_button1" onclick="eda_operation_type_function()">Choose</button>
+                
+                                                                  <script>
+                                                                    document.getElementById('choose_button1').onclick = changeColor; 
+                                                                    function changeColor() { 
+                                                                              document.getElementById('choose_button1').style.color = "red";
+                                                                                }
+                                                                  </script>
+                
+                        
+                                                                  <script>
+                                                                    function eda_operation_type_function() {
+                                                                        //var operation_type = document.getElementById("eda_operation_type").selectedIndex;
+                                                                        // ABOVE Will Give Numeric INDEX for option.value == 0,1,2,3,4== REGEX
+                                                                        var operation_type = document.getElementById("eda_operation_type").value;
+                                                                        console.log(operation_type) 
+                                                                        alert(operation_type)
+                                                                        
+                                                                      }
+                                                                  </script>
+                                                              </p>
+                        
+                        
+                                                              <p>
+                                                                  <label for="id_str_search">String to Search:</label>
+                                                                  <input type="text" name="str_search" maxlength="1000" id="id_str_search">
+                                                              </p>
+                                                              
+                                                              <p>
+                                                                  <label for="id_str_replace">String to Replace:</label>
+                                                                  <input type="text" name="str_replace" maxlength="1000" id="id_str_replace">
+                                                              </p>
+                                                            <button type="submit">Submit</button>
+                                                            </form>  <!-- /.form --> 
+                                                        </div> <!-- conditional_EDA_SearchAndReplace -->
+                          
+                                                          <script>
+                                                            $(document).ready(function() {
+                                                                            $('#conditional_EDA_SearchAndReplace').hide();
+                                                                        });
+                                                          </script>
+                                                          <script>
+                                                              $('#EDA_SearchAndReplace').change(function() {
+                                                                if(this.checked != true){
+                                                                    $("#conditional_EDA_SearchAndReplace").hide();
+                                                                    $("#checkbox_for_eda_MatchSimilarText").show(); // SHOW - CHECKBOX for -- MatchSimilarText
+                                                                    }
+                                                                else{
+                                                                    $("#conditional_EDA_SearchAndReplace").show(); // SHOW - Search and Replace
+                                                                    $("#checkbox_for_eda_MatchSimilarText").hide(); // HIDE - CHECKBOX for -- MatchSimilarText
+                                                                    document.getElementById("#conditional_EDA_SearchAndReplace").style.color = "red";
+                                                                    }
+                                                                    });
+                                                          </script> <!--  ENDs == EDA_SearchAndReplace -->
+      
+      
+                                                      <!--  STARTS == eda_MatchSimilarText -->
+                                                      <div id ="checkbox_for_eda_MatchSimilarText" class="custom-control custom-checkbox mb-3">  <!--  STARTS == eda_MatchSimilarText -->
+                                                        <input type="checkbox" class="custom-control-input" id="eda_MatchSimilarText" name="eda_MatchSimilarText">
+                                                        <label class="custom-control-label" for="eda_MatchSimilarText">Match Similar Text</label>
+                                                    </div>
+                                                
+                                                    <div id="conditional_eda_MatchSimilarText">
+                                                        <form action=/dc/eda_actionMatchSimilarText_/ method="post" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                    
+                                                            <p>
+                                                                <label for="id_fuzziness">Fuzziness:</label>
+                                                                <input type="text" name="fuzziness" maxlength="1000" id="id_fuzziness">
+                                                            </p>
+                                                            
+                                                            <p>
+                                                                <label for="id_str_to_compare_with">String to Compare:</label>
+                                                                <input type="text" name="str_to_compare_with" maxlength="1000" id="id_str_to_compare_with">
+                                                            </p>
+                                                          <button type="submit">Submit</button>
+                                                          </form>  <!-- /.form --> 
+                                                      </div> <!-- conditional_eda_MatchSimilarText -->
+                    
+                                                        <script>
+                                                          $(document).ready(function() {
+                                                                          $('#conditional_eda_MatchSimilarText').hide();
+                                                                      });
+                                                        </script>
+                                                        <script>
+                                                            $('#eda_MatchSimilarText').change(function() {
+                                                              if(this.checked != true){
+                                                                  $("#conditional_eda_MatchSimilarText").hide();
+                                                                  $("#checkbox_for_eda_SearchAndReplace").show();
+                                                                  }
+                                                              else{
+                                                                  $("#conditional_eda_MatchSimilarText").show();
+                                                                  $("#checkbox_for_eda_SearchAndReplace").hide();
+                                                                  document.getElementById("#conditional_eda_MatchSimilarText").style.color = "red";
+                                                                  }
+                                                                  });
+                                                        </script> <!--  ENDs == eda_MatchSimilarText -->
+          
+                                                    </div>
+                                                    <div class="modal_DropDownMenu_footer">
+                                                      <h3> EDA - On Column Actions  </h3>
+                                                    </div>
+          
+                                                </div> <!-- The Modal -->
+                                                  
+          
+                                              </div> <!-- ENDS ==  conditional_Summary_in_ModalPopUp -->
+          
+          
+          
+                                          <script>
+                                                  // Get the modal
+                                                  var myModal1 = document.getElementById('myModal1');
+                                                  // Get the <span> element that closes the modal
+                                                  var myModal1span = document.getElementsByClassName("modal_DropDownMenu_close")[0];
+                                                  // When the user clicks on <span> (x), close the modal
+                                                    myModal1span.onclick = function() {
+                                                    myModal1.style.display = "none";
+                                                    //$('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                                                    //Summary_in_ModalPopUp1
+                                                    //$('.Summary_in_ModalPopUp1').prop('checked', false);
+                                                    //$('.checkbox_for_Summary_in_ModalPopUp1')[0].checked = false;
+                                                    $('.Summary_in_ModalPopUp1').prop('checked', false);
+                                                    $('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                                                      
+                                                  }
+                                                  // When the user clicks anywhere outside of the modal, close it
+                                                  window.onclick = function(event) {
+                                                    if (event.target == myModal1) {
+                                                      myModal1.style.display = "none";
+                                                      $('.Summary_in_ModalPopUp1').prop('checked', false);
+                                                      $('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                                                      //$('.checkbox_for_Summary_in_ModalPopUp1')[0].checked = false;
+                                                      
+                                                    }
+                                                  }
+                                          </script> <!--  Modal SCRIPT ENDS -->
+          
+                                            <script>
+                                            $(document).ready(function() {
+                                                            $('#conditional_Summary_in_ModalPopUp1').hide();
+                                                        });
+                                            </script>
+                                              
+                                            <script>
+                                              var modal1 = document.getElementById('myModal1');
+          
+                                                $('#Summary_in_ModalPopUp1').change(function() {
+                                                  if(this.checked != true){
+                                                      $("#conditional_Summary_in_ModalPopUp1").hide();
+                                                      modal1.style.display = "none"; // Modal Code Only this Line ...
+                                                      
+      
+                                                      }
+                                                  else{
+                                                      $("#conditional_Summary_in_ModalPopUp1").show();
+                                                      modal1.style.display = "block"; // Modal Code Only this Line ...
+                                                      //$("body").css("overflow","hidden"); // Make Entire PAGE Unscrollable
+      
+                                                      //$('html, body').css({ overflow: 'hidden', height: '100%' });
+                                                      
+          
+                                                      }
+                                                      });
+                                            </script>  <!--  Ends   -->
+          
+                                            </li> <!--  ENDS LI TAG  == Summary_in_ModalPopUp -->
+          
+                                            
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                  
+      
+            <li> <!--  STARTS LI TAG == Modal_Query_PSQL_Tables -->
+                      <div class="custom-control custom-checkbox mb-3"> 
+                        <input type="checkbox" class="custom-control-input" id="Modal_Query_PSQL_Tables" name="Modal_Query_PSQL_Tables">
+                        <label class="custom-control-label" for="Modal_Query_PSQL_Tables">Query Tables</label>
+                      </div>
+                            
+                            <div id="conditional_Modal_Query_PSQL_Tables">
+                              <!-- starts div conditional_Modal_Query_PSQL_Tables -->
+                              
+                                <div id="myModal2" class="modal_mainBody_Query_PSQL_Tables"> <!-- myModal2 The Main Modal CSS Class -->
+                                <div class="modal_content_Query_PSQL_Tables"><!-- myModal2 Modal content -->
+      
+                                  <div class="modal_header_Query_PSQL_Tables">
+                                      <span class="modal_close_Query_PSQL_Tables">&times;</span> 
+                                      <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                      <h2> Query PSQL Tables </h2>
+                                    </div> <!-- ENDS  div == modal_header_Query_PSQL_Tables -->
+                                  <div class="modal_body_Query_PSQL_Tables">
+      
+                                              <!--  STARTS == dataSetsList_for_QueryPSQL -->
+                                              <!--  STARTS == CheckBox which will TRIGGER MyModal3 -->
+      
+                                                    <div class="custom-control custom-checkbox mb-3"> 
+                                                        <input type="checkbox" class="custom-control-input" id="dataSetsList_for_QueryPSQL" name="dataSetsList_for_QueryPSQL">
+                                                        <label class="custom-control-label" for="dataSetsList_for_QueryPSQL" style="white-space: pre-wrap;">DataSets for Join/Merge Actions</label>
+                                                    </div>
+      
+                                                    <div id="conditional_dataSetsList_for_QueryPSQL">
+      
+                                              <!--  ENDS == dataSetsList_for_QueryPSQL -->
+      
+                                              <!--  STARTS == modal_which_has_dataSetsList_for_QueryPSQL -->
+                                              <div id="myModal3" class="modal_mainBody_dataSetsView_for_SQL_Queries"> <!-- The Main Modal CSS Class -->
+                                                <div class="modal_content_dataSetsView_for_SQL_Queries"><!-- Modal content -->
+          
+                                                  <div class="modal_header_dataSetsView_for_SQL_Queries">
+                                                      <span class="modal_close_dataSetsView_for_SQL_Queries">&times;</span> 
+                                                      <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                                      <h2> Choose - DataSets for Join / Merge  </h2>
+                                                    </div>
+                                                    <div class="modal_body_dataSetsView_for_SQL_Queries">       
+                                                      
+                                                        <p> Choose from Dropdown List</p>
+      
+                                                        <p> <div class="dropdown">
+                                                          
+                                                          <button class="dropbtn"> Database Type </button>
+                                                          <div class="dropdown-content"> 
+                                                            <a id ="PostgreSQL_chosen">PostgreSQL</a>
+                                                            <a >MySql</a>
+                                                            <a >SQLite</a>
+                                                          </div>
+                                                        </div> </p>
+                                                        
+      
+                                                        <p> <div class="dropdown">
+                                                        <button class="dropbtn">Connection Type</button>
+                                                          <div class="dropdown-content"> 
+                                                            <a >Local Host</a>
+                                                            <a >Remote Host</a>
+                                                            <a >Port # Default</a>
+                                                            <a >Port # User Input</a>
+                                                          </div>
+                                                        </div> </p>
+      
+      
+                                                        <br/>
+      
+                                                    <script>
+                                                      var psql_clicked = document.getElementById('PostgreSQL_chosen');
+                                                      psql_clicked.onclick = function() {
+                                                        
+        
+                                                        //alert("success: " ); // ok 
+                                                        var dropdown_content = document.getElementsByClassName("dropdown-content")[0];
+                                                        //dropdown_content.style.display = "block";
+                                                        $("#dropdown_content").show();
+                                                        // JIRA_ROHIT_PendingTask_None
+                                                        var myModal2 = document.getElementById('myModal2');
+                                                        //myModal2.style.display = "block";
+                                                        $("#myModal2").show();
+      
+                                                        var myModal3 = document.getElementById('myModal3');
+                                                        //myModal3.style.display = "block";
+                                                        $("#myModal3").show();
+      
+                                                        var clicked_drpDown = 1;
+                                                        //myModal3.style.display = "none";
+                                                        var psql_click_url = "{% url 'psql_click_from_js' %}" //
+                                                        $.ajax({
+                                                                url:psql_click_url,
+                                                                type: "POST",
+                                                                dataType: 'json', 
+                                                                data: {
+                                                                      clicked_drpDown: clicked_drpDown,
+                                                                      csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                                      },
+                                                                success:function(response){
+                                                                    alert("success: " + response);
+                                                                },
+                                                                error:function (xhr, textStatus, thrownError){
+                                                                    //alert("failure: " + xhr.statusText);
+                                                                }
+                                                                }).done(function (response) {
+                                                                    //alert("end");
+                                                                });
+                                                          }; // CLOSE-- psql_clicked.onclick function ()
+                                                          
+                                                        </script> 
+                                                      
+                                                    </div> <!-- The Modal -->
+                                                  </div> <!-- ENDS ==  conditional_dataSetsList_for_QueryPSQL -->
+              
+              
+                                              <!--  CLOSE MODAL == myModal3 STARTS -->
+                                              <script>
+                                                      // Get the modal
+                                                      var myModal3 = document.getElementById('myModal3');
+                                                      // Get the <span> element that closes the modal
+                                                      var myModal3span = document.getElementsByClassName("modal_close_dataSetsView_for_SQL_Queries")[0];
+                                                      // When the user clicks on <span> (x), close the modal
+                                                        myModal3span.onclick = function() {
+                                                        myModal3.style.display = "none";
+                                                      }
+                                                      // When the user clicks anywhere outside of the modal, close it
+                                                      window.onclick = function(event) {
+                                                        if (event.target == myModal3) {
+                                                          myModal3.style.display = "none";
+                                                        }
+                                                      }
+                                              </script> <!--  CLOSE MODAL == myModal3  ENDS -->
+      
+      
+      
+      
+                                              <!-- == CONDITIONAL == myModal3 SCRIPT STARTS == -->
+              
+                                                <script> 
+                                                $(document).ready(function() {
+                                                                $('#conditional_dataSetsList_for_QueryPSQL').hide();
+                                                            });
+                                                </script>
+                                                  
+                                                <script>
+                                                  var modal3 = document.getElementById('myModal3');
+              
+                                                    $('#dataSetsList_for_QueryPSQL').change(function() {
+                                                      if(this.checked != true){
+                                                          $("#conditional_dataSetsList_for_QueryPSQL").hide();
+                                                          modal3.style.display = "none"; // Modal Code Only this Line ...
+                                                          }
+                                                      else{
+                                                          $("#conditional_dataSetsList_for_QueryPSQL").show();
+                                                          modal3.style.display = "block"; // Modal Code Only this Line ...
+                                                          }
+                                                          });
+                                                </script>  <!-- == CONDITIONAL == myModal3 SCRIPT ENDS == -->
+                                                
+                                                </div> <!-- IS THIS === conditional_part_query_db -->
+                                                <!-- JIRA_ROHIT_PendingTask OR == IS THIS === conditional_dataSetsList_for_QueryPSQL -->
+      
+      
+                                                
+                                                </div> <!-- == JIRA_ROHIT_PendingTask Check this DIV is it required ... The Modal -->
+          
+                                              </div> <!-- ENDS ==  conditional_Modal_Query_PSQL_Tables -->
+          
+                                          <script>
+                                                  // Get the modal
+                                                  var modal2 = document.getElementById('myModal2');
+                                                  
+                                                  // Get the <span> element that closes the modal
+                                                  var span = document.getElementsByClassName("modal_close_Query_PSQL_Tables")[0];
+                                                  // When the user clicks on <span> (x), close the modal
+                                                  span.onclick = function() {
+                                                    modal2.style.display = "none"; // Change MODAL Name to == modal2
+                                                  }
+                                                  // // When the user clicks anywhere outside of the modal, close it
+                                                  window.onclick = function(event) {
+                                                    if (event.target == modal2) {
+                                                      modal2.style.display = "none"; // Change MODAL Name to == modal2
+                                                    }
+                                                  }
+                                          </script> <!--  Modal SCRIPT ENDS -->
+          
+                                        <script>
+                                            $(document).ready(function() {
+                                                            $('#conditional_Modal_Query_PSQL_Tables').hide();
+                                                        });
+                                        </script>
+                                              
+                                            <script>
+                                              var modal2 = document.getElementById('myModal2');
+                                                $('#Modal_Query_PSQL_Tables').change(function() {
+                                                  if(this.checked != true){
+                                                      $("#conditional_Modal_Query_PSQL_Tables").hide();
+                                                      modal2.style.display = "none"; // Modal Code Only this Line ...
+                                                      }
+                                                  else{
+                                                      $("#conditional_Modal_Query_PSQL_Tables").show();
+                                                      modal2.style.display = "block"; // Modal Code Only this Line ...
+                                                      }
+                                                      });
+                                            </script>  <!--  Ends   -->
+                                      </li> <!--  ENDS LI TAG  == Modal_Query_PSQL_Tables -->
+                                  </li> <!--  Ends LI TAG == Exploratory Analytics  -->                                      
+              
+              
+      
+      
+              
+              
+                                                      <!-- <div class="elnt_container">
+                                                          <input type="text" placeholder="TABLE.." />
+                                                      </div>
+              
+                                                    <div class="elnt_container">
+                                                        <input type="text" placeholder="COLUMN.." />
+                                                    </div>
+              
+                                                    <div class="elnt_container">
+                                                      <label for="more-info"></label>
+                                                      <input id="more_info" name="more-info" type="checkbox" />
+                                                    </div>
+              
+                                                    <div id="conditional_part">
+                                              
+                                                    <p>  <code> {{data_table_name}} </code> </p>
+                                                    </div>
+                                                  </form> 
+                                                  </div> -->
+              
+              
+                          <!-- ## Descriptive Statistics        -->
+                          
+                          <li><a><i class="fa fa-pencil"></i> Descriptive Stats <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Five Point Summary </a></li>
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Text Distance Measures</a></li>
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/">Validation Reports</a></li>
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/">Reports Wizard</a></li>
+                              
+                            </ul>
+                          </li>
+                          
+              
+                          <!-- ## Predictive Statistics     -->
+                            
+                            <li><a><i class="fa fa-bullhorn"></i> Predictive Statistics <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Linear Regression </a></li>
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Logistic Regression </a></li>
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Classification Trees </a></li>
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Random Forests </a></li>
+                                
+                                
+                              </ul>
+                            </li>
+                            
+                              <li><a><i class="fa fa-edit"></i> Dashboards <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="https://www.linkedin.com/in/rohitdhankar/">General Reports</a></li>
+                                    <li><a href="https://www.linkedin.com/in/rohitdhankar/">Advanced Reports</a></li>
+                                    <li><a href="https://www.linkedin.com/in/rohitdhankar/">Validation Reports</a></li>
+                                    <li><a href="https://www.linkedin.com/in/rohitdhankar/">Reports Wizard</a></li>
+                                    
+                                </ul>
+                              </li>
+      
+              
+              
+                                          <!-- <li><a><i class="fa fa-desktop"></i> Indian Startups <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                              <li><a href="general_elements.html">Top Level Dashboard</a></li>
+                                              <li><a href="media_gallery.html">Industry Segments</a></li>
+                                              <li><a href="typography.html">Geo Location</a></li>
+                                              <li><a href="icons.html">Funding Status</a></li>
+                                              <li><a href="glyphicons.html">Funding Level</a></li>
+                                              <li><a href="widgets.html">Investor Segments</a></li>
+                                              
+                                            </ul>
+                                          </li>
+               -->
+              
+                         
+                        </div>
+                        <div class="menu_section">
+                          <h3>Admin Tools</h3>
+                          <ul class="nav side-menu">
+                            <li><a><i class="fa fa-bug"></i> Report a Bug <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                  <li><a href="https://www.linkedin.com/in/rohitdhankar/">Report a Bug</a></li>
+                              </ul>
+                            </li>
+                            
+                            
+                            <li><a href="javascript:void(0)"><i class="fa fa-database"></i> Graph Database <span class="label label-success pull-right"> Pro-Version</span></a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <!-- /sidebar menu -->
+                    
+                      <!-- /menu footer buttons -->
+                      <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                          <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                          <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                          <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                          <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                      </div>
+                      <!-- /menu footer buttons -->
+                    </div>
+                    

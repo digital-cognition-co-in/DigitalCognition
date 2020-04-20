@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<style>
+/* dhankar - form input textbox  */
+input[type="text"] {
+    width: 130px;
+}
+
+.elnt_container{
+  padding: 6px 8px;
+}
+#conditional_part{
+  padding: 6px 4px;
+  display:none;
+}
+
+#conditional_part_more-info_initSearch{
+  padding: 6px 4px;
+  display:none;
+}
+
+
+/*
+ * DHANKAR --- Off Canvas SIDEBAR for Mobile 
+ * ---------------------------------------------
+ SOURCE == https://stackoverflow.com/questions/22985370/making-the-bootstrap-dashboard-example-sidebar-visible-available-on-mobile
+ -----
+ */
+ @media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -33%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 33%;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 33%;
+    margin-left: 10px;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  background-color: #f5f5f5;
+  margin-right: -15px;
+  margin-bottom: 20px;
+  margin-left: -15px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: #428bca;
+}
+
+/* ##DHANKAR# Toggle SIDEBAR ENDS  */
+
+
+
+
+
+
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 550px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #54e610;
+  /* border: 16px solid #f3f3f3; */
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  /* display: none; */
+  /* text-align: center; */
+}
+
+
+
+
+
+/* Dropdown Button 
+ padding == padding between TEXT and Button Border
+ padding shall change relative to == font-size
+ */
+ .dropbtn {
+  background-color:rgba(1, 139, 5, 0.966);
+  color: white;
+  padding: 5px; 
+  font-size: 15px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.50);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color:rgba(1, 139, 5, 0.40);}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+  margin-top: 0;
+  
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color:  rgba(2, 30, 58, 0.966);} 
+
+
+
+
+
+
+
+
+
+/* modal_alerts_backdrop === This is the SEMI-OPAQUE-BACKGROUND  */
+.modal_alerts_backdrop{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index:1; /* Be On TOP of ALL other MODALS when this MODAL is ACTIVE  */
+  
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+     
+  overflow: auto;
+   /* Enable scroll if needed */
+  background-color: rgba(243, 82, 7, 0.377); /* Color and  opacity */
+}
+
+/* modal_alerts_content == Content/Box */
+.modal_alerts_content {
+  position: fixed;
+  width: 400px; 
+  height: 150px;
+  margin-left: 1000px;
+  margin-top: 500px;
+  /* overflow-y: auto;  */
+  /* OK == Vertical SCROLL within MODAL BODY */
+
+  /* margin-bottom: 400px; */
+  /* ORIGINAL MARGIN AUTO  */
+  /* margin: auto; */
+  /* top:50%;
+  left:50%; */
+  background-color: #fefefe;
+  padding: 0;
+  /* border: 10px solid rgb(201, 41, 41); */
+  border: 1px solid #888;
+  /* DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+/* modal_alerts_body Body */
+.modal_alerts_body {
+  padding: 2px 16px;
+  /* max-height: 500px; */
+}
+  /* Modal Header */
+.modal_alerts_header{
+  padding: 2px 16px;
+  background-color: rgba(243, 35, 8, 0.966);
+  color: white;
+}  
+/* modal_content_Query_PSQL_Tables --Close Button */
+.modal_alerts_close{
+  color: #aaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+.modal_alerts_close:hover,
+.modal_alerts_close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+
+
+
+
+
+
+
+
+
+/* modal_backDrop_showTable_drop_psqlTables === This is the SEMI-OPAQUE-BACKGROUND  */
+.modal_backDrop_showTable_drop_psqlTables{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index:1; /* Be On TOP of ALL other MODALS when this MODAL is ACTIVE  */
+  
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+     
+  overflow: auto;
+   /* Enable scroll if needed */
+  background-color: rgba(145, 82, 118, 0.76); /* Color and  opacity */
+}
+
+/* modal_content_showTable_drop_psqlTables == Content/Box */
+.modal_content_showTable_drop_psqlTables {
+  position: fixed;
+  width: 780px; 
+  height: 580px;
+  margin-left: 525px;
+  margin-top: 40px;
+  overflow-y: auto; /* OK == Vertical SCROLL within CONTENT  */
+
+  /* margin-bottom: 400px; */
+  /* ORIGINAL MARGIN AUTO  */
+  /* margin: auto; */
+  /* top:50%;
+  left:50%; */
+  background-color: #fefefe;
+  padding: 0;
+  /* border: 10px solid rgb(201, 41, 41); */
+  border: 1px solid #888;
+  /* DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* modal_content_Query_PSQL_Tables Body */
+.modal_body_SQL_Tables_Merge {
+  padding: 2px 16px;
+  /* max-height: 500px; */
+}
+  /* Modal Header == modal_header_showTable_drop_psqlTables*/
+.modal_header_showTable_drop_psqlTables{
+  padding: 2px 16px;
+  background-color: rgba(2, 30, 58, 0.966);
+  color: white;
+}  
+
+/* modal_close_showTable_drop_psqlTables --Close Button */
+.modal_close_showTable_drop_psqlTables{
+  color: #aaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+.modal_close_showTable_drop_psqlTables:hover,
+.modal_close_showTable_drop_psqlTables:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+
+
+
+
+
+
+
+
+/* modal_backdrop_drop_del_PSQL_Tables === This is the SEMI-OPAQUE-BACKGROUND  */
+.modal_backdrop_drop_del_PSQL_Tables{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  /* top:50%;
+  left:50%; */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto;
+   /* Enable scroll if needed */
+  background-color: rgba(14, 230, 219, 0.1); /* Color and  opacity */
+}
+
+/* modal_content_drop_del_PSQL_Tables == Content/Box */
+.modal_content_drop_del_PSQL_Tables {
+  position: fixed;
+  width: 300px; 
+  margin-left: 225px;
+  margin-top: 260px;
+  /* ORIGINAL MARGIN AUTO  */
+  /* margin: auto; */
+  /* top:50%;
+  left:50%; */
+  /* overflow-y: auto;  */
+  /* NOT_OK == Vertical SCROLL as it HIDES -- HOVER DROP DOWN MENU */
+  background-color: #fefefe;
+  padding: 0;
+  border: 1px solid #888;
+  /* DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+/* modal_content_Query_PSQL_Tables Body */
+.modal_body_drop_del_PSQL_Tables{
+  padding: 2px 16px;
+  /* max-height: 500px; */
+}
+  /* Modal Header */
+.modal_header_drop_del_PSQL_Tables{
+  padding: 2px 16px;
+  background-color: rgba(2, 30, 58, 0.966);
+  color: white;
+}  
+/* modal_content_Query_PSQL_Tables --Close Button */
+.modal_close_drop_del_PSQL_Tables{
+  color: #aaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+.modal_close_drop_del_PSQL_Tables:hover,
+.modal_close_drop_del_PSQL_Tables:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+
+
+
+/* modal_backdrop_csv_to_psql === This is the SEMI-OPAQUE-BACKGROUND  */
+.modal_backdrop_csv_to_psql{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  /* top:50%;
+  left:50%; */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto;
+   /* Enable scroll if needed */
+  background-color: rgba(14, 230, 219, 0.1); /* Color and  opacity */
+}
+
+/* modal_content_csv_to_psql == Content/Box */
+.modal_content_csv_to_psql {
+  position: fixed;
+  width: 300px; 
+  margin-left: 225px;
+  margin-top: 227px;
+  /* ORIGINAL MARGIN AUTO  */
+  /* margin: auto; */
+  /* top:50%;
+  left:50%; */
+  /* overflow-y: auto;  */
+  /* NOT_OK == Vertical SCROLL as it HIDES -- HOVER DROP DOWN MENU */
+  background-color: #fefefe;
+  padding: 0;
+  border: 1px solid #888;
+  /* DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+/* modal_body_csv_to_psql Body */
+.modal_body_csv_to_psql{
+  padding: 2px 16px;
+  /* max-height: 500px; */
+}
+  /* Modal Header */
+.modal_header_csv_to_psql{
+  padding: 2px 16px;
+  background-color: rgba(2, 30, 58, 0.966);
+  color: white;
+}  
+/* modal_close_csv_to_psql --Close Button */
+.modal_close_csv_to_psql{
+  color: #aaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+.modal_close_csv_to_psql:hover,
+.modal_close_csv_to_psql:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+
+
+
+
+
+
+/* modal_outerBody_SQL_Tables_Merge === This is the SEMI-OPAQUE-BACKGROUND  */
+.modal_outerBody_SQL_Tables_Merge{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index:1; /* Be On TOP of ALL other MODALS when this MODAL is ACTIVE  */
+  
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+     
+  overflow: auto;
+   /* Enable scroll if needed */
+  background-color: rgba(145, 82, 118, 0.76); /* Color and  opacity */
+}
+
+/* modal_outerBody_SQL_Tables_Merge == Content/Box */
+.modal_content_SQL_Tables_Merge {
+  position: fixed;
+  width: 780px; 
+  height: 580px;
+  margin-left: 525px;
+  margin-top: 40px;
+  overflow-y: auto; /* OK == Vertical SCROLL within CONTENT  */
+
+  /* margin-bottom: 400px; */
+  /* ORIGINAL MARGIN AUTO  */
+  /* margin: auto; */
+  /* top:50%;
+  left:50%; */
+  background-color: #fefefe;
+  padding: 0;
+  /* border: 10px solid rgb(201, 41, 41); */
+  border: 1px solid #888;
+  /* DHANKAR In the CENTER and WIDTH as % of the SCREEN  */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+/* modal_content_Query_PSQL_Tables Body */
+.modal_body_SQL_Tables_Merge {
+  padding: 2px 16px;
+  /* max-height: 500px; */
+}
+  /* Modal Header */
+.modal_header_SQL_Tables_Merge{
+  padding: 2px 16px;
+  background-color: rgba(2, 30, 58, 0.966);
+  color: white;
+}  
+/* modal_content_Query_PSQL_Tables --Close Button */
+.modal_close_SQL_Tables_Merge{
+  color: #aaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+.modal_close_SQL_Tables_Merge:hover,
+.modal_close_SQL_Tables_Merge:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+} 
+
+/* modal_footer_Query_PSQL_Tables */
+.modal_footer_SQL_Tables_Merge {
+  padding: 2px 16px;
+  /* background-color: rgba(13, 77, 77, 0.966); */
+  background-color: rgba(2, 30, 58, 0.966);
+  color: white;
+  text-align: right;
+  
+}
+
+/* font_awesome custom css FOO_Hover */
+.font_awesome_icon_for_hover{
+  color: rgb(19, 245, 87);
+  
+}
+
+/* font_awesome custom css FOO_Hover */
+.fa_pvBondsfile_icon_for_hover{
+  color: rgb(19, 245, 87);
+  
+}
+
+/* font_awesome custom css FOO_Hover */
+.font_awesome_file_icon_for_hover{
+  color: rgb(19, 245, 87);
+  
+}
+
+
+/* .close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}  */
+
+
+
+
+
+
+
+
+</style>
+
+
+<head>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133322875-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-133322875-1');
+</script>
+
+
+  <!-- DHANKAR == BootStrap4 includes for Custom Checkboxes START -->
+  <!-- DHANKAR == If i include this for CUTE Looking Custom Checkbox it upsets my entire BootStrap3 Layout check again  -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
+
+<!-- DHANKAR == BootStrap4 includes for Custom Checkboxes START -->    
+</head>
+
+
+
+
+<body>
+
+
+<div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <a href= {% url 'data_ListView_index' %} class="site_title"><i class="fa fa-home"></i> <span>Digital Cognition</span></a>
+        </div>
+      
+        <div class="clearfix"></div>
+      
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+          <div class="profile_pic">
+                <img src="/static/img/dhankar.jpg" alt="..." class="img-circle profile_img">
+          </div>
+          <div class="profile_info">
+            <span>Welcome,</span>
+            <h2>Dhankar Rohit</h2>
+          </div>
+        </div>
+        <!-- /menu profile quick info -->
+      
+        <br />
+      
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section">
+            <h3>Data Analyst</h3>
+            <ul class="nav side-menu">
+              <li><a ><i class="fa fa-laptop"></i> Main <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+
+                          
+                        
+                    <li> <!--  STARTS li TAG == CSV to PSQL -->
+                      <!-- FOO_TBD need a MODAL HERE with FORM in the MODAL  -->
+                          <a><i id ="csv_to_psql" class="fa font_awesome_file_icon_for_hover fa-file"></i> Upload CSV </a>
+                                                        
+                          <script>
+                              $("#csv_to_psql").hover(function () {
+                                var fontawesome_file_icon = document.getElementsByClassName("font_awesome_file_icon_for_hover")[0];
+                                fontawesome_file_icon.setAttribute("style", "color:  rgb(230, 180, 19); "); 
+                                $("#conditional_part_csv_to_psql").show(); // JIRA_ROHIT_PendingTask --- this here --- there is NO == conditional_part_csv_to_psql
+                              });
+                          </script>
+
+                          <script>
+                              $("#csv_to_psql").hover(function () {
+                                var var_modal_upload_csv = document.getElementById('modal_upload_csv_to_psql_tables');
+                                var_modal_upload_csv.style.display = "block"; 
+                              });
+                          </script>
+
+                        <div id="modal_upload_csv_to_psql_tables" class="modal_backdrop_csv_to_psql"> 
+                            <div class="modal_content_csv_to_psql">
+                                <div class="modal_header_csv_to_psql">
+                                    <span class="modal_close_csv_to_psql">&times;</span> 
+                                    <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                    <h2> CSV upload to SQL Table </h2>
+                                </div> <!-- ENDS  div == modal_header_drop_del_PSQL_Tables -->
+                                
+                                    <div class="modal_body_csv_to_psql">
+                                         
+                                          <form action=/dc/csv_to_psql/ method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <br>
+                                            <p>
+                                                <label for="id_csv_file_name">CSV File Name:</label>
+                                                <input type="text" name="csv_file_name" maxlength="800" id="id_csv_file_name">
+                                                <br>
+                                                <label for="id_dataset_name">DataSet Name:</label>
+                                                <input type="text" name="dataset_name" maxlength="800" id="id_dataset_name">
+                                              </p>
+                                              
+                                              <p>
+                                                <input type="file" name="csv_file" maxlength="800" id="id_csv_file">
+                                              </p>
+                                              
+                                              <button id="roll_up_form" type="submit">Upload</button>
+                                          </form>  <!-- /.form --> 
+                                          <br>
+                                          
+                                    </div> <!-- == ENDS == modal_body_csv_to_psql -->
+                            </div><!-- == ENDS == modal_content_csv_to_psql -->
+                            </div><!-- == ENDS == modal_backdrop_csv_to_psql -->
+
+                            <script>
+                                var modal_csv_to_psql = document.getElementById('modal_upload_csv_to_psql_tables');
+                                var span_csv_to_psql = document.getElementsByClassName("modal_close_csv_to_psql")[0];
+                                span_csv_to_psql.onclick = function() {
+                                  modal_csv_to_psql.style.display = "none"; // Change MODAL Name to == modal_csv_to_psql
+                                  // FOO_TBD_Doesnt_WORK
+                                  var fontawesome_file_icon = document.getElementsByClassName("font_awesome_file_icon_for_hover")[0];
+                                  fontawesome_file_icon.setAttribute("style", "color:  rgb(19, 245, 87); "); 
+                                }
+
+                                window.onclick = function(event) {
+                                  if (event.target == modal_csv_to_psql) {
+                                    modal_csv_to_psql.style.display = "none"; 
+                                    var fontawesome_file_icon = document.getElementsByClassName("font_awesome_file_icon_for_hover")[0];
+                                    fontawesome_file_icon.setAttribute("style", "color:  rgb(19, 245, 87); "); 
+                                  }
+                                }
+
+                                document.addEventListener('keyup', function(event) {
+                                    if (event.key === 'Escape') {
+                                      modal_csv_to_psql.style.display = 'none';
+                                      var fontawesome_file_icon = document.getElementsByClassName("font_awesome_file_icon_for_hover")[0];
+                                    fontawesome_file_icon.setAttribute("style", "color:  rgb(19, 245, 87); "); 
+                                    }
+                                  });
+                        </script> <!--  Modal SCRIPT ENDS -->
+                          
+                    </li> <!--  ENDS li TAG == CSV to PSQL -->
+
+
+
+
+                    <li> <!--  STARTS pvBonds_csv_to_psql -->
+                          <a><i id ="pvBonds_csv_to_psql" class="fa fa_pvBondsfile_icon_for_hover fa-file"></i> Upload BondsCSV </a>
+
+                          <div id= "conditionalPart_pvBonds">
+
+                              <!-- pvBonds_iFRAME Starts==== -->
+                              <div class="iFrame_pvBonds" style ='overflow: hidden;'>
+                                <iframe id = "id_iFrame_pvBonds" scrolling="auto" width="190" height="190"  src= "{% url 'call_view_pvBonds_csvUploadiFrame' %}"  frameborder="0" ></iframe>			
+                              </div>
+
+                          </div>
+                          <!-- ENDS == conditionalPart_pvBonds -->
+                          <script>
+                            $(document).ready(function() {
+                                            $('#conditionalPart_pvBonds').hide();
+                                        });
+                          </script>
+
+                            <script>
+                              $("#pvBonds_csv_to_psql").hover(function () {
+                                var fa_pvBondsfile_icon_for_hover = document.getElementsByClassName("fa_pvBondsfile_icon_for_hover")[0];
+                                fa_pvBondsfile_icon_for_hover.setAttribute("style", "color:  rgb(230, 18, 19); "); 
+                                $("#conditionalPart_pvBonds").show(); // 
+                              });
+                          </script>
+                          </li>
+                          <!--  ENDS pvBonds_csv_to_psql -->
+                          
+
+                          <!-- <script>
+                            // // JIRA_ROHIT_PendingTask -- SCRIPT below i may CUSTOMIZE according to DC --- but the Original is being Pushed UP
+
+                            // var clickIframe = window.setInterval(checkFocus, 100);
+                            // var i = 0; // Set variable Counter == 0 
+
+                            // function checkFocus() {
+                            //   if(document.activeElement == document.getElementById("id_iFrame_pvBonds")) {
+                            //     console.log("clicked "+(i++)); // Increment i on each Click ANYWHERE inside the iFrame 
+                            //     alert("clicked")
+                            //     window.focus();
+                            //   }
+                            // }
+
+                          // </script> -->
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <li> <!--  STARTS == DROP / DELETE SQL Tables -->
+                          
+                          <a><i id ="drop_del_PSQL_Tables" class="fa font_awesome_icon_for_hover fa-database" ></i> DROP/DELETE DB Table </a>
+
+                          <!-- Modal_drop_del_PSQL_Tables STARTS below the PATH TO OWN STATIC ROOT == /static/ NOT == static/   ==--> 
+
+                          <script src="/static/dc_js_own/main_sidebar/dc_js/drop_del_psql.js"></script> 
+                        
+                          
+                          <div id="modal_drop_del_psql_tables" class="modal_backdrop_drop_del_PSQL_Tables"> 
+                                    <div class="modal_content_drop_del_PSQL_Tables">
+                                        <div class="modal_header_drop_del_PSQL_Tables">
+                                            <span class="modal_close_drop_del_PSQL_Tables">&times;</span> 
+                                            <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                            <h2> DROP or DELETE SQL Tables  </h2>
+                                        </div> <!-- ENDS  div == modal_header_drop_del_PSQL_Tables -->
+                                        
+                                            <div class="modal_body_drop_del_PSQL_Tables">
+                                                  
+                                                  <p id ="drop_table_help_text"> Choose DB type </p>
+
+                                                  <div class="row"> <!-- STARTS DIV CLASS ROW for Buttons  -->
+                                                  
+                                                  <p> 
+                                                    <div class="dropdown">
+                                                      <button class="dropbtn btn btn-default"> PostgreSQL </button>
+                                                      <div class="dropdown-content"> 
+                                                        <a id ="drop_chosen">DROP</a>
+                                                        <a id ="del_chosen">DELETE</a>
+                                                      </div> 
+                                                    </div>
+
+                                                    <div class="dropdown">
+                                                      <button class="dropbtn btn btn-default"> MySQL </button>
+                                                      <div class="dropdown-content"> 
+                                                        <a id ="drop_chosen_mySQL">DROP</a>
+                                                        <a id ="del_chosen_mySQL">DELETE</a>
+                                                      </div> 
+                                                    </div>
+
+                                                      <div class="dropdown">
+                                                          <button class="dropbtn btn btn-default"> SQLite </button>
+                                                          <div class="dropdown-content"> 
+                                                            <a id ="drop_chosen_SQLite">DROP</a>
+                                                            <a id ="del_chosen_SQLite">DELETE</a>
+                                                      </div> 
+
+                                                    </div>
+                                                   </p>
+
+                                                  </div> <!-- ENDS DIV CLASS ROW for Buttons  -->
+
+                                                  <br>
+          
+                                                   <a><i id ="psqlTables_merge" class="fa font_awesome_icon_for_hover fa-database" ></i> Other DB Actions </a>
+                                                   <br>
+                                                   
+                                            </div> <!-- == ENDS == modal_body_Query_PSQL_Tables -->
+                                    </div><!-- == ENDS == modal_content_Query_PSQL_Tables -->
+                                    </div><!-- == ENDS == modal_backdrop_drop_del_PSQL_Tables -->
+
+
+
+
+                                    <script> // STARTs_URL JS TO PY == drop_delete_click_from_js
+                                      var drop_del_js_to_py = "{% url 'drop_delete_click_from_js' %}" 
+                                      //
+                                      var drop_clicked = document.getElementById('drop_chosen');
+                                      drop_clicked.onclick = function() {
+                                      document.getElementById('drop_chosen').setAttribute("style", "color: red; background-color:black ; fontWeight:bold;");
+                                              var clicked_drpDown = 1;
+                                              alert(clicked_drpDown)
+
+                                              $.ajax({
+                                                      url:drop_del_js_to_py,
+                                                      
+                                                      type: "POST",
+                                                      dataType: 'json', 
+                                                      data: {
+                                                            clicked_drpDown: clicked_drpDown,
+                                                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                            },
+                                                      });
+                                              }; // Closes == drop_clicked.onclick = function() {
+                                      
+                                      // var var_drop_chosen = document.getElementById('drop_chosen'); ## Dhankar replaced with == drop_clicked
+                                      drop_clicked.onmouseout = function() {
+                                      drop_clicked.setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                                      };
+                                      
+          
+                                      var delete_clicked = document.getElementById('del_chosen');
+                                      delete_clicked.onclick = function() {
+                                        document.getElementById('del_chosen').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                              var clicked_drpDown = 2;
+                                              $.ajax({
+                                                      url:drop_del_js_to_py,
+                                                      type: "POST",
+                                                      dataType: 'json', 
+                                                      data: {
+                                                            clicked_drpDown: clicked_drpDown,
+                                                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                            },
+                                                      });
+                                      }; // CLOSE-- delete_clicked.onclick function ()
+                                      document.getElementById("del_chosen").onmouseout = function() {
+                                      document.getElementById('del_chosen').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                                      };
+
+                                      var drop_mySQL_clicked = document.getElementById('drop_chosen_mySQL');
+                                      drop_mySQL_clicked.onclick = function() {
+                                        document.getElementById('drop_chosen_mySQL').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                              var clicked_drpDown = 3;
+                                              $.ajax({
+                                                      url:drop_del_js_to_py,
+                                                      type: "POST",
+                                                      dataType: 'json', 
+                                                      data: {
+                                                            clicked_drpDown: clicked_drpDown,
+                                                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                            },
+                                                      });
+                                      }; 
+                                      document.getElementById("drop_chosen_mySQL").onmouseout = function() {
+                                      document.getElementById('drop_chosen_mySQL').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                                      };
+          
+                                      var delete_mySQL_clicked = document.getElementById('del_chosen_mySQL');
+                                      delete_mySQL_clicked.onclick = function() {
+                                        document.getElementById('del_chosen_mySQL').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                              var clicked_drpDown = 4;
+                                              $.ajax({
+                                                      url:drop_del_js_to_py,
+                                                      type: "POST",
+                                                      dataType: 'json', 
+                                                      data: {
+                                                            clicked_drpDown: clicked_drpDown,
+                                                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                            },
+                                                      });
+                                      }; // CLOSE-- delete_mySQL_clicked.onclick function ()
+                                      document.getElementById("del_chosen_mySQL").onmouseout = function() {
+                                      document.getElementById('del_chosen_mySQL').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                                      };
+
+                                      //
+
+                                      var drop_SQLite_clicked = document.getElementById('drop_chosen_SQLite');
+                                      drop_SQLite_clicked.onclick = function() {
+                                        document.getElementById('drop_chosen_SQLite').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                              var clicked_drpDown = 5;
+                                              $.ajax({
+                                                      url:drop_del_js_to_py,
+                                                      type: "POST",
+                                                      dataType: 'json', 
+                                                      data: {
+                                                            clicked_drpDown: clicked_drpDown,
+                                                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                            },
+                                                      });
+                                      }; 
+                                      document.getElementById("drop_chosen_SQLite").onmouseout = function() {
+                                              document.getElementById('drop_chosen_SQLite').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                                      };
+          
+                                      var delete_SQLite_clicked = document.getElementById('del_chosen_SQLite');
+                                      delete_SQLite_clicked.onclick = function() {
+                                        document.getElementById('del_chosen_SQLite').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                              var clicked_drpDown = 6;
+                                              $.ajax({
+                                                      url:drop_del_js_to_py,
+                                                      type: "POST",
+                                                      dataType: 'json', 
+                                                      data: {
+                                                            clicked_drpDown: clicked_drpDown,
+                                                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                            },
+                                                      });
+                                      }; // CLOSE-- delete_mySQL_clicked.onclick function ()
+                                      document.getElementById("del_chosen_SQLite").onmouseout = function() {
+                                              document.getElementById('del_chosen_SQLite').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                                      };
+                                  </script> <!-- ENDs_URL JS TO PY == drop_delete_click_from_js == -->
+
+                                        
+                                              <!--  modal_drop_del_psql_tables CLOSING SCRIPT STARTS -->
+                                              <script>
+                                                  var modal_drop_del = document.getElementById('modal_drop_del_psql_tables');
+                                                  var span_modal_drop_del = document.getElementsByClassName("modal_close_drop_del_PSQL_Tables")[0];
+                                                  span_modal_drop_del.onclick = function() {
+                                                    modal_drop_del.style.display = "none"; // Change MODAL Name to == modal_drop_del
+                                                    var var_font_awesome_icon_for_hover = document.getElementsByClassName("font_awesome_icon_for_hover")[0];
+                                                    var_font_awesome_icon_for_hover.setAttribute("style", "color:  rgb(19, 245, 87); "); 
+                                                  }
+                                                  window.onclick = function(event) {
+                                                    if (event.target == modal_drop_del) {
+                                                      modal_drop_del.style.display = "none"; // Change MODAL Name to == modal_drop_del
+                                                      var var_font_awesome_icon_for_hover = document.getElementsByClassName("font_awesome_icon_for_hover")[0];
+                                                      var_font_awesome_icon_for_hover.setAttribute("style", "color:  rgb(19, 245, 87); "); 
+                                                    }
+                                                  }
+                                                  document.addEventListener('keyup', function(event) {
+                                                    if (event.key === 'Escape') {
+                                                      modal_drop_del.style.display = 'none';
+                                                      var var_font_awesome_icon_for_hover = document.getElementsByClassName("font_awesome_icon_for_hover")[0];
+                                                      var_font_awesome_icon_for_hover.setAttribute("style", "color:  rgb(19, 245, 87); "); 
+                                                    }
+                                                  });
+                                          </script> <!--  modal_drop_del_psql_tables CLOSING SCRIPT ENDS -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  <script> // <!-- STARTS == modal_drop_psql== Triggerred by CLICK ON == drop_chosen -->
+
+
+                                        var var_drop_chosen = document.getElementById('drop_chosen');
+                                        var_drop_chosen.onclick = function()  {
+                                          
+                                      // drop_chosen for PSQL == Display the MODAL 
+                                        var var_modal_drop_psql = document.getElementById('modal_drop_psql');
+                                        var_modal_drop_psql.style.display = "block"; 
+
+                                        // JIRA_ROHIT_PendingTask == ajax call which was earlier FIRED on Document Load //$(document).ready(function(){  == is now here below
+                                        // This way PSQL_DROp_CHOSEN Clicked >> Shows MODAL >> Fills Modal with AJAX GET ajax call to url == psql_tableNames_from_py >>  DataTables.js 
+
+                                        var Url_psqlTables_drop = "{% url 'psql_tableNames_from_py' %}" //call_modal_psqlDB_Conn_Status
+                                                var dataSet_psqlTables_drop;
+                                                var modalCols_psqlTablNames = []; // Init EMPTY_ARRAY 
+                                        
+                                                //$(document).ready(function(){ 
+                                                  // JIRA_ROHIT_PendingTask == DONT fire on //$(document).ready == Instead FIRE on var_drop_chosen.onclick
+                                                  //alert("-----Modal--Url_psqlTables_drop--") // OK 
+                                                    $.ajax({
+                                                            url: Url_psqlTables_drop,
+                                                            type: 'GET',      
+                                                            dataType: 'json', 
+                                                            success: function(dict_jsonFromPyforTablesDrop) {
+                                                            var dataSet_psqlTables_drop = dict_jsonFromPyforTablesDrop.data_json.columns;
+                                                            $.each(dataSet_psqlTables_drop, function( key, value ) {
+                                                                                    var dict_forCols = {};
+                                                                                    dict_forCols.data = key; 
+                                                                                    dict_forCols.title = value;
+                                                                                    modalCols_psqlTablNames.push(dict_forCols); // We PUSH the DICT Into the EMPTY ARRAY 
+                                                                                    return modalCols_psqlTablNames
+                                                                            }); // Close == $.each(dataSet, function( key, value )
+                                      
+                                                                assignToEventsColumns(modalCols_psqlTablNames,dict_jsonFromPyforTablesDrop);
+                                                            }, // Close == success: function(dict_jsonFromPyforTablesMerge)
+                                                        })    // Close - "ajax":
+                                        
+                                                    function assignToEventsColumns(modalCols_psqlTablNames,dict_jsonFromPyforTablesDrop) {
+
+                                                    var dataTable_drop_psql = $('#dataTable_drop_psqlTables').DataTable({
+                                                        "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                                                        "serverSide": false, // FALSE - As of NOW gets data from within DOM == clientSide
+                                                        "select": true, // Column Select done below ...
+                                                        "aaData": dict_jsonFromPyforTablesDrop.data_json.data, 
+                                                        "columns" : modalCols_psqlTablNames,
+                                      
+                                                            }) // CLOSE == $('#dataTable_psqlTables_merge').DataTable({
+                                                        //} // CLOSE == function assignToEventsColumns === FOO_ClickAlertFails == taken this curly brace DOWN 
+
+
+                                              
+
+
+
+
+                                                      var array_of_clicks = [];
+                                                      //var new_merged_tableName = []; // JIRA_ROHIT_PendingTask_MERGE_NotHere --- Create a FORM ENTRY FOR == new_merged_tableName
+
+                                                      var cell_data_url1 = "{% url 'cell_get_js_val_drop_psql' %}" //
+                                                      var csrftoken_merge = jQuery("[name=csrfmiddlewaretoken]").val();
+
+                                                      $('#dataTable_drop_psqlTables tbody').on( 'click', 'td', function () {
+                                                            var col = $(this).parent().children().index($(this));
+                                                            var row = $(this).parent().parent().children().index($(this).parent());
+                                                            var cell_data=$("#dataTable_drop_psqlTables tbody").find('tr:eq('+ row + ')').find('td:eq(' + col + ')');
+                                                            var cell_data_text = cell_data.text()
+                                                            array_of_clicks.push(cell_data_text);
+                                                            // array_of_clicks -- NOT REALLY REQUIRED HERE 
+                                                            // Could could do with == cell_data_text ...also. 
+
+
+                                                            
+
+
+                                                            
+                                                  if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length ==1) {
+                                                              //alert("Got == 1 Table to DROP ")
+
+                                                              //dataTable_drop_psql.ajax.reload();
+
+                                             //var dataTable_drop_psql = $('#dataTable_drop_psqlTables')
+                                             //var dataTable_drop_psql = document.getElementById("dataTable_drop_psqlTables")
+                                             alert(dataTable_drop_psql)
+                                            //  console.log(dataTable_drop_psql)
+                                            //  dataTable_drop_psql.ajax.reload();
+                                            console.log("===modalCols_psqlTablNames====")
+                                            console.log(modalCols_psqlTablNames)
+
+                                            console.log("========dict_jsonFromPyforTablesDrop.data_json=======")
+                                            console.log(dict_jsonFromPyforTablesDrop.data_json)
+
+
+                                             $('#dataTable_drop_psqlTables').DataTable({
+                                                        "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                                                        "serverSide": false, // FALSE - As of NOW gets data from within DOM == clientSide
+                                                        "select": true, // Column Select done below ...
+                                                        "aaData": dict_jsonFromPyforTablesDrop.data_json.data, 
+                                                        "columns" : modalCols_psqlTablNames,
+                                      
+                                                            }).ajax.reload();
+
+                                             
+
+                                                              $.ajax({
+                                                                    url:cell_data_url1,
+                                                                    type: "POST",
+                                                                    dataType: 'json', 
+                                                                    data: {
+                                                                          array_of_clicks: array_of_clicks,
+                                                                          csrfmiddlewaretoken: csrftoken_merge,
+                                                                          },
+                                                                      }); // CLOSES AJAX ==>> $.ajax({
+
+                                                              //// JIRA_ROHIT_PendingTask ---- Test below here == /// JIRA_ROHIT_PendingTask ---- Testing above here DESTROY and RE Create DataTable == Url_psqlTables_drop2 == https://datatables.net/manual/tech-notes/3
+                                                              alert("--------JIRA_ROHIT_PendingTask--2ndAJAX")
+
+                                                              
+                                                              //JIRA_ROHIT_PendingTask === earlier tried these below 
+                                                              // table.destroy();
+                                                              // dataTable_drop_psqlTables  === is the HTML DIV of the dataTable.js 
+                                                              //dataTable_drop_psql.destroy(); // JIRA_ROHIT_PendingTask --- USE == : location.reload(true)
+                                                              //location.reload(true); // JIRA_ROHIT_PendingTask === FAILS === Cant Reload DataTable.js == = https://datatables.net/manual/tech-notes/3
+                                                              // //var dt_pswl = document.getElementById("dataTable_drop_psqlTables")
+                                                              // //dt_pswl.destroy();
+
+
+
+
+
+                                                              // var Url_psqlTables_drop2 = "{% url 'psql_tableNames_from_py' %}" //
+                                                              // var dataSet_psqlTables_drop2;
+                                                              // var modalCols_psqlTablNames2 = []; // Init EMPTY_ARRAY 
+
+
+                                                              // $.ajax({
+                                                              // url: Url_psqlTables_drop2,
+                                                              // type: 'GET',      
+                                                              // dataType: 'json', 
+                                                              // success: function(dict_jsonFromPyforTablesDrop2) {
+                                                              // var dataSet_psqlTables_drop2 = dict_jsonFromPyforTablesDrop2.data_json.columns;
+                                                              // $.each(dataSet_psqlTables_drop2, function( key, value ) {
+                                                              //                       var dict_forCols2 = {};
+                                                              //                       dict_forCols2.data = key; 
+                                                              //                       dict_forCols2.title = value;
+                                                              //                       modalCols_psqlTablNames2.push(dict_forCols2); // We PUSH the DICT Into the EMPTY ARRAY 
+                                                              //                       return modalCols_psqlTablNames2
+                                                              //               }); // Close == $.each(dataSet, function( key, value )
+
+                                                              //   assignToEventsColumns(modalCols_psqlTablNames2,dict_jsonFromPyforTablesDrop2);
+                                                              // }, // Close == success: function(dict_jsonFromPyforTablesMerge)
+                                                              // })    // Close - "ajax":
+
+                                                              // function assignToEventsColumns(modalCols_psqlTablNames2,dict_jsonFromPyforTablesDrop2) {
+
+                                                              // var dataTable_drop_psql2 = $('#dataTable_drop_psqlTables').DataTable({
+                                                              // "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                                                              // "serverSide": false, // FALSE - As of NOW gets data from within DOM == clientSide
+                                                              // "select": true, // Column Select done below ...
+                                                              // "aaData": dict_jsonFromPyforTablesDrop2.data_json.data, 
+                                                              // "columns" : modalCols_psqlTablNames2,
+
+                                                              // }) // CLOSE == $('#dataTable_psqlTables_merge').DataTable({
+                                                              // } // CLOSE == function assignToEventsColumns ==FOO TESTING 
+
+                                                              // // /// JIRA_ROHIT_PendingTask ---- Testing above here DESTROY and RE Create DataTable == Url_psqlTables_drop2 == https://datatables.net/manual/tech-notes/3
+                                                              // /// JIRA_ROHIT_PendingTask === Challenge with this approach 
+                                                              // // 1/ dataTable_drop_psql --- gets created and destroyed == next == dataTable_drop_psql2 gets created ?? 
+
+
+
+
+                                                                var table_one_name = array_of_clicks[0];
+                                                                //JIRA_ROHIT_PendingTask== CREATE a GREEN OK Confirmation MODAL here ........
+
+                                                                var var_modal_alerts = document.getElementById('modal_alerts');
+                                                                var_modal_alerts.style.display = "block"; 
+                                                                document.getElementById("dynamic_alert_header").innerHTML = "Heads Up !" 
+                                                                document.getElementById("dynamic_alert_text").innerHTML = "PSQL Table " + "  = " + "<span style='color:#FF0000;font-weight:bold'>" + table_one_name + "</span>"  + "  " + " DROPPED. <br> Do you want to DROP another TABLE = " + "<span style='color:#FF0000;font-weight:bold'>" + + "</span>"  + "   ?" 
+                                                                // SAMPLE_DYNAMIC_HTML //document.getElementById("dynamic_alert_text").innerHTML = " As result of EDA Action - Search and Replace , a New Column =" + new_column_name + " , has been inserted into Dataset = " + new_df_from_eda + " , thanks. " 
+                                                                //var delay_modalAlertDisplay = 8000; // Original reduced for testing 
+                                                                var delay_modalAlertDisplay = 300; // Reduced for testing 
+                                                                setTimeout(function() {
+                                                                var_modal_alerts.style.display = "none"; 
+                                                                // alert(dataTable_drop_psql) // ok we get this VAR here ...
+
+                                                                //$('#dataTable_drop_psqlTables').DataTable().ajax.reload();
+                                                                
+
+                                                                }, delay_modalAlertDisplay);
+
+                                                                
+
+                                                                // setInterval( function () {
+                                                                //           $('#dataTable_drop_psqlTables').ajax.reload();
+                                                                //       }, 30 );
+
+                                                            } // CLOSES ==>> if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length ==1) {
+
+
+
+
+
+
+//$('#dataTable_drop_psqlTables').DataTable().ajax.reload();
+
+
+                                                              // Source == .ajax.reload(); == https://stackoverflow.com/a/43530918/4928635
+                                                              // Source == .ajax.reload(); = https://datatables.net/reference/api/ajax.reload()
+
+                                                              // var table = $('#example').DataTable( {
+                                                              //                 ajax: "data.json"
+                                                              //             } );
+                                                                          
+                                                              //             setInterval( function () {
+                                                              //                 table.ajax.reload( null, false ); // user paging is not reset on reload
+                                                              //             }, 30000 );
+
+
+
+
+
+
+
+
+                                                            if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length > 1) {
+                                                                var table_one_name = array_of_clicks[0];
+                                                                var table_two_name = array_of_clicks[1];
+
+                                                                var var_modal_alerts = document.getElementById('modal_alerts');
+                                                                var_modal_alerts.style.display = "block"; 
+                                                                document.getElementById("dynamic_alert_header").innerHTML = "Heads Up !" 
+                                                                document.getElementById("dynamic_alert_text").innerHTML = "PSQL Table " + "  = " + "<span style='color:#FF0000;font-weight:bold'>" + table_one_name + "</span>"  + "  " + " DROPPED. <br> Do you want to DROP another TABLE = " + "<span style='color:#FF0000;font-weight:bold'>" + table_two_name + "</span>"  + "   ?" 
+                                                                // SAMPLE_DYNAMIC_HTML //document.getElementById("dynamic_alert_text").innerHTML = " As result of EDA Action - Search and Replace , a New Column =" + new_column_name + " , has been inserted into Dataset = " + new_df_from_eda + " , thanks. " 
+                                                                //var delay_modalAlertDisplay = 8000; // Original reduced for testing 
+                                                                var delay_modalAlertDisplay = 80;
+                                                                setTimeout(function() {
+                                                                var_modal_alerts.style.display = "none"; 
+                                                                }, delay_modalAlertDisplay);
+
+
+                                
+
+                                                            } // Close == if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length > 1) {
+                                                        }); // CLOSE-- Click on CELL FUNCTION == $('#dataTable_psqlTables_merge tbody').on( 'click', 'td', function
+
+
+                                                        } // CLOSE == function assignToEventsColumns === FOO_without this Curly Brace here the Click_Event_Fails == Got this from Above
+                                          // JIRA_ROHIT_PendingTask END THE ---- Ajax call within DROP_Chosen == PSQL 
+                                          }; // CLOSE == var_drop_chosen.onclick = function()  {
+
+                                            
+
+                                    </script>
+                              
+
+
+
+
+
+
+
+                              <div id="modal_drop_psql" class="modal_backDrop_showTable_drop_psqlTables"> 
+                                  <div class="modal_content_showTable_drop_psqlTables"><!-- myModal2b Modal content -->
+                                      <div class="modal_header_showTable_drop_psqlTables"> 
+                                          <span id = "crossClose_modal_drop_psql" class="modal_close_showTable_drop_psqlTables">&times;</span> 
+                                          <h2> PSQL - DROP Tables </h2>
+                                      </div> <!-- ENDS  div == modal_header_showTable_drop_psqlTables -->
+                                      
+                                          <div class="modal_body_showTable_drop_psqlTables">
+                                                <p> Click on PSQL TableName to DROP </p>
+                                               
+                                              <script type="text/javascript">
+                                                  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                                              </script>
+                                              
+                                              <table id="dataTable_drop_psqlTables" class="display" cellspacing="0" width="100%">
+                                              </table>
+                                              
+                                              
+                                          
+                                    </div> <!-- == ENDS == modal_body_SQL_Tables_Merge -->
+                                  </div><!-- == ENDS == modal_content_SQL_Tables_Merge -->
+                                  </div><!-- == ENDS == modal_mainBody_SQL_Tables_Merge -->
+                                  
+
+                                  <script> // <!--  modal_drop_psql == Closing_SCRIPT_starts -->
+                                      var var_modal_drop_psql = document.getElementById('modal_drop_psql');
+                                      var var_crossClose_modal_drop_psql = document.getElementById('crossClose_modal_drop_psql');
+                                      
+                                      var_crossClose_modal_drop_psql.onclick = function() {
+                                        var_modal_drop_psql.style.display = "none"; // Change MODAL Name here.
+                                      }
+                                      window.onclick = function(event) {
+                                        if (event.target == var_modal_drop_psql) {
+                                          var_modal_drop_psql.style.display = "none"; // Change MODAL Name here.
+                                        }
+                                      }
+
+                                    document.addEventListener('keyup', function(event) {
+                                        if (event.key === 'Escape') {
+                                          var_modal_drop_psql.style.display = 'none';
+                                        }
+                                      });
+
+                                </script> <!--  modal_drop_psql == Closing_SCRIPT_ENDs -->
+                                <!--  ENDS == DROP / DELETE SQL Tables -->
+
+                              <div id="modal_alerts" class="modal_alerts_backdrop"> <!-- == modal_alerts_backdrop == -->
+                                <div class="modal_alerts_content"><!-- myModal2 Modal content -->
+
+                                    <div class="modal_alerts_header">
+                                        <span class="modal_alerts_close">&times;</span> 
+                                        <h2 id = "dynamic_alert_header"> </h2>
+                                    </div> <!-- ENDS  div == modal_alerts_header -->
+                                    
+                                        <div class="modal_alerts_body">
+                                              <p id = "dynamic_alert_text">  </p>
+                                              <br>
+                                              
+                                </div> <!-- == ENDS == modal_alerts_body -->
+                                </div><!-- == ENDS == modal_alerts_content -->
+                                </div><!-- == ENDS == modal_alerts_backdrop -->
+
+
+                  
+          </li> <!--  Ends LI TAG Data Ingress -->
+                      
+
+
+<!-- ## Descriptive Statistics        -->
+        
+<li><a><i class="fa fa-pencil"></i> Descriptive Stats <span class="fa fa-chevron-down"></span></a>
+  <ul class="nav child_menu">
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Five Point Summary </a></li>
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Text Distance Measures</a></li>
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/">Validation Reports</a></li>
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/">Reports Wizard</a></li>
+    
+  </ul>
+</li>
+
+
+
+<!-- ## Predictive Statistics     -->
+
+<li><a><i class="fa fa-bullhorn"></i> Predictive Statistics <span class="fa fa-chevron-down"></span></a>
+  <ul class="nav child_menu">
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Linear Regression </a></li>
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Logistic Regression </a></li>
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Classification Trees </a></li>
+    <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Random Forests </a></li>
+    
+    
+  </ul>
+</li>
+
+                            <li><a><i class="fa fa-edit"></i> Dashboards <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/">General Reports</a></li>
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/">Advanced Reports</a></li>
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/">Validation Reports</a></li>
+                                <li><a href="https://www.linkedin.com/in/rohitdhankar/">Reports Wizard</a></li>
+                                
+                              </ul>
+                            </li>
+
+
+
+                            <!-- <li><a><i class="fa fa-desktop"></i> Indian Startups <span class="fa fa-chevron-down"></span></a>
+                              <ul class="nav child_menu">
+                                <li><a href="general_elements.html">Top Level Dashboard</a></li>
+                                <li><a href="media_gallery.html">Industry Segments</a></li>
+                                <li><a href="typography.html">Geo Location</a></li>
+                                <li><a href="icons.html">Funding Status</a></li>
+                                <li><a href="glyphicons.html">Funding Level</a></li>
+                                <li><a href="widgets.html">Investor Segments</a></li>
+                                
+                              </ul>
+                            </li>
+ -->
+
+ 
+              <li><a><i class="fa fa-database"></i> DB Connectors <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <!-- <li><a href="fixed_sidebar.html"></a></li>
+                  <li><a href="fixed_footer.html">Fixed Footer</a></li> -->
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+
+          <div class="menu_section">
+            <h3>Admin Tools</h3>
+            <ul class="nav side-menu">
+              <li><a><i class="fa fa-bug"></i> Report a Bug <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="https://www.linkedin.com/in/rohitdhankar/">Report a Bug</a></li>
+                </ul>
+              </li>
+              
+              
+              <li><a href="javascript:void(0)"><i class="fa fa-database"></i> Graph Database <span class="label label-success pull-right"> Pro-Version</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- /sidebar menu -->
+      
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+          <a data-toggle="tooltip" data-placement="top" title="Settings">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="Lock">
+            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          </a>
+        </div>
+        <!-- /menu footer buttons -->
+      </div>
+      
+      
+
+
+      
+    </body>
+    </html>
+    

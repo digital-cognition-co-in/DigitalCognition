@@ -1,0 +1,589 @@
+<style>
+
+    body {
+  background-color: lightblue;
+}
+
+    /* dhankar - form input textbox  */
+    input[type="text"] {
+        width: 130px;
+    }
+    
+            .elnt_container{
+              padding: 6px 8px;
+            }
+            #conditional_part{
+              padding: 6px 4px;
+              display:none;
+            }
+            
+            #conditional_part_more-info_initSearch{
+              padding: 6px 4px;
+              display:none;
+            }
+            
+            
+            /*
+             * DHANKAR --- Off Canvas SIDEBAR for Mobile 
+             * ---------------------------------------------
+             SOURCE == https://stackoverflow.com/questions/22985370/making-the-bootstrap-dashboard-example-sidebar-visible-available-on-mobile
+             -----
+             */
+             @media screen and (max-width: 768px) {
+              .row-offcanvas {
+                position: relative;
+                -webkit-transition: all 0.25s ease-out;
+                -moz-transition: all 0.25s ease-out;
+                transition: all 0.25s ease-out;
+              }
+            
+              .row-offcanvas-left
+              .sidebar-offcanvas {
+                left: -33%;
+              }
+            
+              .row-offcanvas-left.active {
+                left: 33%;
+              }
+            
+              .sidebar-offcanvas {
+                position: absolute;
+                top: 0;
+                width: 33%;
+                margin-left: 10px;
+              }
+            }
+            
+            /* Sidebar navigation */
+            .nav-sidebar {
+              background-color: #f5f5f5;
+              margin-right: -15px;
+              margin-bottom: 20px;
+              margin-left: -15px;
+            }
+            .nav-sidebar > li > a {
+              padding-right: 20px;
+              padding-left: 20px;
+            }
+            .nav-sidebar > .active > a {
+              color: #fff;
+              background-color: #428bca;
+            }
+            
+            /* ##DHANKAR# Toggle SIDEBAR ENDS  */
+            
+            
+            
+            
+            
+            
+            /* Center the loader */
+            #loader {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              z-index: 1;
+              width: 550px;
+              height: 150px;
+              margin: -75px 0 0 -75px;
+              border: 16px solid #54e610;
+              /* border: 16px solid #f3f3f3; */
+              border-radius: 50%;
+              border-top: 16px solid #3498db;
+              width: 120px;
+              height: 120px;
+              -webkit-animation: spin 2s linear infinite;
+              animation: spin 2s linear infinite;
+            }
+            
+            @-webkit-keyframes spin {
+              0% { -webkit-transform: rotate(0deg); }
+              100% { -webkit-transform: rotate(360deg); }
+            }
+            
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+            
+            /* Add animation to "page content" */
+            .animate-bottom {
+              position: relative;
+              -webkit-animation-name: animatebottom;
+              -webkit-animation-duration: 1s;
+              animation-name: animatebottom;
+              animation-duration: 1s
+            }
+            
+            @-webkit-keyframes animatebottom {
+              from { bottom:-100px; opacity:0 } 
+              to { bottom:0px; opacity:1 }
+            }
+            
+            @keyframes animatebottom { 
+              from{ bottom:-100px; opacity:0 } 
+              to{ bottom:0; opacity:1 }
+            }
+            
+            #myDiv {
+              /* display: none; */
+              /* text-align: center; */
+            }
+            
+            
+            </style>
+            
+            
+            <head>
+            
+              <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133322875-1"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'UA-133322875-1');
+            </script>
+            
+            
+              <!-- DHANKAR == BootStrap4 includes for Custom Checkboxes START -->
+              <!-- DHANKAR == If i include this for CUTE Looking Custom Checkbox it upsets my entire BootStrap3 Layout check again  -->
+                <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
+            
+            <!-- DHANKAR == BootStrap4 includes for Custom Checkboxes START -->    
+            </head>
+            <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                      <a href= {% url 'data_ListView_index' %} class="site_title"><i class="fa fa-home"></i> <span>Digital Cognition</span></a>
+                    </div>
+                  
+                    <div class="clearfix"></div>
+                  
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                      <div class="profile_pic">
+                            <img src="/static/img/dhankar.jpg" alt="..." class="img-circle profile_img">
+                      </div>
+                      <div class="profile_info">
+                        <span>Welcome,</span>
+                        <h2>Dhankar Rohit</h2>
+                      </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                  
+                    <br />
+                  
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                      <div class="menu_section">
+                        <h3>Data Analyst</h3>
+                        <ul class="nav side-menu">
+                            <li><a ><i class="fa fa-laptop"></i> Exploratory Analytics <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+            
+                                          <li> 
+                                              <a href="{% url  'data_ListView'%}">Data Ingress</a> 
+                                          </li>  
+    
+                                          <li> 
+                                              <a href="{% url  'call_eda_dataset_name_listView'%}">DataSets ListView</a> 
+                                          </li>  
+    
+    
+    
+                                            <li> <!--  STARTS  == Exploratory Analytics Functions  -->  
+                                            
+            
+                                            <div class="custom-control custom-checkbox mb-3">  <!--  STARTS == EDA_SearchAndReplace -->
+                                              <input type="checkbox" class="custom-control-input" id="EDA_SearchAndReplace" name="EDA_SearchAndReplace">
+                                              <label class="custom-control-label" for="EDA_SearchAndReplace">Search and Replace</label>
+                                          </div>
+                                      
+                                          <div id="conditional_EDA_SearchAndReplace">
+                                              <form action=/dc/eda_actionSearchAndReplace_/ method="post" enctype="multipart/form-data">
+                                                  {% csrf_token %}
+                                                  <p>
+                                                      <label for="eda_new_column">New Column:</label>
+                                                        <select id="eda_new_column" name="form_input_new_column">
+            
+                                                          <option value="new_col">Results in New Col.</option>
+                                                          <option value="old_col">Overwrite Chosen Col.</option>
+                                                          
+                                                        </select>
+                                                      <button type="button" style="color:green;" id="choose_button" onclick="eda_newColumn()">Choose</button>
+    
+                                                      <script>
+                                                        document.getElementById('choose_button').onclick = changeColor; 
+                                                        
+                                                        function changeColor() { 
+                                                                  document.getElementById('choose_button').style.color = "red";
+                                                            }
+                                                        </script>
+    
+    
+            
+                                                      <script>
+                                                        function eda_newColumn() {
+                                                            var choose_newColumn = document.getElementById("eda_new_column").value;
+                                                            //console.log(choose_newColumn) 
+                                                            //alert(choose_newColumn)
+                                                            
+                                                          }
+                                                      </script>
+                                                  </p>
+            
+            
+                                                  <p>
+                                                      <label for="eda_operation_type">Choose Operation:</label>
+                                                        <select id="eda_operation_type" name="django_form_input_operation_type">
+                                                        
+            
+                                                          <option value="equals">Equals(=)</option>
+                                                          <option value="contains">Text Contains SubString</option>
+                                                          <option value="starts_with">Text Starts With</option>
+                                                          <option value="ends_with">Text Ends With</option>
+                                                          <option value="regex">REGEX</option>
+                                                        </select>
+                                                      <button type="button" style="color:green;" id="choose_button1" onclick="eda_operation_type_function()">Choose</button>
+    
+                                                      <script>
+                                                        document.getElementById('choose_button1').onclick = changeColor; 
+                                                        function changeColor() { 
+                                                                  document.getElementById('choose_button1').style.color = "red";
+                                                                    }
+                                                      </script>
+    
+            
+                                                      <script>
+                                                        function eda_operation_type_function() {
+                                                            //var operation_type = document.getElementById("eda_operation_type").selectedIndex;
+                                                            // ABOVE Will Give Numeric INDEX for option.value == 0,1,2,3,4== REGEX
+                                                            var operation_type = document.getElementById("eda_operation_type").value;
+                                                            console.log(operation_type) 
+                                                            alert(operation_type)
+                                                            
+                                                          }
+                                                      </script>
+                                                  </p>
+            
+            
+                                                  <p>
+                                                      <label for="id_str_search">String to Search:</label>
+                                                      <input type="text" name="str_search" maxlength="1000" id="id_str_search">
+                                                  </p>
+                                                  
+                                                  <p>
+                                                      <label for="id_str_replace">String to Replace:</label>
+                                                      <input type="text" name="str_replace" maxlength="1000" id="id_str_replace">
+                                                  </p>
+                                                <button type="submit">Submit</button>
+                                                </form>  <!-- /.form --> 
+                                            </div> <!-- conditional_EDA_SearchAndReplace -->
+              
+                                              <script>
+                                                $(document).ready(function() {
+                                                                $('#conditional_EDA_SearchAndReplace').hide();
+                                                            });
+                                              </script>
+                                              <script>
+                                                  $('#EDA_SearchAndReplace').change(function() {
+                                                    if(this.checked != true){
+                                                        $("#conditional_EDA_SearchAndReplace").hide();
+                                                        }
+                                                    else{
+                                                        $("#conditional_EDA_SearchAndReplace").show();
+                                                        document.getElementById("#conditional_EDA_SearchAndReplace").style.color = "red";
+                                                        }
+                                                        });
+                                              </script> <!--  ENDs == EDA_SearchAndReplace -->
+                
+                                          
+    
+                
+    
+                                    <div class="custom-control custom-checkbox mb-3">  <!--  STARTS == eda_MatchSimilarText -->
+                                        <input type="checkbox" class="custom-control-input" id="eda_MatchSimilarText" name="eda_MatchSimilarText">
+                                        <label class="custom-control-label" for="eda_MatchSimilarText">Match Similar Text</label>
+                                    </div>
+                                
+                                    <div id="conditional_eda_MatchSimilarText">
+                                        <form action=/dc/eda_actionMatchSimilarText_/ method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+    
+                                            <p>
+                                                <label for="id_fuzziness">Fuzziness:</label>
+                                                <input type="text" name="fuzziness" maxlength="1000" id="id_fuzziness">
+                                            </p>
+                                            
+                                            <p>
+                                                <label for="id_str_to_compare_with">String to Compare:</label>
+                                                <input type="text" name="str_to_compare_with" maxlength="1000" id="id_str_to_compare_with">
+                                            </p>
+                                          <button type="submit">Submit</button>
+                                          </form>  <!-- /.form --> 
+                                      </div> <!-- conditional_eda_MatchSimilarText -->
+    
+                                        <script>
+                                          $(document).ready(function() {
+                                                          $('#conditional_eda_MatchSimilarText').hide();
+                                                      });
+                                        </script>
+                                        <script>
+                                            $('#eda_MatchSimilarText').change(function() {
+                                              if(this.checked != true){
+                                                  $("#conditional_eda_MatchSimilarText").hide();
+                                                  }
+                                              else{
+                                                  $("#conditional_eda_MatchSimilarText").show();
+                                                  document.getElementById("#conditional_eda_MatchSimilarText").style.color = "red";
+                                                  }
+                                                  });
+                                        </script> <!--  ENDs == eda_MatchSimilarText -->
+    
+    
+    
+    
+    
+                                            
+            
+                                      <div class="custom-control custom-checkbox mb-3"> <!--  STARTS == Query Database -->
+                                          <input type="checkbox" class="custom-control-input" id="query_db" name="query_db">
+                                          <label class="custom-control-label" for="query_db">Query Database</label>
+                                      </div>
+                                  
+                                      <div id="conditional_part_query_db">
+                                          <form action=/dc/json_dataTable/ method="post" enctype="multipart/form-data">
+                                              {% csrf_token %}
+                                              <p>
+                                                <label for="id_table_name">Display Table Data:</label>
+                                                <input type="text" name="table_name" maxlength="1000" id="id_table_name">
+                                              </p>
+                                              
+                                              <p>
+                                                <label for="id_limit_records">Display Records:</label>
+                                                <input type="text" name="limit_records" maxlength="1000" id="id_limit_records">
+                                              </p>
+            
+                                              <p>
+                                                  <label for="id_create_table_name">New Table Name:</label>
+                                                  <input type="text" name="new_table_name" maxlength="1000" id="id_new_table_name">
+                                              </p>
+                                              
+                                              <p>
+                                                  <label for="id_sql_query_input">Sql Query:</label>
+                                                  <input type="text" name="sql_query_input" maxlength="1000" id="id_sql_query_input">
+                                              </p>
+                                              
+                                                
+                                              <button type="submit">Query</button>
+                                          </form>  <!-- /.form --> 
+                                      </div> <!-- conditional_part_query_db -->
+            
+                                          <script>
+                                            $(document).ready(function() {
+                                                            $('#conditional_part_query_db').hide();
+                                                        });
+                                          </script>
+                                          <script>
+                                              $('#query_db').change(function() {
+                                                if(this.checked != true){
+                                                    $("#conditional_part_query_db").hide();
+                                                    }
+                                                else{
+                                                    $("#conditional_part_query_db").show();
+                                                    }
+                                                    });
+                                          </script>  <!--  Ends == Query Database  -->
+            
+                                     
+                                          </li> <!--  Ends LI TAG == Exploratory Analytics  -->
+            
+            
+            
+            
+            
+            
+            
+                                                    <!-- <div class="elnt_container">
+                                                        <input type="text" placeholder="TABLE.." />
+                                                    </div>
+            
+                                                  <div class="elnt_container">
+                                                      <input type="text" placeholder="COLUMN.." />
+                                                  </div>
+            
+                                                  <div class="elnt_container">
+                                                    <label for="more-info"></label>
+                                                    <input id="more_info" name="more-info" type="checkbox" />
+                                                  </div>
+            
+                                                  <div id="conditional_part">
+                                            
+                                                  <p>  <code> {{data_table_name}} </code> </p>
+                                                  </div>
+                                                </form> 
+                                                </div> -->
+            
+            
+            <!-- ## Descriptive Statistics                                     -->
+            
+            <li><a><i class="fa fa-pencil"></i> Descriptive Stats <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="form.html">Summary Statistics </a></li>
+                <li><a href="form_advanced.html"> Diff. Between Text</a></li>
+                <li><a href="form_validation.html">Validation Reports</a></li>
+                <li><a href="form_wizards.html">Reports Wizard</a></li>
+                <li><a href="form_upload.html">Reports Upload</a></li>
+                <li><a href="form_buttons.html">Reports Adhoc</a></li>
+              </ul>
+            </li>
+            
+            
+            
+            <!-- ## Predictive Statistics                                     -->
+            
+            <li><a><i class="fa fa-bullhorn"></i> Predictive Stats <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li><a href="form.html">Summary Statistics </a></li>
+                <li><a href="form_advanced.html"> </a></li>
+                <li><a href="form_validation.html">Validation Reports</a></li>
+                <li><a href="form_wizards.html">Reports Wizard</a></li>
+                <li><a href="form_upload.html">Reports Upload</a></li>
+                <li><a href="form_buttons.html">Reports Adhoc</a></li>
+              </ul>
+            </li>
+            
+                                        <li><a><i class="fa fa-edit"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu">
+                                            <li><a href="form.html">General Reports</a></li>
+                                            <li><a href="form_advanced.html">Advanced Reports</a></li>
+                                            <li><a href="form_validation.html">Validation Reports</a></li>
+                                            <li><a href="form_wizards.html">Reports Wizard</a></li>
+                                            <li><a href="form_upload.html">Reports Upload</a></li>
+                                            <li><a href="form_buttons.html">Reports Adhoc</a></li>
+                                          </ul>
+                                        </li>
+            
+            
+            
+                                        <li><a><i class="fa fa-desktop"></i> Indian Startups <span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu">
+                                            <li><a href="general_elements.html">Top Level Dashboard</a></li>
+                                            <li><a href="media_gallery.html">Industry Segments</a></li>
+                                            <li><a href="typography.html">Geo Location</a></li>
+                                            <li><a href="icons.html">Funding Status</a></li>
+                                            <li><a href="glyphicons.html">Funding Level</a></li>
+                                            <li><a href="widgets.html">Investor Segments</a></li>
+                                            
+                                          </ul>
+                                        </li>
+            
+            
+                                        <li><a><i class="fa fa-globe"></i> Global Startups <span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu">
+                                            <li><a href="general_elements.html">Top Level Dashboard</a></li>
+                                            <li><a href="media_gallery.html">Industry Segments</a></li>
+                                            <li><a href="typography.html">Geo Location</a></li>
+                                            <li><a href="icons.html">Funding Status</a></li>
+                                            <li><a href="glyphicons.html">Funding Level</a></li>
+                                            <li><a href="widgets.html">Investor Segments</a></li>
+                                            
+                                          </ul>
+                                        </li>
+            
+            
+                                        <li><a><i class="fa fa-table"></i> Data Tables <span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu">
+                                            <li><a href="tables.html">Tables</a></li>
+                                            <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                                          </ul>
+                                        </li>
+            
+            
+                                        <li><a><i class="fa fa-bar-chart-o"></i> Data Viz. <span class="fa fa-chevron-down"></span></a>
+                                          <ul class="nav child_menu">
+                                            <li><a href="chartjs.html">Chart JS</a></li>
+                                            <li><a href="chartjs2.html">Chart JS2</a></li>
+                                            <li><a href="morisjs.html">Moris JS</a></li>
+                                            <li><a href="echarts.html">ECharts</a></li>
+                                            <li><a href="other_charts.html">Other Charts</a></li>
+                                          </ul>
+                                        </li>
+            
+            
+                          <li><a><i class="fa fa-clone"></i>DB Connectors <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                              <!-- <li><a href="fixed_sidebar.html"></a></li>
+                              <li><a href="fixed_footer.html">Fixed Footer</a></li> -->
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="menu_section">
+                        <h3>Admin Tools</h3>
+                        <ul class="nav side-menu">
+                          <li><a><i class="fa fa-bug"></i> Report a Bug <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                              <li><a href="e_commerce.html">E-commerce</a></li>
+                              <li><a href="projects.html">Projects</a></li>
+                              <li><a href="project_detail.html">Project Detail</a></li>
+                              <li><a href="contacts.html">Contacts</a></li>
+                              <li><a href="profile.html">Profile</a></li>
+                            </ul>
+                          </li>
+                          <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                              <li><a href="page_403.html">403 Error</a></li>
+                              <li><a href="page_404.html">404 Error</a></li>
+                              <li><a href="page_500.html">500 Error</a></li>
+                              <li><a href="plain_page.html">Plain Page</a></li>
+                              <li><a href="login.html">Login Page</a></li>
+                              <li><a href="pricing_tables.html">Pricing Tables</a></li>
+                            </ul>
+                          </li>
+            
+                          <li><a><i class="fa fa-sitemap"></i> Hierarchical Tree <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="#level1_1">Level One</a>
+                                <li><a>Level One<span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="level2.html">Level Two</a>
+                                    </li>
+                                    <li><a href="#level2_1">Level Two</a>
+                                    </li>
+                                    <li><a href="#level2_2">Level Two</a>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li><a href="#level1_2">Level One</a>
+                                </li>
+                            </ul>
+                          </li>
+                          <li><a href="javascript:void(0)"><i class="fa fa-database"></i> Graph Database <span class="label label-success pull-right"> Pro-Version</span></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                  
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                      <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                      </a>
+                      <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                      </a>
+                      <a data-toggle="tooltip" data-placement="top" title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                      </a>
+                      <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                      </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                  </div>
+                  

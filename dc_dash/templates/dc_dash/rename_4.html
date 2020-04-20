@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+{% load static %}
+{% include 'dc_dash/base.html' %}
+
+
+    
+    
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Digital Cognition</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- DHANKAR define paths to local STATIC -->
+    <!-- DHANKAR - All original Comments from Original Boot template have been retained -->
+
+    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">      
+
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">      
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'dist/css/dashboard.css' %}" rel="stylesheet">    
+    
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      
+      
+      
+      
+      
+      
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Robotic Process Automation </span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" style='color: #fff'>Robotic Process Automation</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" style='color: #fff'>Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#"> Level [#1] Delete All Data  <span class="sr-only">(current)</span></a></li>
+            
+            <li><a href="# Demo App Nothing here yet ...URL">Del -All Data Table[1]</a></li>
+            <li><a href="# Demo App Nothing here yet ...URL">Del -All Data Table[2]</a></li>
+            
+          </ul>
+            
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Level [#2] SIDEBAR- TBD<span class="sr-only">(current)</span></a></li>
+            
+            <li><a href="# Demo App Nothing here yet ...URL">SIDEBAR- TBD</a></li>
+            <li><a href="# Demo App Nothing here yet ...URL">SIDEBAR- TBD</a></li>
+            <li><a href="# Demo App Nothing here yet ...URL">SIDEBAR- TBD</a></li>
+            <li><a href="# Demo App Nothing here yet ...URL">SIDEBAR- TBD</a></li>
+            
+          </ul>
+            
+        </div>
+          
+          
+<!-- SIDEBAR BLUE ENDS HERE -->                                      
+          
+          
+          
+          
+          
+          
+<!-- Ist MAIN Starts Dont EDIT HERE -->                            
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="row placeholders">
+            
+
+              
+              
+              
+              
+              
+<!-- Ist BootStrap COLUMN Starts  -->                            
+              
+<div class='col-sm-6'>
+<i class="fa fa-file-excel-o fa-5x"></i> 
+<h2 class="page-header"style='color:orange'> [_DATABASE_NAME_]</h2>    
+<h3>[_Table_NAME_]</h3>
+<br>
+
+    <div class="controls">
+    <button class="btn btn-danger btn-sm" value="None Required" onClick="window.location.reload()">RELOAD STATUS</button>
+    </div><!-- controls -->
+<br>
+<a class="btn btn-success" href="{% url 'fileup_1' %}" role="button" >MAIN PAGE</a>    
+<br>       
+
+<!-- HTML Table Starts
+    ================================================== -->
+                  
+              
+              
+        <h2 class="sub-header" style='color:orange'> SQL Database </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style='color:orange'>Sr.No.#</th>
+                  <th style='color:orange'>Data Table Name</th>
+                  <th style='color:orange'>Table Owner</th>
+                  <th style='color:orange'># of Columns</th>
+                  <th style='color:orange'># of Rows </th>
+                  <th style='color:orange'>Linked Tables </th>  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td style='color:blue' href="{% url 'fileup_1' %}"> {{table_1}}</td>  
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td>adipiscing</td>
+                  <td>elit</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Integer</td>
+                  <td>nec</td>
+                  <td>odio</td>
+                  <td>Praesent</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>libero</td>
+                  <td>Sed</td>
+                  <td>cursus</td>
+                  <td>ante</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>dapibus</td>
+                  <td>diam</td>
+                  <td>Sed</td>
+                  <td>nisi</td>
+                    <td>sit</td>
+                </tr>
+                                
+              </tbody>
+            </table>
+          </div>
+
+    <!-- HTML Table Ends
+    ================================================== -->
+    
+    
+
+</div>
+
+<!-- Ist BootStrap COLUMN Ends  -->                  
+              
+              
+         
+              
+              
+              
+              
+<!-- 2nd BootStrap COLUMN Starts  -->                            
+              
+<div class='col-sm-6'>
+<i class="fa fa-file-excel-o fa-5x"></i> 
+<h2 class="page-header"style='color:orange'>[_DATABASE_NAME_] </h2>    
+
+<h3>[_Table_NAME_]</h3>
+<br>
+
+    <div class="controls">
+    <button class="btn btn-danger btn-sm" value="None Required" onClick="window.location.reload()">RELOAD STATUS</button>
+    </div><!-- controls -->
+<br>
+<a class="btn btn-success" href="{% url 'fileup_1' %}" role="button" >MAIN PAGE</a>    
+<br>       
+    
+<!-- HTML Table Starts
+    ================================================== -->
+                  
+              
+              
+        <h2 class="sub-header" style='color:orange'> SQL Database </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style='color:orange'>Sr.No.#</th>
+                  <th style='color:orange'>Data Table Name</th>
+                  <th style='color:orange'>Table Owner</th>
+                  <th style='color:orange'># of Columns</th>
+                  <th style='color:orange'># of Rows </th>
+                  <th style='color:orange'>Linked Tables </th>  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td style='color:blue' href="{% url 'fileup_1' %}"> {{table_1}}</td>  
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td>adipiscing</td>
+                  <td>elit</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Integer</td>
+                  <td>nec</td>
+                  <td>odio</td>
+                  <td>Praesent</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>libero</td>
+                  <td>Sed</td>
+                  <td>cursus</td>
+                  <td>ante</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>dapibus</td>
+                  <td>diam</td>
+                  <td>Sed</td>
+                  <td>nisi</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Nulla</td>
+                  <td>quis</td>
+                  <td>sem</td>
+                  <td>at</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>nibh</td>
+                  <td>elementum</td>
+                  <td>imperdiet</td>
+                  <td>Duis</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>sagittis</td>
+                  <td>ipsum</td>
+                  <td>Praesent</td>
+                  <td>mauris</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Fusce</td>
+                  <td>nec</td>
+                  <td>tellus</td>
+                  <td>sed</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>augue</td>
+                  <td>semper</td>
+                  <td>porta</td>
+                  <td>Mauris</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>massa</td>
+                  <td>Vestibulum</td>
+                  <td>lacinia</td>
+                  <td>arcu</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>eget</td>
+                  <td>nulla</td>
+                  <td>Class</td>
+                  <td>aptent</td>
+                    <td>sit</td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+    <!-- HTML Table Ends
+    ================================================== -->
+    
+    
+
+</div>
+
+<!-- 2nd BootStrap COLUMN Ends  -->                            
+              
+            
+            
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+            
+              
+              
+              
+            
+            
+<!-- DONT Change Anything Below here   -->                                        
+              
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+      
+      
+      <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+      
+      
+      
+    <script src="/dist/js/bootstrap.min.js"></script>
+    <link href="{% static 'assets/js/vendor/jquery.min.js' %}" rel="stylesheet">     
+      
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+      
+      
+      
+      <!-- FLOT Charts -->
+            
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/flot/0.7/jquery.flot.min.js">
+        </script>
+
+      
+      
+  </body>
+</html>

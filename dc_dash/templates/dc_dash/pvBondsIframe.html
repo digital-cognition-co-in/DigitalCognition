@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}    
+{% include 'dc_dash/includes/dc_customCSS.html' %}
+
+
+<head>
+    <!-- JIRA_ROHIT_PendingTask_removed_jquery_4 from here for testing  -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+</head>
+
+<style>
+
+/* below code from So here - it creates a Red Border around all elements within this here iFrame page */
+/* * {  border: 1px solid #f00 !important; } */
+/* * { outline: 1px #f00 solid; } */
+
+
+/* CSS in dc_customCSS.html == .modal_DropDownMenu_header ..etc etc ... */
+body {
+  background-color: rgb(84, 177, 231);
+  font-family: 'Roboto';font-size: 12px;
+      }
+
+::-webkit-scrollbar {
+width: 5px;
+height: 5px; 
+/* outline: 3px  rgb(3, 243, 151) solid; */
+display: block;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(15, 209, 135);
+}
+
+::-webkit-scrollbar-thumb {
+  background:rgb(1, 89, 139) 
+}
+
+
+/* display: none;  */
+</style>
+
+<body>
+
+    <!-- pvBonds Parameters manual inputs STARTS -->
+
+        <div id ="id_checkbox_vanila_pv_paramsUI" class="custom-control custom-checkbox mb-3">  <!--  STARTS == Bond Value Parameters -->
+            <input type="checkbox" class="custom-control-input" id="id_vanila_pv_paramsUI" name="id_vanila_pv_paramsUI">
+            <label id="id_label_vanila_pv_paramsUI" class="custom-control-label" for="id_vanila_pv_paramsUI">Bond Value Parameters</label>
+        </div>
+
+                    <div id = "conditional_vanila_pv_paramsUI" > 
+                        <div class="params_vanila_pv_paramsUI">
+                            <p> Input Parameters for Bond Valuation </p>
+                            
+                            <p>  <!-- Starts PARA - Currency Variable Input  -->
+                           <label for="bond_currency">Currency:</label>
+                                    <select id="id_bond_currency" name="name_bond_currency">
+                                      <option value="USA_dollar">USD</option>
+                                      <option value="India_INR">INR</option>
+                                    </select>
+                                  <button type="button" style="color:green;" id="id_bondCurr_button">Choose</button>
+
+                                  <script>
+                                    document.getElementById('id_bondCurr_button').onclick = changeColor; 
+                                    function changeColor() { 
+                                              document.getElementById('id_bondCurr_button').style.color = "red";
+                                                            }
+                                    </script>
+
+                                    <script>
+                                    document.getElementById('id_bondCurr_button').onclick = function()
+                                    {
+                                        var val_bondCurr = document.getElementById("id_bond_currency").value;
+                                        //alert(val_bondCurr) // Alert will POP-UP even when its within iFrame on SideBar
+                                        document.getElementById('id_bondCurr_button').style.color = "red";
+                                        // JIRA_ROHIT_PendingTask --- make button Not Clickable for Second time when its RED
+                                        // JIRA_ROHIT_PendingTask --- Give a RESET button at bottom - along with Complete form SUBMIT Button 
+                                    } 
+                                 </script>
+                            </p> <!-- ENDS== PARA - Currency Variable Input  -->
+                            
+                            <p> <!-- Starts PARA - FACE VALUE Variable Input  -->
+                                    <label for="id_bondface">Face Value:</label>
+                                    <input type="text" name="bondface" maxlength="100" id="id_bondfaceValue">
+                            </p> <!-- ENDS== PARA - FACE VALUE Variable Input  -->
+
+
+                            <p> <!-- Starts PARA - RATE - SAIR  -->
+                                <label for="id_Rate-SAIR"> Rate-SAIR :</label>
+                                <input type="text" name="Rate-SAIR" maxlength="100" id="id_Rate-SAIR_Value">
+                            </p> <!-- ENDS== Rate-SAIR -->
+
+                            <p> <!-- Starts PARA - COUPON PAYMENT PERIODS  -->
+                                <label for="id_T_COUPON">Coupon Periods :</label>
+                                <input type="text" name="T_COUPON" maxlength="100" id="id_T_COUPON_value">
+                            </p> <!-- ENDS== COUPON PAYMENT PERIODS-->
+
+                            <button id="id_button_pvBonds_Submit" type="submit">Submit</button>
+
+                      </div> <!-- == ENDS ==params_vanila_pv_paramsUI -->
+                 </div>  <!-- ENDS == conditional_vanila_pv_paramsUI -->
+
+                 <script>
+                     // REDIRECT SCRIPT
+                        var id_button_pvBonds_Submit = document.getElementById('id_button_pvBonds_Submit');
+                        var url_pvBonds_Submit = "{% url 'call_pvBonds_renderPage' %}" //
+                        var js_toPy_params_pvBonds = "{% url 'js_toPy_params_pvBonds' %}" //
+                        //
+                        id_button_pvBonds_Submit.onclick = function() {
+                            //window.parent.location = url_pvBonds_Submit; // JIRA_ROHIT_PendingTask --- Moved to end of this FUNC after AJAX POST
+                            //id_bondfaceValue
+                            var f_bondfaceValue = document.getElementById("id_bondfaceValue").value;
+                            var SAIR_Value = document.getElementById("id_Rate-SAIR_Value").value;
+                            var t_couponValue = document.getElementById("id_T_COUPON_value").value;
+                            //alert(t_couponValue)
+                            $.ajax({
+                                url:js_toPy_params_pvBonds,
+                                type: "POST",
+                                dataType: 'json', 
+                                data: {
+                                        f_bondfaceValue:f_bondfaceValue,
+                                        SAIR_Value:SAIR_Value,
+                                        t_couponValue: t_couponValue,
+                                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                                        },
+                                }); // ajax_Closed
+                                window.parent.location = url_pvBonds_Submit;
+                            }; // CLOSE-- psql_clicked.onclick function ()
+                            //document.getElementById("PostgreSQL_chosen").onmouseout = function() {
+                            //         document.getElementById('PostgreSQL_chosen').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                            // };
+                        //} // ENDS == id_button_pvBonds_Submit.onclick = function() {
+                </script>
+
+
+                 <script>
+                     // conditional_vanila_pv_paramsUI HIDE SCRIPT
+                        $(document).ready(function() {
+                                        $('#conditional_vanila_pv_paramsUI').hide();
+                                    });
+                 </script>
+
+                 <script>
+                     // conditional_vanila_pv_paramsUI SHOW SCRIPT
+                          $('#id_vanila_pv_paramsUI').change(function() {
+                            if(this.checked != true)
+                            {
+                            $("#conditional_vanila_pv_paramsUI").hide(); 
+                            }
+                            else
+                            {
+                            $("#conditional_vanila_pv_paramsUI").show(); // HIDE - 
+                            }
+                        });
+                 </script>
+
+
+</body>
+</html>

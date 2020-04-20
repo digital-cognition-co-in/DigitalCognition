@@ -1,0 +1,296 @@
+{% extends "dc_dash/dhankar_fixedSideBar_base.html" %}    
+
+
+{% load static %}
+{% include 'dc_dash/base.html' %}
+
+
+{% load micawber_tags %} 
+
+{% block title %} 
+ 
+{% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}  
+  <!-- jQuery custom content scroller -->
+  <link href="/static/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+{% endblock stylesheets %}
+
+{% block sidebar_class %}
+nav-md menu_fixed
+{% endblock sidebar_class %}
+
+<style>
+/*Dhankar --- */
+.popover-title {
+    background-color: rgb(143, 197, 150) !important;
+    margin: 0 5px;
+    font-weight: bold;
+    /*color: #505458 !important;*/
+    color:rgb(9, 4, 75) !important;
+    text-align: left;
+    padding: 2px 5px;
+    font-weight: 300;
+    border-bottom: 1px solid #f7f7f7;
+} 
+
+/* Dhankar --- Popover Body */
+.popover-content {
+    background-color:rgb(12, 189, 36) !important;
+    color: rgb(9, 4, 75) !important;
+    padding: 25px;
+}
+    
+body {
+    color: grey;
+}
+    
+
+h1 {
+    text-align: center;
+        color: black;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+    
+    
+table {
+    border-collapse: collapse;
+    width: 100%;        
+}
+
+table, th, td {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid grey;
+    padding: 15px;
+    height: 25px;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    text-align: justify;
+    font-size:13px !important;
+   
+}
+    
+tr:hover {background-color:#ffdb99}
+
+</style>
+
+<head>
+
+<link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet"> 
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">      
+<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="{% static 'dist/css/dashboard.css' %}" rel="stylesheet">    
+
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+<!-- === DHANKAR=== bootstrap-table Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.js"></script>
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/locale/bootstrap-table-en-US.js"></script>
+<link href="{% static 'css/bootstrap-table.min.css' %}" rel="stylesheet">  
+<link href="{% static 'css/bootstrap-table.css' %}" rel="stylesheet">  
+
+<!-- === DHANKAR=== bootstrap-table ==== ALLL CDN imports Above here=== -->
+
+
+<!-- PopOver CSS and JS DHANKAR Starts-->       
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- PopOver CSS and JS DHANKAR Ends-->       
+
+
+
+</head>
+
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+
+            <!-- DHANKAR Content Starts -->   
+                
+            <!-- == DIV Class for Push Towards the RIGHT so we have SIDEBAR on LEFT ==-->           
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">                    
+                        
+               
+
+        <!-- Top Pagination OK Dont Change-->    
+        {% if is_paginated %}
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li>
+        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+        </li>
+        {% endif %}
+        <li class="">
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+        </li>
+        {% if page_obj.has_next %}
+        <li>
+        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+        </li>
+        {% endif %}
+        </ul>
+        {% else %}
+        <h3> This Data Table Has Only These Many Records  </h3>
+        <p> Come back later for more Tweets</p>
+        {% endif %}
+        <!-- Top Pagination - Ends OK Dont Change-->        
+        
+        
+        
+        
+        
+        
+        
+             
+            
+        <!-- Dhankar - Original PopOver Code 
+        {% for entry in list_targetSearchTerm %}
+        <a  href="#" role="button" class="btn popovers" data-toggle="popover" title="" 
+        data-content= "{{ entry.initSearchStr }}" 
+        data-original-title="Search Term Results">Results for Search Term :- </a>
+        {% endfor %} -->
+        
+        
+        <!-- PopOver DHANKAR Starts-->   
+        <script>
+            $(document).ready(function()
+            {
+        
+            //$('[data-toggle="popover"]').popover();  
+            //$('[data-toggle="popover"]').popover({title: "Header", content: "Blabla", trigger: "hover"});   
+            $('[data-toggle="popover"]').popover({trigger: "hover"});   
+        
+            //$(this).attr('data-content',strData);
+        
+            });
+        </script>
+        
+        <!-- PopOver DHANKAR Ends -->        
+        
+        
+        
+        
+        
+        
+        
+   
+                     
+        
+                  
+        
+        
+        <table id="TW11">  
+        
+        <thead>
+        <tr>
+          <th>Start Up Name</th>
+          <th>Website</th>
+          <th>LinkedIn</th>      
+          <th>Stage</th>  
+          <th>Industry</th>  
+          <th>Location</th>  
+        
+        </tr>
+        
+        {% for entry in list_mod_4 %}
+          
+        <tr>
+              <td style='color:black;'>{{ entry.ORG_Name }}</td>
+              <td style='color:black;'>{{ entry.ORG_URL|oembed_html:"600x600"}}</td>
+              <td style='color:black;'>{{ entry.LinkedIn_URL|oembed_html:"600x600"}}</td>                  
+              <td style='color:black;'>{{ entry.COY_Stage|oembed_html:"600x600"}}</td>   
+              <td style='color:black;'>{{ entry.ORG_Industry|oembed_html:"600x600"}}</td>   
+              <td style='color:black;'>{{ entry.ORG_loca|oembed_html:"600x600"}}</td>   
+        
+        </tr>
+        
+        {% endfor %}
+        
+        </table>
+            
+           
+        </ul>
+         
+        </div>
+        
+            
+            
+            
+            
+            
+            
+            
+            
+         {% if is_paginated %}
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li>
+                <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+            </li>
+        {% endif %}
+            <li class="">
+                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+            </li>
+        {% if page_obj.has_next %}
+            <li>
+                <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+            </li>
+        {% endif %}
+        </ul>
+        {% else %}
+            <h3> This Twitter Handle Has Only These Many Tweets  </h3>
+            <p> Come back later for more Tweets</p>
+        {% endif %}
+
+
+        <!-- DHANKAR Content ENDS -->   
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+  <!-- jQuery custom content scroller -->
+  <script src="/static/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+{% endblock javascripts %}
+
+
+
+
+
+
+

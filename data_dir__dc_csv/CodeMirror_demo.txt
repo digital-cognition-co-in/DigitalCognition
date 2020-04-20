@@ -1,0 +1,26 @@
+ SELECT * FROM dc_codemirror; 
+
+SELECT FROM table1;
+WHERE 
+ORDER 
+
+ORDER B --- BY/BETWEEN etc ...
+
+WHERE column_name BETWEEN col_ AND col_; ## COLUMN NAMES Not Being icked up yet ... 
+
+
+ ALTER 
+ CREATE 
+ DROP 
+ JOIN 
+
+
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+
+
+
+
+
+

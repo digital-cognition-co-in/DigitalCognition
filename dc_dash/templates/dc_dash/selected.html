@@ -1,0 +1,40 @@
+{% block content %}
+
+<h1> Selected</h1>
+
+
+    <div class="row">
+        <div class="col s4">
+            <form action="{% url 'computation' %}" method="POST">
+                {% csrf_token %}
+
+                <input id="csvfile" type="hidden" name="csvfile" value="{{ csvpath }}">
+                <input type="submit" class="btn" value="Computation">
+            </form>
+        </div>
+
+        <div class="col s4">
+
+
+            <form action="{% url 'visualisation' %}" method="POST">
+                {% csrf_token %}
+
+                <input id="csvfile" type="hidden" name="csvfile" value="{{ csvpath }}">
+                <input type="submit" class="btn" value="Visualisation">
+            </form>
+        </div>
+
+        <div class="col s4">
+
+            <form action="{% url 'learning' %}" method="POST">
+                {% csrf_token %}
+
+                <input id="csvfile" type="hidden" name="csvfile" value="{{ csvpath }}">
+                <input type="submit" class="btn" value="Machine Learning">
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock content %}

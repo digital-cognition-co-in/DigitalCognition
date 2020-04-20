@@ -1,0 +1,75 @@
+body 
+{
+  min-height: 1000px;
+}
+
+/* CSS FILE COMMENT --- Static navbar body all */
+
+.navbar-static-top 
+{
+  color: black;
+  margin-bottom: 10px;
+  background-color: #e50000;
+  border-color: #ff7f7f;
+}
+
+
+
+/* CSS FILE COMMENT --- Navbar Brand Only */
+
+.navbar-default .navbar-brand 
+{ 
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 70px;
+}
+
+.navbar-default .navbar-brand:hover 
+{
+  color: #777;
+}
+
+.navbar-default .navbar-brand1 
+{ 
+  color: #ffffff;
+  text-decoration:none;  
+  font-weight: 900;
+  font-size: 30px;
+}
+
+.navbar-default .navbar-brand1:hover 
+{
+  text-decoration:none;
+  color: #777;
+}
+
+
+
+/* CSS FILE COMMENT --- Navbar Navigation Tags - RENTAL etc includes CART Icon*/
+
+.navbar-default .navbar-nav
+{
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 30px;
+}
+.navbar-default .navbar-nav>li>a:hover {
+  color: yellow;
+}
+
+
+
+
+
+/* CSS FILE COMMENT --- Navbar Toggle - No Idea ? ? CHECK */
+.navbar-default .navbar-toggle {
+ border-color: transparent !important;
+}
+
+.navbar-toggle:hover {
+	background-color: #7f5200 !important;
+}
+
+.navbar-toggle {
+	background-color: #ff6666!important;
+}

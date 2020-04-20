@@ -1,0 +1,27 @@
+{% extends 'dc_dash/bokeh_base.html' %}
+{% load static %}
+{% include 'dc_dash/base.html' %}
+
+
+{% block content %}
+    <div>
+        {% load static %}
+        <link rel='stylesheet' href={{cdn_css|safe}} type="text/css"/>
+        <script type="text/javascript" src={{cdn_js|safe}}></script>
+            
+
+    </div>
+
+
+
+    <div>
+        <br>
+        <h1> The Globe and Mail - Canada Finance </h1>
+      <h3>{{graphname }}</h3>
+        <br>
+      {{div|safe}}
+      {{js|safe}}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}    
+
+<head>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        
+
+</head>
+
+<style>
+/* CSS in dc_customCSS.html == .modal_DropDownMenu_header ..etc etc ... */
+</style>
+
+<body>
+
+    
+<script>
+$( function() {
+                    $( "#id_draggable" ).draggable();
+                } );
+</script>
+
+
+
+      <script>
+            function add_TableAu_ColName()
+                    {
+                        //alert("----FUNC----")
+                        var new_ColName = document.getElementById("textInput_ColName").value;
+                        var newTableau_metricsNode = document.getElementById("tableau_metrics");
+                        var create_LInode = document.createElement("LI");
+                        
+                        var create_Textnode = document.createTextNode(new_ColName);
+
+                        //create_LInode.setAttribute('draggable', true);
+                        create_LInode.innerHTML = '<div id="id_draggable" > <p>Drag me around</p> </div>';
+
+                        // $(create_LInode).draggable({
+                        //     revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                        //     });
+
+                        create_LInode.appendChild(create_Textnode);
+                        newTableau_metricsNode.appendChild(create_LInode);
+                    }
+
+        </script>
+
+
+
+
+
+
+
+
+        <div id="checkbox_id_TableAuStyleReports" class="custom-control custom-checkbox mb-3"> 
+                <input type="checkbox" class="custom-control-input" id="modal_TableAuStyleReports" name="modal_TableAuStyleReports">
+                <label class="custom-control-label" for="modal_TableAuStyleReports">TableAu Style Reports</label>
+                <!-- == JIRA_ROHIT_PendingTask ==EARLIER == Summary_in_ModalPopUp1 -->
+            </div>
+        
+            <div id="conditional_TableAuStyleReports">
+              <!-- == JIRA_ROHIT_PendingTask ==EARLIER == conditional_Summary_in_ModalPopUp1 -->
+
+                <div id="id_modal_TableAuReports_backdrop" class="modal_TableAuReports_backdrop"> <!-- The Modal backDrop-->
+                    <!-- == JIRA_ROHIT_PendingTask ==EARLIER == <div id="myModal1" -->
+                <div class=" modal_TableAuReports_content"><!-- Modal content -->
+                    <!-- JIRA_ROHIT_PendingTask - earlier == modal_DropDownMenu_content -->
+
+                  <div class="modal_TableAuReports_header">
+                      <!-- JIRA_ROHIT_PendingTask earlier == modal_DropDownMenu_header -->
+                      <span class="modal_DropDownMenu_close">&times;</span> 
+                      <!-- SPAN CLASS for the CLOSE CROSS X -->
+                      <h2>Reports = Dimensions and Metrics i.e == TableAu  </h2>
+                    </div>
+                    <div class="modal-body">
+
+
+                            <h3>Reports = TableAu  </h3>
+                                    <ul id="tableau_metrics" class="">
+                                            <li id = 'id_draggable'> dates-1</li>
+                                            <li> dates-2</li>
+
+                                    </ul>
+
+                                    <input type="text" id="textInput_ColName">
+
+            <input type="button" onclick="add_TableAu_ColName()" value="CLICK ME">
+
+                    
+            </div> <!-- The Modal -->
+            </div> <!-- ENDS ==  conditional_Summary_in_ModalPopUp -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <script>
+                    //var myUrl = "{% url 'eda_MatchSimilarText_outPut' %}" //eda_MatchSimilarText_outPut
+                    var myUrl = "{% url 'call_eda_landing_init_dataTable' %}" //eda_landing_init_dataTable
+                    //var myUrl = "https://my-json-server.typicode.com/RohitDhankar/test_json_foo/db"
+                    var dataSet;
+                var my_columns = [];
+            
+                $(document).ready(function(){
+
+                  $.ajax({
+                    url: myUrl,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(dict_json_from_py) {
+                      
+                      console.log("--FILE== modal_TableAuReports.html---dict_json_from_py--======--")
+                      console.log(dict_json_from_py)
+                      var dataSet = dict_json_from_py.data_json.columns;
+                                  //console.log(dataSet)
+                                  $.each(dataSet, function( key, value ) {
+                                    var my_item = {};
+                                    my_item.data = key;
+                                    my_item.title = value;
+                                    //console.log("--FILE== modal_TableAuReports.html---dict_json_from_py--===my_item.data===--")
+                                    //console.log(my_item.data)
+                                    //console.log("--FILE== modal_TableAuReports.html---dict_json_from_py--===my_item.title===--")
+                                    //console.log(my_item.title) // JIRA_ROHIT_PendingTask --- These are the Column Names for the METRICS / DIMENSIONS of the REPORT 
+                                    //my_columns.push(my_item); // Can be used ?? 
+                                    //console.log(my_columns)
+                                    //return my_columns // Not Reqd 
+                                  });
+
+                                  
+                                  //assignToEventsColumns(my_columns,dict_json_from_py);
+                                }, // Close - success:
+                            })    // Close - "ajax":
+
+                }); // Close - // $(document).ready(function(){
+
+
+
+
+
+                    // JIRA_ROHIT_PendingTask ---- below not reqd for TableAu Metrics n Reports--- 26JUL19 
+            
+                //   function assignToEventsColumns(my_columns,dict_json_from_py) {
+            
+                //     var table = $('#example').DataTable({
+                //                     "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                //                     "serverSide": false, //
+                //                     "aaData": dict_json_from_py.data_json.data,
+                //                     "columns" : my_columns,
+                //                   })
+                
+                
+                //   }
+                // }); EARLIER was Closing ==  $(document).ready(function(){ ............. Now Closed below ........
+            
+            
+            
+            
+            
+            
+            // Below OK for Clicking --- Source -- https://datatables.net/reference/api/cell().index()
+                    
+                                    // $('#example tbody').on( 'click', 'td', function () {
+                                    //   alert("CLICKED------COL")
+                                      
+                                    //                   var col_num = table.cell( this ).index().columnVisible; 
+                                    //                   // OK works ---we get the COL INDEX of CELL
+                                    //                   alert(col_num)
+                                                      
+                                    //                   //table.column(col_num).select(); // NO -- .select(); --- Not FUNC ERROR 
+                                    //                   // ERROR Above -- Uncaught TypeError: table.column(.. .).select is not a function
+                                    //                   //alert('DHANKAR - Clicked on cell in visible column: '+col_num); // OK Dhank
+                                    //                   var col_post_url = "{% url 'col_get_js_val_bokeh' %}" //
+                                    //                   // TEXT to Speech Starts 
+                                    //                   var name_of_col_1 = dict_json_from_py.data_json.data[0][0]
+                                    //                   var len_of_col_1 = dict_json_from_py.data_json.data[0][8]
+                                    //                   var dType_of_col_1 = dict_json_from_py.data_json.data[0][9]
+            
+                                    //                   var summaryStatsTTS = new SpeechSynthesisUtterance(" SUMMARY STATISTICS for COLUMN One " + name_of_col_1 + " , the LENGTH is  " + len_of_col_1 + " RECORDS . ");
+                                    //                   var summaryStatsTTS_1 = new SpeechSynthesisUtterance(" The DATA TYPE of COLUMN One is " + dType_of_col_1 + " , thanks.  ");
+                                    //                   summaryStatsTTS.rate = 0.90; // behaves differently on Firefox and Chrome. 
+                                    //                   summaryStatsTTS_1.rate = 0.90; // 
+                                    //                   //summaryStatsTTS.voice = chosenVoice;
+                                    //                   window.speechSynthesis.speak(summaryStatsTTS);
+                                    //                   window.speechSynthesis.speak(summaryStatsTTS_1);
+                                    //                   // TEXT to Speech ENDS
+            
+            
+                                    //                   $.ajax({
+                                    //                           url:col_post_url,
+                                    //                           type: "POST",
+                                    //                           dataType: 'json', 
+                                    //                           data: {
+                                    //                                 col_num: col_num,
+                                    //                                 csrfmiddlewaretoken: '{{ csrf_token }}'
+                                    //                                 },
+                                    //                           success:function(response){
+                                    //                               alert("success: " + response);
+                                    //                           },
+                                    //                           error:function (xhr, textStatus, thrownError){
+                                    //                               //alert("failure: " + xhr.statusText);
+                                    //                           }
+                                    //                           }).done(function (response) {
+                                    //                               //alert("end");
+                                    //                           });
+                                    //       }); // CLOSE-- Click on CELL FUNCTION == .on( 'click', 'td', function ()
+                                    
+                                      //}
+                                  
+                    
+                        </script>
+                     
+
+                     
+
+
+
+
+
+
+
+
+
+
+
+            <script>
+            if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length > 2) {
+                var var_modal_alerts = document.getElementById('modal_alerts');
+                var_modal_alerts.style.display = "block"; 
+                document.getElementById("dynamic_alert_header").innerHTML = "Heads Up !" 
+                document.getElementById("dynamic_alert_text").innerHTML = "TWO Tables Already Selected for MERGE. " 
+                // 
+                //document.getElementById("dynamic_alert_text").innerHTML = " As result of EDA Action - Search and Replace , a New Column =" + new_column_name + " , has been inserted into Dataset = " + new_df_from_eda + " , thanks. " 
+                var delay_modalAlertDisplay = 8000;
+                setTimeout(function() {
+                var_modal_alerts.style.display = "none"; 
+                }, delay_modalAlertDisplay);
+
+            } // Close == if(typeof ....
+        //}); // CLOSE-- Click on CELL FUNCTION == $('#dataTable_psqlTables_merge tbody').on( 'click', 'td', function
+        //} // CLOSE == function assignToEventsColumns === FOO_without this Curly Brace here the Click_Event_Fails == Got this from Above
+    //}); // CLOSE ==  $(document).ready(function(){
+</script>
+
+
+
+
+
+
+
+
+
+          <script>
+                  // Get the modal
+                  var modal_TableAuReports_backdrop = document.getElementById('id_modal_TableAuReports_backdrop');
+                  // Get the <span> element that closes the modal
+                  var modal_TableAuReports_backdrop_span = document.getElementsByClassName("modal_DropDownMenu_close")[0];
+                  // When the user clicks on <span> (x), close the modal
+                    modal_TableAuReports_backdrop_span.onclick = function() {
+                    id_modal_TableAuReports_backdrop.style.display = "none";
+                    //$('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                    //Summary_in_ModalPopUp1
+                    //$('.Summary_in_ModalPopUp1').prop('checked', false);
+                    //$('.checkbox_for_Summary_in_ModalPopUp1')[0].checked = false;
+                    //$('.modal_TableAuStyleReports').prop('checked', false);
+                    $('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                      
+                  }
+
+                  // FOO_
+                  // When the user clicks anywhere outside of the modal, close it
+                  window.onclick = function(event) {
+                    if (event.target == modal_TableAuReports_backdrop) {
+                        modal_TableAuReports_backdrop.style.display = "none";
+                      //$('.modal_TableAuStyleReports').prop('checked', false);
+                      $('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                      //$('.checkbox_for_Summary_in_ModalPopUp1')[0].checked = false;
+                      
+                    }
+                  }
+          </script> <!--  Modal SCRIPT ENDS -->
+
+            <script>
+            $(document).ready(function() {
+                            $('#conditional_TableAuStyleReports').hide();
+                        });
+            </script>
+              
+            <script>
+              var modal_TableAuReports_backdrop = document.getElementById('id_modal_TableAuReports_backdrop');
+
+                $('#modal_TableAuStyleReports').change(function() {
+                  if(this.checked != true){
+                      alert("----YA---")
+                      $("#conditional_TableAuStyleReports").hide();
+                      modal_TableAuReports_backdrop.style.display = "none"; 
+                      }
+                  else{
+                      $("#conditional_TableAuStyleReports").show();
+                      modal_TableAuReports_backdrop.style.display = "block"; 
+                      //$("body").css("overflow","hidden"); // Make Entire PAGE Unscrollable
+                      //$('html, body').css({ overflow: 'hidden', height: '100%' });
+                      }
+                      });
+            </script> 
+
+
+
+
+
+
+</body>
+</html>

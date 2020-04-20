@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+{% load static %}
+{% include 'dc_dash/base.html' %}
+
+   
+    
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Digital Cognition</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- DHANKAR define paths to local STATIC -->
+    <!-- DHANKAR - All original Comments from Original Boot template have been retained -->
+
+    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">      
+
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">      
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'dist/css/dashboard.css' %}" rel="stylesheet">    
+    
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+    
+    
+    
+<style>
+
+.well {
+    background: rgb(22, 105, 173);
+}    
+
+.well.custom-well-small { 
+    width: 200px; 
+    height: 50px;
+    margin: 0 auto; 
+    /*background: grey;*/
+    /*background: rgb(255, 140, 0); */
+    }    
+    
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ccccff;
+}
+
+    
+    
+body {
+    color: black;
+}
+    
+
+h1 {
+    text-align: center;
+        color: black;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+    
+    
+table {
+    border-collapse: collapse;
+    width: 100%;        
+}
+
+table, th, td {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid grey;
+    padding: 15px;
+    height: 25px;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    text-align: justify;
+   
+}
+    
+tr:hover {background-color:#ffdb99}
+ 
+th {
+    background-color:#e59400; 
+    color: white;
+}
+    
+    
+</style>
+    
+    
+    
+    
+    
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Robotic Process Automation </span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" style='color: #fff'> Robotic Process Automation</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" style='color: #fff'>Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-3 col-md-2 sidebar">
+
+<ul class="nav nav-sidebar">
+        <li class="active"><a href="#"> Level [#1] Reporting <span class="sr-only">(current)</span></a></li>
+        <li style='background:#66d8ff'><a href="{% url 'upload_csv_page' %}">Initial Upload</a></li>
+        <li style='background:#00bfff'><a href="{% url 'summary_stats_1' %}">Dashboard</a></li>
+        <li style='background:#66d8ff'><a href="{% url 'summary_stats_index' %}">Summary Stats</a></li>
+        <li style='background:#00bfff'><a href="{% url 'chart_1' %}">Charts</a></li>
+        <li style='background:#ff8282;'><a href="{% url 'data_del_index' %}">DELETE DATA TABLE</a></li>    
+
+
+</ul>
+
+<ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Level [#2] Reporting <span class="sr-only">(current)</span></a></li>
+
+        <li style='background:#66d8ff'><a href="{% url 'upload_csv_page' %}">Initial Upload</a></li>
+        <li style='background:#00bfff'><a href="{% url 'summary_stats_1' %}">Dashboard</a></li>
+        <li style='background:#66d8ff'><a href="{% url 'summary_stats_index' %}">Summary Stats</a></li>
+        <li style='background:#00bfff'><a href="{% url 'chart_1' %}">Charts</a></li>
+        <li style='background:#ff8282;'><a href="{% url 'data_del_index' %}">DELETE DATA TABLE</a></li>    
+
+</ul>
+
+
+<ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Level [#3] Reporting <span class="sr-only">(current)</span></a></li>
+
+        <li style='background:#66d8ff'><a href="{% url 'upload_csv_page' %}">Initial Upload</a></li>
+        <li style='background:#00bfff'><a href="{% url 'summary_stats_1' %}">Dashboard</a></li>
+        <li style='background:#66d8ff'><a href="{% url 'summary_stats_index' %}">Summary Stats</a></li>
+        <li style='background:#00bfff'><a href="{% url 'chart_1' %}">Charts</a></li>
+        <li style='background:#ff8282;'><a href="{% url 'data_del_index' %}">DELETE DATA TABLE</a></li>    
+
+</ul>
+
+    
+    
+    
+</div>
+          
+          
+          
+          
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header"style='color:orange'>RPA - Overview</h1>
+            
+            
+<div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+                
+                <i class="fa fa-pie-chart fa-5x" style="color:orange"></i>
+                
+              
+              <h4>Finance</h4>
+              <span class="text-muted">Snapshot</span>
+            </div>
+              
+              
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <i class="fa fa-area-chart fa-5x" aria-hidden="true" style="color:red"></i>
+
+                <h4>Accounting</h4>
+              <span class="text-muted">Snapshot</span>
+            </div>
+              
+              
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <i class="fa fa-money fa-5x" aria-hidden="true" style="color:#43E8D8"></i>
+              <h4>Marketing</h4>
+              <span class="text-muted">Snapshot</span>
+            </div>
+              
+              
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <i class="fa fa-area-chart fa-5x" aria-hidden="true" style="color:#FF89AB"></i>
+              <h4>Service Delivery</h4>
+              <span class="text-muted">Snapshot</span>
+            </div>
+          </div>
+            
+                                  
+            
+            
+<!-- CSV Upload Starts== Vitor Style ============================================== -->
+<h2 class="sub-header" style='color:orange'> Upload Data Files to DataBase :- {{sheet_1_mod4}} </h2>            
+            
+
+{% block content %}
+            
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+  </form>
+  
+{% endblock %}
+                
+<!-- CSV Upload Ends ============================================== -->            
+            
+            
+            
+            
+
+            
+            
+            
+<!-- HTML Table Starts ============================================== -->
+        
+<h2 class="sub-header" style='color:orange'> Files already in Database :- {{sheet_1_mod4}} </h2>
+
+<div class="table-responsive">
+<table class="table table-responsive">
+  <thead>
+    <tr>
+
+      <th style='color:white;'>FILE NAME</th>
+      <th style='color:white;'>DESCRIPTION </th>
+      <th style='color:white;'>DATE-TIME UPLOADED </th>
+      <th style='color:white;'>REMARKS [if any]</th>
+
+    </tr>
+  </thead>
+
+ <tbody>
+ <tr>
+     {% for obj in documents %}
+     <td style="color:blue;"><input type="checkbox" onchange="doalert(this)">{{ obj.csvfile }}</td>
+     <td style='color:black;'>{{ obj.description}}</td>
+     <td style='color:black;'>{{ obj.uploaded_at}}</td>
+     <td style='color:blue;'>{{ obj.uploaded_at}}</td>
+
+ </tr>
+     {% endfor %}
+
+
+  </tbody>
+    
+</table>
+              
+<!-- HTML Table Ends ============================================== -->
+ 
+              
+              
+              
+<br>              
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
+            
+            
+            
+
+          <h2 class="sub-header" style='color:orange'>Progress Table </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style='color:orange'>Sr.No.#</th>
+                  <th style='color:orange'>Process Name</th>
+                  <th style='color:orange'>Process Owner</th>
+                  <th style='color:orange'>KPI Measure</th>
+                  <th style='color:orange'>Desired Performance </th>
+                  <th style='color:orange'>Current Performance </th>  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td>adipiscing</td>
+                  <td>elit</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Integer</td>
+                  <td>nec</td>
+                  <td>odio</td>
+                  <td>Praesent</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>libero</td>
+                  <td>Sed</td>
+                  <td>cursus</td>
+                  <td>ante</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>dapibus</td>
+                  <td>diam</td>
+                  <td>Sed</td>
+                  <td>nisi</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Nulla</td>
+                  <td>quis</td>
+                  <td>sem</td>
+                  <td>at</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>nibh</td>
+                  <td>elementum</td>
+                  <td>imperdiet</td>
+                  <td>Duis</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>sagittis</td>
+                  <td>ipsum</td>
+                  <td>Praesent</td>
+                  <td>mauris</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Fusce</td>
+                  <td>nec</td>
+                  <td>tellus</td>
+                  <td>sed</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>augue</td>
+                  <td>semper</td>
+                  <td>porta</td>
+                  <td>Mauris</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>massa</td>
+                  <td>Vestibulum</td>
+                  <td>lacinia</td>
+                  <td>arcu</td>
+                    <td>sit</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>eget</td>
+                  <td>nulla</td>
+                  <td>Class</td>
+                  <td>aptent</td>
+                    <td>sit</td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+      
+      
+      <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+      
+      
+      
+    <script src="/dist/js/bootstrap.min.js"></script>
+    <link href="{% static 'assets/js/vendor/jquery.min.js' %}" rel="stylesheet">     
+      
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1187 @@
+{% load static %}   
+{% include 'dc_dash/includes/dc_customCSS.html' %}
+
+
+
+<style>
+
+  /* JIRA_ROHIT_PendingTask - Dhank-Testing--01SEP19 -- iframe id = "id_iFrame_pvBonds"  */
+  /* #id_iFrame_pvBonds::-webkit-scrollbar { 
+             display: none;  
+            width: 12px;
+	background-color: blue;
+        } */
+
+
+  body {
+  background-color: lightblue;
+      }
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+
+/* dhankar - form input textbox  */
+input[type="text"] {
+    width: 130px;
+}
+
+        .elnt_container{
+          padding: 6px 8px;
+        }
+        #conditional_part{
+          padding: 6px 4px;
+          display:none;
+        }
+        
+        #conditional_part_more-info_initSearch{
+          padding: 6px 4px;
+          display:none;
+        }
+        
+        
+        /*
+         * DHANKAR --- Off Canvas SIDEBAR for Mobile 
+         * ---------------------------------------------
+         SOURCE == https://stackoverflow.com/questions/22985370/making-the-bootstrap-dashboard-example-sidebar-visible-available-on-mobile
+         -----
+         */
+         @media screen and (max-width: 768px) {
+          .row-offcanvas {
+            position: relative;
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+          }
+        
+          .row-offcanvas-left
+          .sidebar-offcanvas {
+            left: -33%;
+          }
+        
+          .row-offcanvas-left.active {
+            left: 33%;
+          }
+        
+          .sidebar-offcanvas {
+            position: absolute;
+            top: 0;
+            width: 33%;
+            margin-left: 10px;
+          }
+        }
+        
+        /* Sidebar navigation */
+        .nav-sidebar {
+          background-color: #f5f5f5;
+          margin-right: -15px;
+          margin-bottom: 20px;
+          margin-left: -15px;
+        }
+        .nav-sidebar > li > a {
+          padding-right: 20px;
+          padding-left: 20px;
+        }
+        .nav-sidebar > .active > a {
+          color: #fff;
+          background-color: #428bca;
+        }
+        
+        /* ##DHANKAR# Toggle SIDEBAR ENDS  */
+        
+        
+        </style>
+        
+
+        
+
+
+
+
+        
+<head>
+
+    <script>
+        var send_dfToJSON_forBokehUrl = "{% url 'call_send_dfToJSON_forBokeh' %}" //call_send_dfToJSON_forBokeh
+
+        //$(document).ready(function(){
+          //$(function(){
+                      $.ajax({
+                              url: send_dfToJSON_forBokehUrl,
+                              type: 'GET',      
+                              dataType: 'json', 
+                              success: function(dict_json_forBokehPlots) {
+                                      var dictJsonFromPy = dict_json_forBokehPlots;
+                                      // console.log("VAR dictJsonFromPy======= BELOW =============")
+                                      // console.log(dictJsonFromPy) // OK 
+                                      
+                                      localStorage.setItem('myObj_bokeh', JSON.stringify(dictJsonFromPy));
+                                      var myObj_bokeh = JSON.parse(localStorage.getItem('myObj_bokeh'));
+                                      //alert("=myObj_bokeh==1====")
+                                      // FOO_Uncomment_Below-----
+                                      // console.log("VAR myObj_bokeh============ BELOW ===========")
+                                      // console.log(myObj_bokeh)
+                                    }, // Close - success:
+                          })    // Close - "ajax":
+            //}); // Close - // $(document).ready(function(){
+  </script>
+
+
+
+        
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133322875-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-133322875-1');
+        </script>
+        
+
+<!-- Bokeh CDN deleted == All Down in LOCAL STATIC DIR == -->
+<script src="/static/bokeh/bokeh-0.12.13.min.js"></script>
+<script src="/static/bokeh/bokeh-0.12.3.min.js"></script>
+<script src="/static/bokeh/bokeh-tables-0.12.13.min.js"></script>
+
+<link href="/static/bokeh/bokeh-0.12.3.min.css" rel="stylesheet">
+<link href="/static/bokeh/bokeh-0.12.13.min.css" rel="stylesheet">
+<link href="/static/bokeh/bokeh-widgets-0.12.13.min.css" rel="stylesheet">
+<link href="/static/bokeh/bokeh-tables-0.12.13.min.css" rel="stylesheet">
+
+
+<!-- JS includes for dataTable  -->
+
+<!-- JIRA_ROHIT_PendingTask_removed_jquery_4 from here for testing  -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<!-- below for Columns HighLight SO COde == https://stackoverflow.com/questions/42464805/select-column-in-jquery-datatables -->
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.7/js/dataTables.select.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<!-- ENDS JS includes for dataTable  -->
+
+</head>
+
+
+        <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                  <a href= {% url 'data_ListView_index' %} class="site_title"><i class="fa fa-home"></i> <span>Digital Cognition</span></a>
+                </div>
+              
+                <div class="clearfix"></div>
+              
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                  <div class="profile_pic">
+                        <img src="/static/img/dhankar.jpg" alt="..." class="img-circle profile_img">
+                  </div>
+                  <div class="profile_info">
+                    <span>Welcome,</span>
+                    <h2>Dhankar Rohit</h2>
+                  </div>
+                </div>
+                <!-- /menu profile quick info -->
+              
+                <br />
+              
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                  <div class="menu_section">
+                    <h3>Data Analyst</h3>
+                    <ul class="nav side-menu">
+                        <li><a ><i class="fa fa-laptop"></i> Exploratory Analytics <span class="fa fa-chevron-down"></span></a>
+                        <ul id ="foo_focus" class="nav child_menu">
+        
+                                      <li> 
+                                          <a href="{% url  'data_ListView'%}">Data Ingress</a> 
+                                      </li>  
+
+                                      <li> 
+                                          <a href="{% url  'call_eda_dataset_name_listView'%}">DataSets ListView</a> 
+                                      </li>  
+
+                                      <li> <!--  STARTS LI TAG == Summary_in_ModalPopUp -->
+                                        <div class="custom-control custom-checkbox mb-3"> 
+                                          <input type="checkbox" class="custom-control-input" id="Summary_in_ModalPopUp" name="Summary_in_ModalPopUp">
+                                          <label class="custom-control-label" for="Summary_in_ModalPopUp">Summary Stats</label>
+                                      </div>
+
+                                      <!-- FOO __  includes templates here == -->
+                                      {% include "dc_dash/includes/modal_summary_stats.html" %}
+
+                                      </li> <!--  Ends == includes === ENDS LI TAG  == Summary_in_ModalPopUp -->
+                                      
+                                      
+
+                                        <script>
+                                          // FOO_myObj_bokeh
+
+                                              var myObj_bokeh = JSON.parse(localStorage.getItem('myObj_bokeh'));
+                                                                                                            
+                                              // console.log("VAR myObj_bokeh==FOO==AAAAAAAA======== BELOW ===========")
+                                              // alert("=myObj_bokeh==2====")
+                                              // console.log(myObj_bokeh)
+
+                                          </script>
+  
+             
+            
+
+
+
+              <li> <!--  STARTS LI TAG  == modal_TableAuReports -->
+                
+                <!-- FOO_INCLUDE == modal_TableAuReports.html here  -->
+                {% include "dc_dash/includes/modal_TableAuReports.html" %}
+
+              </li> <!--  ENDS LI TAG  ==  == modal_TableAuReports -->
+            
+
+
+
+
+
+
+
+
+              <li> <!--  STARTS LI TAG == Modal_Query_PSQL_Tables -->
+
+                  <!-- FOO_TBD need a MODAL HERE with FORM in the MODAL  -->
+                      <a><i id ="id_psql_CentOS" class="fa font_awesome_centos_icon_for_hover fa-file"></i> Ping PSQL_CentOS </a>
+                      {% csrf_token %}
+                                                    
+                      <script>
+                          $("#id_psql_CentOS").hover(function () {
+                            var fontawesome_centos_icon = document.getElementsByClassName("font_awesome_centos_icon_for_hover")[0];
+                            fontawesome_centos_icon.setAttribute("style", "color:  rgb(230, 180, 19); "); 
+                            //$("#conditional_part_csv_to_psql").show();
+                          });
+                      </script>
+
+                      <script>
+                          $("#id_psql_CentOS").hover(function () {
+                            var url_psql_CentOS = "{% url 'call_modal_psql_CentOS' %}" //
+                            hover_status = 1; 
+                            //
+                            $.ajax({
+                                    url:url_psql_CentOS,
+                                    type: "POST",
+                                    dataType: 'json', 
+                                    data: {
+                                          hover_status: hover_status,
+                                          csrfmiddlewaretoken: '{{ csrf_token }}'
+                                          },
+                                    }); // Close == AJAX
+                          }); // CLOSE == $("#id_psql_CentOS").hover(function ()
+                      </script>
+
+                  
+              </li>
+      
+
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <li> <!--  STARTS LI TAG == Modal_Query_PSQL_Tables -->
+                <div id = "active_div1" class="custom-control custom-checkbox mb-3"> 
+                  <input type="checkbox" class="custom-control-input" id="Modal_Query_PSQL_Tables" name="Modal_Query_PSQL_Tables">
+                  <label class="custom-control-label" for="Modal_Query_PSQL_Tables">Query Tables</label>
+                </div>
+                      
+                      <!-- starts div conditional_Modal_Query_PSQL_Tables -->
+                      <div id="conditional_Modal_Query_PSQL_Tables">
+
+                          <div id="myModal2" class="modal_mainBody_Query_PSQL_Tables"> <!-- myModal2 The Main Modal CSS Class -->
+                          <div class="modal_content_Query_PSQL_Tables"><!-- myModal2 Modal content -->
+
+                              <div class="modal_header_Query_PSQL_Tables">
+                                  <span class="modal_close_Query_PSQL_Tables">&times;</span> 
+                                  <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                  <h2> Query PSQL Tables </h2>
+                              </div> <!-- ENDS  div == modal_header_Query_PSQL_Tables -->
+                              
+                                  <div class="modal_body_Query_PSQL_Tables">
+                                        <!--  STARTS == dataSetsList_for_QueryPSQL style="color:purple;" ==-->
+                                        <p> Create a DataBase Connection </p>
+                                        
+                                        <p> <div class="dropdown">
+                                            <button class="dropbtn btn btn-default"> Database Type </button>
+                                            <div class="dropdown-content"> 
+                                              <a id ="PostgreSQL_chosen">PostgreSQL</a>
+                                              <a id ="mySQL_chosen">MySql</a>
+                                              <a id ="SQLite_chosen">SQLite</a>
+                                            </div> 
+                                          </div>
+                                         </p>
+
+                                         <a><i id ="psqlTables_merge" class="fa font_awesome_icon_for_hover fa-database" ></i> Choose Tables to Merge </a>
+
+                                         <br>
+                                         <br>
+
+                                         <a><i id ="psqlConn_status" class="fa font_awesome_icon_for_hover fa-pencil" ></i> Status Existing Connections</a>
+                                         
+                                  </div> <!-- == ENDS == modal_body_Query_PSQL_Tables -->
+                          </div><!-- == ENDS == modal_content_Query_PSQL_Tables -->
+                          </div><!-- == ENDS == modal_mainBody_Query_PSQL_Tables -->
+                          </div> <!-- == ENDS ==  conditional_Modal_Query_PSQL_Tables -->
+
+                          <script>
+                            var dbType_js_to_py = "{% url 'psql_click_from_js' %}" //
+                            var psql_clicked = document.getElementById('PostgreSQL_chosen');
+                            psql_clicked.onclick = function() {
+                              document.getElementById('PostgreSQL_chosen').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                    var clicked_drpDown = 1;
+                                    //return clicked_drpDown
+                                    $.ajax({
+                                            url:dbType_js_to_py,
+                                            type: "POST",
+                                            dataType: 'json', 
+                                            data: {
+                                                  clicked_drpDown: clicked_drpDown,
+                                                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                  },
+                                            });
+                            }; // CLOSE-- psql_clicked.onclick function ()
+                            document.getElementById("PostgreSQL_chosen").onmouseout = function() {
+                                    document.getElementById('PostgreSQL_chosen').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                            };
+
+                            //
+                            var mySQL_clicked = document.getElementById('mySQL_chosen');
+                            mySQL_clicked.onclick = function() {
+                              document.getElementById('mySQL_chosen').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                    var clicked_drpDown = 2;
+                                    $.ajax({
+                                            url:dbType_js_to_py,
+                                            type: "POST",
+                                            dataType: 'json', 
+                                            data: {
+                                                  clicked_drpDown: clicked_drpDown,
+                                                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                  },
+                                            });
+                            }; // CLOSE-- mySQL_clicked.onclick function ()
+                            document.getElementById("mySQL_chosen").onmouseout = function() {
+                                    document.getElementById('mySQL_chosen').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                            };
+
+                            //
+                            var SQLite_clicked = document.getElementById('SQLite_chosen');
+                            SQLite_clicked.onclick = function() {
+                              document.getElementById('SQLite_chosen').setAttribute("style", "color: yellow; background-color:black ; fontWeight:bold;");
+                                    var clicked_drpDown = 3;
+                                    $.ajax({
+                                            url:dbType_js_to_py,
+                                            type: "POST",
+                                            dataType: 'json', 
+                                            data: {
+                                                  clicked_drpDown: clicked_drpDown,
+                                                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                  },
+                                            });
+                            }; // CLOSE-- SQLite_clicked.onclick function ()
+
+                            document.getElementById("SQLite_chosen").onmouseout = function() {
+                                    document.getElementById('SQLite_chosen').setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                            };
+                            //
+
+                          </script> 
+
+                                    <script>
+                                            var modal2 = document.getElementById('myModal2');
+                                            var span = document.getElementsByClassName("modal_close_Query_PSQL_Tables")[0];
+                                            span.onclick = function() {
+                                              modal2.style.display = "none"; // Change MODAL Name to == modal2
+                                            }
+                                            window.onclick = function(event) {
+                                              if (event.target == modal2) {
+                                                modal2.style.display = "none"; // Change MODAL Name to == modal2
+                                              }
+                                            }
+                                    </script> <!--  Modal SCRIPT ENDS -->
+    
+                                  <script>
+                                      $(document).ready(function() {
+                                                      $('#conditional_Modal_Query_PSQL_Tables').hide();
+                                                  });
+                                  </script>
+                                        
+                                      <script>
+                                        var modal2 = document.getElementById('myModal2');
+                                          $('#Modal_Query_PSQL_Tables').change(function() {
+                                            if(this.checked != true){
+                                                $("#conditional_Modal_Query_PSQL_Tables").hide();
+                                                modal2.style.display = "none"; 
+                                                }
+                                            else{
+                                                $("#conditional_Modal_Query_PSQL_Tables").show();
+                                                modal2.style.display = "block"; 
+                                                }
+                                                });
+                                      </script>  <!--  Ends   -->
+
+
+                                      <!-- Modal_PsqlConn_Status STARTS-->
+                                      <script>
+
+                                          $("#psqlConn_status").hover(function () {
+                                            
+                                            var var_myModal2a = document.getElementById('myModal2a');
+                                            var_myModal2a.style.display = "block"; 
+                                            // var_myModal2a.style.backdrop = "false"; 
+                                          });
+
+                                      </script>
+
+
+                                  <div id="myModal2a" class="modal_outerBody_PSQL_ConnStatus"> 
+                                    <!-- == modal_mainBody_Query_PSQL_Tables  === myModal2 The Main Modal CSS Class -->
+                                    <div class="modal_content_PSQL_ConnStatus"><!-- myModal2 Modal content -->
+
+                                        <div class="modal_header_Query_PSQL_Tables">
+                                            <span id = "crossCloseMyModal2a" class="modal_close_Query_PSQL_Tables">&times;</span> 
+                                            <!-- SPAN CLASS for the CLOSE CROSS X -->
+                                            <h2> PSQL CONN Status </h2>
+                                        </div> <!-- ENDS  div == modal_header_Query_PSQL_Tables -->
+                                        
+                                            <div class="modal_body_Query_PSQL_Tables">
+                                                  <!--  STARTS == dataSetsList_for_QueryPSQL style="color:purple;" ==-->
+                                                  <p> PSQL Connection/Sessions Status  </p>
+
+                                                <script type="text/javascript">
+                                                    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                                                </script>
+                                                
+                                                <table id="dataTable_PSQL_ConnStatus" class="display" cellspacing="0" width="100%">
+                                                </table>
+                                                
+                                                <script>
+                                                        var psqlDBConnStatusUrl = "{% url 'call_modal_psqlDB_Conn_Status' %}" //call_modal_psqlDB_Conn_Status
+                                                        var dataSet;
+                                                        var modalCols_psqlDBConnStatus = []; // An EMPTY ARRAY 
+                                                
+                                                        $(document).ready(function(){
+                                                            $.ajax({
+                                                                    url: psqlDBConnStatusUrl,
+                                                                    type: 'GET',      // Other Option - POST 
+                                                                    dataType: 'json', 
+                                                                    success: function(dict_json_from_py) {
+      
+                                                                      //console.log(" INITIAL dict_json_from_py ==================== BELOW =============")
+                                                                      //console.log(dict_json_from_py)
+      
+                                                                      var dataSet = dict_json_from_py.data_json.columns;
+
+                                                                      // console.log("VAR dataSet==================== BELOW =============")
+                                                                      // console.log(dataSet)
+                                                                      
+                                                                      //var dictJsonFromPy = dict_json_from_py.data_json.columns;
+                                                                      var dictJsonFromPy = dict_json_from_py;
+                                                                      localStorage.setItem('myObj2', JSON.stringify(dictJsonFromPy));
+                                                                      var obj2 = JSON.parse(localStorage.getItem('myObj2'));
+
+                                                                      // console.log("VAR dictJsonFromPy======= BELOW =============")
+                                                                      // console.log(dictJsonFromPy)
+                                                                      
+                                                                      // console.log("VAR myObj============ BELOW =============")
+                                                                      // console.log(obj2)
+                                                                      
+                                                                      $.each(dataSet, function( key, value ) {
+                                                                                              var my_item = {};
+                                                                                              my_item.data = key; 
+                                                                                              my_item.title = value;
+                                                                                              modalCols_psqlDBConnStatus.push(my_item); // We PUSH the DICT Into the EMPTY ARRAY 
+                                                                                              return modalCols_psqlDBConnStatus
+                                                                                      });
+                                              
+                                                                        assignToEventsColumns(modalCols_psqlDBConnStatus,dict_json_from_py);
+                                                                    }, // Close - success:
+                                                                })    // Close - "ajax":
+                                                
+                                                            function assignToEventsColumns(modalCols_psqlDBConnStatus,dict_json_from_py) {
+                                                              //console.log("======TTS TBD here ====dict_json_from_py.data_json.data==============")
+                                                              //console.log(dict_json_from_py.data_json.data)
+                                                              //console.log(dict_json_from_py.data_json.data[0])
+                                                              //console.log("======TTS TBD here ================")
+                                                              // console.log(dict_json_from_py.data_json.data[0][0])
+                                                              // console.log(dict_json_from_py.data_json.data[0][8])
+                                                              // console.log(dict_json_from_py.data_json.data[0][9])
+
+    
+                                                            var table = $('#dataTable_PSQL_ConnStatus').DataTable({
+                                                                "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                                                                "serverSide": false, 
+                                                                "select": true, // Column Select done below ...
+                                                                "aaData": dict_json_from_py.data_json.data, 
+                                                                "columns" : modalCols_psqlDBConnStatus,
+                                                                //} );
+                                              
+                                                                    })// FOO Main == Closes -- $('#summary_dataTable').DataTable({
+                                                                    }
+                                                            }); // Close - // $(document).ready(function(){
+                                              
+                                                  </script>
+                                                  
+                                            </div> <!-- == ENDS == modal_body_Query_PSQL_Tables -->
+                                    </div><!-- == ENDS == modal_content_Query_PSQL_Tables -->
+                                    </div><!-- == ENDS == modal_mainBody_Query_PSQL_Tables -->
+
+
+
+                                    <!--  myModal2a == Closing_SCRIPT_starts -->
+
+                                    <script>
+                                        var modal2a = document.getElementById('myModal2a');
+                                        var span2a = document.getElementById('crossCloseMyModal2a');
+                                        //var span = document.getElementsByClassName("modal_close_Query_PSQL_Tables")[0];
+                                        span2a.onclick = function() {
+                                          modal2a.style.display = "none"; // Change MODAL Name here.
+                                        }
+                                        window.onclick = function(event) {
+                                          if (event.target == modal2a) {
+                                            modal2a.style.display = "none"; // Change MODAL Name here.
+                                          }
+                                        }
+                                </script> <!--  myModal2a == Closing_SCRIPT_ENDs -->
+
+
+                                  <!-- Modal_psqlTables_merge STARTS-->
+                                  <script>
+                                    $("#psqlTables_merge").hover(function () {
+                                      var var_myModal2b = document.getElementById('myModal2b');
+                                      var_myModal2b.style.display = "block"; 
+                                      // var_myModal2a.style.backdrop = "false"; 
+                                    });
+                                  </script>
+
+                                  <div id="myModal2b" class="modal_outerBody_SQL_Tables_Merge"> 
+                                    <div class="modal_content_SQL_Tables_Merge"><!-- myModal2b Modal content -->
+                                        <div class="modal_header_SQL_Tables_Merge"> 
+                                            <span id = "crossCloseMyModal2b" class="modal_close_SQL_Tables_Merge">&times;</span> 
+                                            <h2> PSQL Choose Tables to Merge </h2>
+                                        </div> <!-- ENDS  div == modal_header_Query_PSQL_Tables -->
+                                            <div class="modal_body_SQL_Tables_Merge">
+                                                  <p> To create a new SQL Table , click and choose Two SQL table names for Merge </p>
+                                                  <br>
+
+                                                <script type="text/javascript">
+                                                    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                                                </script>
+                                                
+                                                <table id="dataTable_psqlTables_merge" class="display" cellspacing="0" width="100%">
+                                                </table>
+                                                
+                                                <script>
+                                                  var Url_psqlTables_merge = "{% url 'psql_tableNames_from_py' %}" //call_modal_psqlDB_Conn_Status
+                                                  var dataSet_psqlTables_merge;
+                                                  var modalCols_psqlTablNames = []; // Init EMPTY_ARRAY 
+                                          
+                                                  $(document).ready(function(){
+                                                      $.ajax({
+                                                              url: Url_psqlTables_merge,
+                                                              type: 'GET',      
+                                                              dataType: 'json', 
+                                                              success: function(dict_jsonFromPyforTablesMerge) {
+                                                              var dataSet_psqlTables_merge = dict_jsonFromPyforTablesMerge.data_json.columns;
+                                                              $.each(dataSet_psqlTables_merge, function( key, value ) {
+                                                                                      var dict_forCols = {};
+                                                                                      dict_forCols.data = key; 
+                                                                                      dict_forCols.title = value;
+                                                                                      modalCols_psqlTablNames.push(dict_forCols); // We PUSH the DICT Into the EMPTY ARRAY 
+                                                                                      return modalCols_psqlTablNames
+                                                                              }); // Close == $.each(dataSet, function( key, value )
+                                        
+                                                                  assignToEventsColumns(modalCols_psqlTablNames,dict_jsonFromPyforTablesMerge);
+                                                              }, // Close == success: function(dict_jsonFromPyforTablesMerge)
+                                                          })    // Close - "ajax":
+                                          
+                                                      function assignToEventsColumns(modalCols_psqlTablNames,dict_jsonFromPyforTablesMerge) {
+
+                                                      var dataTable_forMerge = $('#dataTable_psqlTables_merge').DataTable({
+                                                        // FOO --- this above == var dataTable_forMerge --- Not used anywhere.
+                                                        
+                                                          "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                                                          "serverSide": false, 
+                                                          "select": true, 
+                                                          "aaData": dict_jsonFromPyforTablesMerge.data_json.data, 
+                                                          "columns" : modalCols_psqlTablNames,
+                                        
+                                                              }) // CLOSE == $('#dataTable_psqlTables_merge').DataTable({
+                                                          //} // CLOSE == function assignToEventsColumns === FOO_ClickAlertFails == taken this curly brace DOWN 
+
+                                                        var array_of_clicks = [];
+                                                        var cell_data_url1 = "{% url 'cell_getJSVal1' %}" // EARLIER == cell_getJSVal1
+                                                        var csrftoken_merge = jQuery("[name=csrfmiddlewaretoken]").val();
+                                                
+
+                                                        $('#dataTable_psqlTables_merge tbody').on( 'click', 'td', function () {
+                                                              var col = $(this).parent().children().index($(this));
+                                                              var row = $(this).parent().parent().children().index($(this).parent());
+                                                              var cell_data=$("#dataTable_psqlTables_merge tbody").find('tr:eq('+ row + ')').find('td:eq(' + col + ')');
+                                                              //alert(cell_data.text());
+                                                              var cell_data_text = cell_data.text()
+                                                              //alert(cell_data_text);
+                                                              array_of_clicks.push(cell_data_text);
+                                                              //alert(array_of_clicks);
+                                                              //alert(array_of_clicks.length);
+
+                                                              if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length ==2) {
+                                                                //alert("Got == 2 ")
+                                                                $.ajax({
+                                                                      url:cell_data_url1,
+                                                                      type: "POST",
+                                                                      dataType: 'json', 
+                                                                      //data: JSON.stringify({
+                                                                        data: {
+                                                                            array_of_clicks: array_of_clicks,
+                                                                            csrfmiddlewaretoken: csrftoken_merge,
+                                                                            },
+                                                                        });
+                                                              }
+
+                                                              if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length > 2) {
+                                                                  var var_modal_alerts = document.getElementById('modal_alerts');
+                                                                  var_modal_alerts.style.display = "block"; 
+                                                                  document.getElementById("dynamic_alert_header").innerHTML = "Heads Up !" 
+                                                                  document.getElementById("dynamic_alert_text").innerHTML = "TWO Tables Already Selected for MERGE. " 
+                                                                  // 
+                                                                  //document.getElementById("dynamic_alert_text").innerHTML = " As result of EDA Action - Search and Replace , a New Column =" + new_column_name + " , has been inserted into Dataset = " + new_df_from_eda + " , thanks. " 
+                                                                  var delay_modalAlertDisplay = 8000;
+                                                                  setTimeout(function() {
+                                                                  var_modal_alerts.style.display = "none"; 
+                                                                  }, delay_modalAlertDisplay);
+
+                                                              } // Close == if(typeof ....
+                                                          }); // CLOSE-- Click on CELL FUNCTION == $('#dataTable_psqlTables_merge tbody').on( 'click', 'td', function
+                                                          } // CLOSE == function assignToEventsColumns === FOO_without this Curly Brace here the Click_Event_Fails == Got this from Above
+                                                      }); // CLOSE ==  $(document).ready(function(){
+                                            </script>
+                                            
+                                      </div> <!-- == ENDS == modal_body_SQL_Tables_Merge -->
+
+                                      <div class="modal_footer_SQL_Tables_Merge" style = "text-align: left;">
+                                        <h2> Input New SQL Table Name  </h2>
+                                            <form id="frm_newTableMerge">
+                                              New Table Name: <input id= "New_Table_Name_id" type="text" name="fname"><br>
+                                              <input type="button" onclick="myFunc_newTableName()" value="CLICK ME">
+                                            </form>
+
+
+                                          <script>
+                                            
+                                          function myFunc_newTableName() {
+                                              var cell_data_url2 = "{% url 'cell_getJSVal1' %}" // EARLIER == cell_getJSVal1 / cell_getJSVal2
+                                              var forMergeRedirectURL = "{% url 'call_merged_table_view' %}" // This here URL calls == render_merged_table_htmlPage
+                                              var csrftoken_merge = jQuery("[name=csrfmiddlewaretoken]").val();
+                                              //document.getElementById("frm_newTableMerge").submit();
+                                              var newTableName = document.getElementById("New_Table_Name_id").value;
+                                              alert(newTableName)
+
+                                              if (typeof newTableName !== 'undefined') {
+                                                                                                
+                                                  alert(cell_data_url2)
+                                                    $.ajax({
+                                                          url:cell_data_url2,
+                                                          type: "POST",
+                                                          dataType: 'json', 
+                                                          data: {
+                                                                new_merged_tableName: newTableName,
+                                                                csrfmiddlewaretoken: csrftoken_merge,
+                                                                },
+                                                            });
+                                                        } // ENDS == typeof newTableName
+                                                        // REDIRECT to below URL == call_merged_table_view
+                                                        window.location = forMergeRedirectURL;    
+                                                    } // ENDS == function myFunc_newTableName
+                                          </script>
+                                      </div>   <!-- ENDS Class = modal_footer_SQL_Tables_Merge -->
+                                    </div><!-- == ENDS == modal_content_SQL_Tables_Merge -->
+                                    </div><!-- == ENDS == modal_mainBody_SQL_Tables_Merge -->
+
+
+
+                                    <!--  myModal2a == Closing_SCRIPT_starts -->
+                                    <script>
+                                        var modal2b = document.getElementById('myModal2b');
+                                        var span2b = document.getElementById('crossCloseMyModal2b');
+                                        // FOO_ERROR - in Chrome Console == Uncaught TypeError: Cannot set property 'onclick' of null
+                                        // This Error came up even though we got the --- VARIABLE == span2b , in the console.log(span2b) - above 
+                                        // This ERROR was not in this FILE --- but in FILE == dc_dash/includes/modal_summary_stats.html
+                                        span2b.onclick = function() {
+                                          modal2b.style.display = "none"; // Change MODAL Name here.
+                                        }
+                                        window.onclick = function(event) {
+                                          if (event.target == modal2b) {
+                                            modal2b.style.display = "none"; // Change MODAL Name here.
+                                          }
+                                        }
+                                  </script> <!--  myModal2b == Closing_SCRIPT_ENDs -->
+                                </li> <!--  ENDS LI TAG  == Modal_Query_PSQL_Tables -->
+
+                                <div id="modal_alerts" class="modal_alerts_backdrop"> <!-- == modal_alerts_backdrop == -->
+                                  <div class="modal_alerts_content"><!-- myModal2 Modal content -->
+        
+                                      <div class="modal_alerts_header">
+                                          <span class="modal_alerts_close">&times;</span> 
+                                          <h2 id = "dynamic_alert_header"> </h2>
+                                      </div> <!-- ENDS  div == modal_alerts_header -->
+                                      
+                                          <div class="modal_alerts_body">
+                                                <p id = "dynamic_alert_text">  </p>
+                                                 <br>
+                                                 
+                                  </div> <!-- == ENDS == modal_alerts_body -->
+                                  </div><!-- == ENDS == modal_alerts_content -->
+                                  </div><!-- == ENDS == modal_alerts_backdrop -->
+
+                            </li> <!--  Ends LI TAG == Exploratory Analytics  -->                                      
+
+
+  <!-- Bokeh REMOVE FROM HERE FOR TESTING ======= STARTS -->
+
+                            <!-- ## Descriptive Statistics   GROUP of BOKEH MODALS     -->
+                    <li><a><i class="fa fa-pencil"></i> Descriptive Stats <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        
+                      <li>  <a id = "bokeh_modalShow" > Summary Stats Graphs  </a>  </li>
+
+                      <!-- == JIRA_ROHIT_PendingTask == Removed from here == for DRAGGABLE Modals == jQuery.ui.js ====-->
+                      <script src="/static/vendors/jquery/dhankar_apr19_jQueryUI/jquery-ui.js"></script>
+
+                      <!-- JIRA_ROHIT_PendingTask==BokehModalHover -->
+
+                      <script>
+                        $("#bokeh_modalShow").hover(function () {
+                        var var_modal_bokeh = document.getElementById('id_modal_Bokeh_TukeySummary');
+                        var_modal_bokeh.style.display = "block"; 
+                        });
+                      </script>
+                         
+                          <div id="id_modal_Bokeh_TukeySummary" class="modal_bokeh_Tukey_backdrop"> 
+
+
+
+                            <!-- 1st Bokeh_Modal  -->
+
+                            <div id="id_modal_bokeh_Tukey_content" class="modal_bokeh_Tukey_content">
+                                <div class="modal_bokeh_Tukey_header">
+                                    <a style="color:white" id = "dynamic_bokeh_header_text"> <code> Violin Plot-var(1)</code> </a> <i style="margin-left:2.5em ; color: rgb(218, 178, 193)" id="explode_violin_1" class="fa fa-desktop"></i>
+                                </div> <!-- ENDS  div == modal_bokeh_header -->
+                                    <div class="modal_bokeh_Tukey_body">
+                                        <!-- Bokeh-1  iFRAME Starts==== -->
+                                        <div class="bokeh_Tukey_iframe" style ='overflow: hidden;'>
+                                              <iframe width="320" height="250"  src= "{% url 'call_dc_holoviews_violinPlot_small' %}"  frameborder="0" allowfullscreen></iframe>			
+                                        </div>
+                                        <br>
+                            </div> <!-- == ENDS == modal_bokeh_Tukey_body -->
+                            </div><!-- == ENDS == modal_bokeh_Tukey_content -->
+
+
+                            <!-- 2nd Bokeh_Modal  -->
+                           
+                            <div id="id_modal_bokeh_one_content" class="modal_bokeh_content">
+                                <div class="modal_bokeh_header">
+                                    <a style="color:white" id = "dynamic_bokeh_header_text_Vertical_Bars"> <code> Vertical Bars</code> </a> <i style="margin-left:4.5em ; color: rgb(218, 178, 193)" id="explode_bokeh_vertical_bars" class="fa fa-desktop"></i>
+                                </div> <!-- ENDS  div == modal_bokeh_header -->
+                                    <div class="modal_bokeh_body">
+                                        <!-- Bokeh-1  iFRAME Starts==== -->
+                                        <div class="bokeh_iframe_in_modal" style ='overflow: hidden;'>
+                                              <iframe width="220" height="195"  src= "{% url 'call_holoviews_bar_small' %}"  frameborder="0" allowfullscreen></iframe>			
+                                        </div>
+                                        <br>
+                            </div> <!-- == ENDS == modal_bokeh_body -->
+                            </div><!-- == ENDS == modal_bokeh_content -->
+
+
+                              <!-- 3rd Bokeh_Modal  -->
+                              <div id="id_modal_bokeh_3_content" class="modal_bokeh_3_content">
+                                  <div class="third_modal_bokeh_header">
+                                      <a style="color:white" id = "dynamic_text_boxPlotFivePointSummary"> <code> Box Plot - Tukey's</code> </a> <i style="margin-left:2.5em ; color: rgb(218, 178, 193)" id="explode_bokeh_Tukey" class="fa fa-desktop"></i>
+                                  </div> <!-- ENDS  div == third_modal_bokeh_header -->
+                                      <div class="modal_bokeh_body">
+                                          <!-- Bokeh-1  iFRAME Starts==== -->
+                                          <div class="bokeh_iframe_in_modal" style ='overflow: hidden;'>
+                                                <iframe width="320" height="250"  src= "{% url 'call_bokeh_boxplot' %}"  frameborder="0" allowfullscreen></iframe>			
+                                          </div>
+                                          <br>
+                              </div> <!-- == ENDS == modal_bokeh_body -->
+                              </div><!-- == ENDS == modal_bokeh_content -->
+
+                                  <script>
+                                    // Close Smaller_BokehModal and launch largerBokehModal
+                                    var bokeh_modal3 = document.getElementById('id_modal_bokeh_3_content');
+                                    
+                                    // Get the FA Desktop Icon that Destroys this Modal
+                                    var explode_bokeh_Tukey = document.getElementById('explode_bokeh_Tukey');
+                                    
+                                    explode_bokeh_Tukey.onclick = function() {
+                                      bokeh_modal3.style.display = "none";
+                                      // Below -- display = "block"; ____ the id_modal_bokeh_3_LargeContent
+                                      var bokeh_modal3_large = document.getElementById('id_modal_bokeh_3_LargeContent');
+                                      bokeh_modal3_large.style.display = "block"; 
+                                   
+                                    
+                                    } // ENDS === explode_bokeh_Tukey.onclick____
+                                    
+                                  </script> <!--  Modal SCRIPT ENDS -->
+
+
+                                <!-- FOO_Include here HTML Page == Large Bokeh Vertical Bars and Custom Summary Stats MODAL  -->
+
+                                      
+
+
+
+                                  <!-- 3rd Bokeh_LargeModal  -->
+                                  <div id="id_modal_bokeh_3_LargeContent" class="modal_bokeh_3_LargeContent">
+                                    <div class="modal_bokeh_3_LargeHeader">
+                                       <a style="margin-left:2.7em ; color:white" id = "dynamic_text_boxPlotFivePointSummary_large"> <code> Box Plot - Tukey's Five Point Summary</code> </a>  <i style="margin-left:14.5em ; color: rgb(218, 178, 193)" id="close_bokeh_3_large" class="fa fa-desktop"></i>
+                                        
+                                    </div> <!-- ENDS  div == modal_bokeh_3_LargeHeader -->
+                                        <div class="modal_bokeh_body">
+                                            <!-- Bokeh-1  iFRAME Starts==== -->
+                                            <div class="bokeh_iframe_in_modal" style ='overflow: hidden;'>
+                                                  <iframe width="720" height="410"  src= "{% url 'call_bokeh_boxplot' %}"  frameborder="0" allowfullscreen></iframe>			
+                                            </div>
+                                            <div class="modal_footer_Bokeh_3_LargeContent">
+                                                <p> Design Tools :- Plot Markers </p>
+                                                        
+                                                <p> <div class="dropdown">
+                                                    <button class="dropbtn btn btn-default"> Outliers </button>
+                                                    <div class="dropdown-content"> 
+                                                      <a id ="box_outlier_shape"> Shape</a>
+                                                      <a id ="box_outlier_size">Size</a>
+                                                      <a id ="box_outlier_color">Color</a>
+                                                    </div> 
+                                                  </div>
+                                                 
+
+                                                 <div class="dropdown">
+                                                  <button class="dropbtn btn btn-default"> Upper Extreme </button>
+                                                  <div class="dropdown-content"> 
+                                                    <a id ="box_outlier_shape"> Shape</a>
+                                                    <a id ="Bokeh_SomeID1">Size</a>
+                                                    <a id ="Bokeh_SomeID2">Color</a>
+                                                  </div> 
+                                                </div>
+
+                                                <div class="dropdown">
+                                                  <button class="dropbtn btn btn-default"> Upper Quartile </button>
+                                                  <div class="dropdown-content"> 
+                                                    <a id ="box_outlier_shape"> Shape</a>
+                                                    <a id ="Bokeh_SomeID1">Size</a>
+                                                    <a id ="Bokeh_SomeID2">Color</a>
+                                                  </div> 
+                                                </div>
+
+                                                <div class="dropdown">
+                                                  <button class="dropbtn btn btn-default"> Median </button>
+                                                  <div class="dropdown-content"> 
+                                                    <a id ="box_outlier_shape"> Shape</a>
+                                                    <a id ="Bokeh_SomeID1">Size</a>
+                                                    <a id ="Bokeh_SomeID2">Color</a>
+                                                  </div> 
+                                                </div>
+
+                                                <div class="dropdown">
+                                                  <button class="dropbtn btn btn-default"> Lower Quartile </button>
+                                                  <div class="dropdown-content"> 
+                                                    <a id ="box_outlier_shape"> Shape</a>
+                                                    <a id ="Bokeh_SomeID1">Size</a>
+                                                    <a id ="Bokeh_SomeID2">Color</a>
+                                                  </div> 
+                                                </div>
+
+                                                <div class="dropdown">
+                                                  <button class="dropbtn btn btn-default"> Whiskers </button>
+                                                  <div class="dropdown-content"> 
+                                                    <a id ="box_outlier_shape"> Shape</a>
+                                                    <a id ="Bokeh_SomeID1">Size</a>
+                                                    <a id ="Bokeh_SomeID2">Color</a>
+                                                  </div> 
+                                                </div>
+
+
+
+                                               </p>
+                                              
+
+                                                  <a><i id ="psqlConn_status" class="fa font_awesome_icon_for_hover fa-pencil" ></i> Status Existing Connections</a>
+                                                  <br>
+                                                  
+                                                  
+                                              </div> <!-- ENDS  div == modal_footer_Bokeh_3_LargeContent -->
+
+                                </div> <!-- == ENDS == BOKEH_Modal_3_BoXPlot__body -->
+                                </div><!-- == ENDS == modal_bokeh_3_LargeContent -->
+
+
+                                <script> // STARTs_URL JS TO PY == bokeh_boxplot_clicks_from_js
+                                        var boxplot_clicks_url = "{% url 'bokeh_boxplot_clicks_from_js' %}" 
+                                        //
+                                        var box_outlier_shape = document.getElementById('box_outlier_shape');
+                                        var box_outlier_size = document.getElementById('box_outlier_size');
+                                        // JavaScript ---- Assign to Variables in place of doing Multiple == document.getElementById			https://stackoverflow.com/a/7298245/4928635
+
+
+                                        box_outlier_shape.onclick = function() {
+                                        box_outlier_shape.setAttribute("style", "color: green; background-color:yellow ; fontWeight:bold;");
+                                        var clicked_box_outlier = 1;
+                                        
+                                        $.ajax({
+                                                  url:boxplot_clicks_url,
+                                                  type: "POST",
+                                                  dataType: 'json', 
+                                                  data: {
+                                                        clicked_box_outlier: clicked_box_outlier,
+                                                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                                                        },
+                                                  }); // Closes -- ajax 
+                                                
+                                        }; // Closes == box_outlier_shape.onclick = function() {
+                                        box_outlier_shape.onmouseout = function() {
+                                        box_outlier_shape.setAttribute("style", "color: black; background-color:transparent ; fontWeight:normal;");
+                                        };
+
+                                          // get a UNDEFINED check here ---- then DRY below ---- FAILS 
+                                          // var new_value = document.getElementById(clicked_box_outlier).value;
+                                          // alert(new_value)
+
+                                          // if (new_value > 0) {
+                                          //   alert(clicked_box_outlier)
+                                          // } // Closes == if (typeof clicked_box_outlier !== 'undefined') {
+
+                                  
+                              </script> <!-- ENDs_URL JS TO PY = == -->
+                                  
+
+
+                            
+                                <!-- 4th Bokeh_Modal  -->
+                                <div id="id_modal_bokeh_4_content" class="modal_bokeh_4_content">
+                                    <div class="fourth_modal_bokeh_header">
+                                        <p id = "dynamic_bokeh_header_text"> Scatter Plot </p>
+                                    </div> <!-- ENDS  div == fourth_modal_bokeh_header -->
+                                        <div class="modal_bokeh_body">
+                                            <!-- Bokeh-1  iFRAME Starts==== -->
+                                            <div class="bokeh_iframe_in_modal" style ='overflow: hidden;'>
+                                                  <iframe width="220" height="295"  src= "{% url 'call_dc_bokeh_scatterPlot_view' %}"  frameborder="0" allowfullscreen></iframe>			
+                                            </div>
+                                            <br>
+                                </div> <!-- == ENDS == modal_bokeh_body -->
+                                </div><!-- == ENDS == modal_bokeh_content -->
+    
+
+
+
+                            </div><!-- == ENDS == modal_bokeh_Tukey_backdrop -->
+
+                              <!--  modal_bokeh_Tukey_backdrop == Draggable and Closing_SCRIPT_starts -->
+
+                              <script src="/static/vendors/jquery/dhankar_apr19_jQueryUI/jquery-ui.js"></script>
+ 
+
+                              <script>
+                                // Draggable for - 1st Modal
+                                $('.modal_bokeh_Tukey_content').draggable({
+                                    handle: ".modal_bokeh_Tukey_header",
+                                    revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                                });
+
+                                // Draggable for - 2nd Modal
+                                $('.modal_bokeh_content').draggable({
+                                    handle: ".modal_bokeh_header",
+                                    revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                                });
+
+                                // Draggable for - 3rd Modal --- Chosen by CLASS = modal_bokeh_3_content
+                                $('.modal_bokeh_3_content').draggable({
+                                    handle: ".third_modal_bokeh_header",
+                                    revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                                });
+
+                                // Draggable for - modal_bokeh_3_LargeContent --- Chosen by CLASS = modal_bokeh_3_LargeContent
+                                $('.modal_bokeh_3_LargeContent').draggable({
+                                    handle: ".modal_bokeh_3_LargeHeader",
+                                    revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                                });
+
+                                // Draggable for - 4th Modal --- Chosen by CLASS = modal_bokeh_4_content
+                                $('.modal_bokeh_4_content').draggable({
+                                    handle: ".fourth_modal_bokeh_header",
+                                    revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                                });
+
+                                window.onclick = function(event) {
+                                    if (event.target == id_modal_Bokeh_TukeySummary) {
+                                      id_modal_Bokeh_TukeySummary.style.display = "none"; // Change MODAL Name here.
+                                              }
+                                            }
+                              </script> <!--  modal_bokeh_Tukey_backdrop == Closing_SCRIPT_ENDs -->
+
+                        <!-- Bokeh REMOVE FROM HERE FOR TESTING ======= ENDs === -->
+
+                        <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Text Distance Measures</a></li>
+                        <li><a href="https://www.linkedin.com/in/rohitdhankar/">Validation Reports</a></li>
+                        <li><a href="https://www.linkedin.com/in/rohitdhankar/">Reports Wizard</a></li>
+                        
+                      </ul>
+                    </li>
+                    
+
+                    
+
+
+                    <!-- ## pv_bonds_eda_sideBar  -->
+                    <li><a id = "id_pvBonds_ChildMenuB" ><i class="fa fa-file-excel-o"></i> Value of Bonds <span id = "id_pvBonds_ChildMenuA" class="fa fa-chevron-down"></span></a>
+                      <ul id = "id_pvBonds_ChildMenu" class="nav child_menu">
+                      
+                      
+                        <!-- pvBonds_iFRAME Starts==== -->
+                         <div class="iFrame_pvBonds" style ='overflow: hidden;'>
+                            <iframe id = "id_iFrame_pvBonds" scrolling="auto" width="190" height="190"  src= "{% url 'call_iFrame_pvBonds_view' %}"  frameborder="0" ></iframe>			
+                      </div>
+
+
+                      <!-- ====Below Code Only Testing==== -->
+                        <li><a href="https://www.linkedin.com/in/rohitdhankar/"> LinkedIn Profile </a></li>
+                       
+                      </ul>
+                    </li>
+
+
+
+
+
+
+                    <!-- ## call_EdaColActions_view    -->
+                      
+                      <li><a id = "id_edaOnColActions_ChildMenuB" ><i class="fa fa-bullhorn"></i> On Column Actions <span id = "id_edaOnColActions_ChildMenuA" class="fa fa-chevron-down"></span></a>
+                        <ul id = "id_edaOnColActions_ChildMenu" class="nav child_menu">
+                       
+                          <!-- EdaColActions_iFRAME Starts==== -->
+                           <div class="iFrame_EdaColActions" style ='overflow: hidden;'>
+                              <iframe scrolling="auto" width="190" height="190"  src= "{% url 'call_EdaColActions_view' %}"  frameborder="0" ></iframe>			
+                        </div>
+
+
+                        <!-- ====Below Code Only Testing==== -->
+                          <li><a href="https://www.linkedin.com/in/rohitdhankar/"> Linear Regression </a></li>
+                          
+                          
+                        </ul>
+                      </li>
+
+
+                      <script>
+                        // Inside File == templates/dc_dash/includes/modal_EDA_Col_Actions.html
+                        // want to get this == p_clicked --- this FAILS ?? JIRA_ROHIT_PendingTask ?? 
+                        var p_clicked = document.getElementById('id_edaOnColActions_ChildMenuB');
+                         p_clicked.onclick = function() {
+                         
+                              //alert("===JIRA_ROHIT_PendingTask===")
+                          };
+
+                      </script>
+                      
+
+
+
+                      <li><a><i class="fa fa-edit"></i> Dashboards <span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/">General Reports</a></li>
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/">Advanced Reports</a></li>
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/">Validation Reports</a></li>
+                              <li><a href="https://www.linkedin.com/in/rohitdhankar/">Reports Wizard</a></li>
+                              
+                          </ul>
+                        </li>
+
+        
+        
+                                    <!-- <li><a><i class="fa fa-desktop"></i> Indian Startups <span class="fa fa-chevron-down"></span></a>
+                                      <ul class="nav child_menu">
+                                        <li><a href="general_elements.html">Top Level Dashboard</a></li>
+                                        <li><a href="media_gallery.html">Industry Segments</a></li>
+                                        <li><a href="typography.html">Geo Location</a></li>
+                                        <li><a href="icons.html">Funding Status</a></li>
+                                        <li><a href="glyphicons.html">Funding Level</a></li>
+                                        <li><a href="widgets.html">Investor Segments</a></li>
+                                        
+                                      </ul>
+                                    </li>
+         -->
+        
+                   
+                  </div>
+                  <div class="menu_section">
+                    <h3>Admin Tools</h3>
+                    <ul class="nav side-menu">
+                      <li><a><i class="fa fa-bug"></i> Report a Bug <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="https://www.linkedin.com/in/rohitdhankar/">Report a Bug</a></li>
+                        </ul>
+                      </li>
+                      
+                      
+                      <li><a href="javascript:void(0)"><i class="fa fa-database"></i> Graph Database <span class="label label-success pull-right"> Pro-Version</span></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- /sidebar menu -->
+              
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                  <a data-toggle="tooltip" data-placement="top" title="Settings">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                  </a>
+                  <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                  </a>
+                  <a data-toggle="tooltip" data-placement="top" title="Lock">
+                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                  </a>
+                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                  </a>
+                </div>
+                <!-- /menu footer buttons -->
+              </div>
+              

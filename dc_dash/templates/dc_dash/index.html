@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    {% include 'dc_dash/base.html' %}
+
+    {% load crispy_forms_tags %}
+
+
+    
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Digital Cognition</title>    
+
+
+
+<!-- CSS IN LOCAL STATIC for AXIS cars rental - Dhankar -->
+
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    
+    
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script src="https://use.fontawesome.com/a4d1cf5c0b.js"></script>
+
+<!-- CSS for LIGHTBOX SLIDESHOW-- LOKESH DHAKAR -->
+<link href="{% static 'css/lightbox.css' %}" rel="stylesheet">
+    
+    
+    
+    
+    
+
+<style type="text/css">
+    
+.navbar-static-top {
+	margin-bottom: 0px !important;
+}
+    
+    .jumbotron {
+	background-color:#78bac2;
+    margin-bottom:0;
+	color:white;
+    
+	{% if featured_image.make_image_background %} 
+	background-image: url("{{ featured_image.image.url }}");
+	background-repeat: no-repeat;
+	background-color: #000;
+	background-size: cover;
+	background-position-y: -272px;
+	{% endif %}
+}
+
+.shadow
+    {
+        text-shadow: black 0.3em 0.3em 0.3em;
+    }
+        
+#outer {
+    text-align: center;
+    border-style: solid;
+    border-width: 11px;
+    border-color: #e50000;
+    height: 50px;
+    width:auto;
+    display:inline-block;
+}
+
+#image {
+    float: right;
+    width: 50px;
+}
+
+#element_block {
+    display:block;
+}
+
+    
+html, body {
+  max-height: 100% !important;
+  max-width: 100% !important;
+ overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+    
+.container, .tab-content, .tab-pane  {
+  max-height: 100% !important;
+  max-width: 100% !important;
+ overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+    
+    
+</style>
+    
+    
+    
+    
+    
+    
+<BODY>
+    
+    
+<div class="container"> <!-- # DIV -1 START ------>  
+    
+        <left><h2 style='color: #ff0000'> Digital Cognition</h2></left>
+    <br>
+    <br>
+    
+    
+        <left><h3 >  </h3></left>
+    <i style='color: #fff'class='fa fa-exclamation'></i>
+    
+    
+<div id="content"> <!-- # DIV -2 START ------> 
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+
+                <li class="active"><a href="#_A" data-toggle="tab">RPA</a></li> <!-- # ACTIVE --TAB ACtive on LOAD ------> 
+                <li><a href="#_B" data-toggle="tab">Workflow Automation</a></li>
+                <li><a href="#_C" data-toggle="tab">Bigger Data </a></li>
+                <li><a href="#_D" data-toggle="tab">About Us</a></li>
+                <li><a href="#_E" data-toggle="tab">infoBOT.co.in</a></li>
+
+            </ul>
+
+<div id="my-tab-content" class="tab-content">  <!-- # DIV-3 START ------> 
+
+    
+    
+<div class="tab-pane fade in active" id="_A">  <!-- # DIV-4 START ------> 
+
+<div class="row"> <!-- # DIV-5 START ------> 
+
+    <div class="col-sm-3 pull-left"> <!-- # DIV -6 START ------> 
+            <h4 class="text-align-center"> Robotic Process Automation...... more ...soon ... </h4>
+ 
+        
+        <br>
+                <input class='btn btn-primary' type='button' value="More..." onClick="window.location.reload()" />
+
+</div> <!-- # DIV-6 STOP ------> 
+</div> <!-- # DIV-5 END --div class="row" -------->
+</div> <!-- # DIV-4 END --div class="tab-pane fade in active" id="_A" -------->
+
+    
+        
+        <div class="tab-pane fade" id="_B"> <!-- # DIV-7 START ------> 
+            <div class="col-sm-6 pull-left"> <!-- # AVIS internal format START ------> 
+                    <h4> Workflow Automation...... more ...soon ... </h4>
+            <p> ......WIP ......</p>
+        <br>
+                
+                <input class='btn btn-primary' type='button' value="More..." onClick="window.location.reload()" />
+                </div> <!-- # internal format STOP ------>            
+        </div> <!-- # DIV-7 STOP ------> 
+        
+              
+    
+    
+    
+    
+        
+        <div class="tab-pane fade" id="_C"> <!-- # DIV-8 START ------> 
+            <h4> Bigger Data - not only BIG DATA :) </h4>
+            <p> ..Not only Terrabytes but also Gigabytes n less....</p>
+        <br>
+                <input class='btn btn-primary' type='button' value="More..." onClick="window.location.reload()" />
+            
+        </div> <!-- # DIV-8 STOP ------> 
+        
+    
+    
+    
+    
+    
+    
+    
+    
+        <div class="tab-pane fade" id="_D">  <!-- # DIV-9 START ------> 
+            <h4> About us ......  </h4>
+            <p> ...Always "Work in Progress"....</p>
+        <br>
+                <input class='btn btn-primary' type='button' value="More..." onClick="window.location.reload()" />
+            
+        </div> <!-- # DIV-9 STOP ------> 
+    
+     
+    
+       <div class="tab-pane fade" id="_E"> <!-- # DIV-10 START ------> 
+            <h4>infoBOT.co.in  </h4>
+            <p> ...Coming soon ....</p>
+        <br>
+                <input class='btn btn-primary' type='button' value="More..." onClick="window.location.reload()" />
+            
+        </div> <!-- # DIV-10 STOP ------> 
+    
+    
+    
+    
+    
+      </div> <!-- # DIV-1 ENDS ------> 
+      </div> <!-- # DIV-2 ENDS ------> 
+                 <!-- # DIV-3 ENDS ------> 
+    
+    
+    
+    
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  
+    
+    
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    
+
+  </body>
+</html>

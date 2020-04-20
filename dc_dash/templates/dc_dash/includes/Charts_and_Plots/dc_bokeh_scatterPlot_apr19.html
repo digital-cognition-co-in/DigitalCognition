@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}    
+
+<html style="overflow: hidden;"> 
+  <head>
+  </head>
+    
+<style>
+</style>
+    
+<body>
+<!-- Bokeh-1  Starts================================================== -->
+
+<div>
+        {% load static %}
+        <link rel='stylesheet' href={{cdn_css|safe}} type="text/css"/>
+        <script type="text/javascript" src={{cdn_js|safe}}></script>
+</div>
+
+<div>
+       {{div_bokeh|safe}}
+       {{js_bokeh|safe}}
+</div>
+
+
+
+<!-- Bokeh-1 Ends ================================================== -->
+
+
+<!-- Bokeh-2  Starts================================================== -->
+
+<div>
+  {% load static %}
+  <link rel='stylesheet' href={{cdn_css1|safe}} type="text/css"/>
+  <script type="text/javascript" src={{cdn_js1|safe}}></script>
+</div>
+
+<div>
+ {{div_bokeh1|safe}}
+ {{js_bokeh1|safe}}
+</div>
+
+
+
+<!-- Bokeh-2 Ends ================================================== -->
+
+
+    
+<!-- DONT Change Anything Below here   -->                                        
+</body>
+</html>

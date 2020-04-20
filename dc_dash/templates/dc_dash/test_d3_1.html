@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+{% load static %}
+{% include 'd3_own_css.html' %}
+{% include '_____jQuery_Pro_Examples.html' %}
+
+{% load crispy_forms_tags %}
+
+
+    
+<head>
+<link href='http://fonts.googleapis.com/css?family=Calibri' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    
+    
+    <script src="jquery-1.7.js" type="text/javascript"></script>
+    <script src="jquery-ui-1.8.16.custom.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.8.16.custom.css"/>
+    
+</head>
+  
+    <style>
+
+#draggable {font-size: x-large; border: thin solid red;
+    width: 5em; text-align: center}
+        
+h1 {
+font-family: 'Calibri', cursive;
+font-size: 40px;
+color: "black";
+text-align: left;
+}
+            
+h3 {
+font-family: 'Calibri', cursive;
+font-size: 20px;
+color: "black";
+text-align: left;
+}
+label{
+  font-family: 'Calibri', cursive;
+  font-size: 10px;
+  color: #bdbdbd;
+  display: inline;
+  padding: 20px;
+  text-align: center;
+}
+
+text {
+  font-family: 'Calibri', cursive;
+  font-size: 15px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+li {
+  display: inline;
+}
+.row {
+  width: 100%;
+  margin: 0 auto;
+}
+#DonutChart {
+  margin-left: 80px;
+  margin-top: 70px;
+  display: inline-block;
+  width: 360px; 
+  height: 500px;
+  vertical-align: top;
+}
+#BarChart {
+  margin-left: 80px;
+  margin-top: 60px;
+  display: inline-block;
+  width: 600px; 
+  height: 500px;
+}
+.legend {                              
+  font-size: 12px;                     
+}         
+        
+rect {
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+        
+rect {                                                     
+  stroke-width: 2; 
+}   
+
+path:hover {  opacity:0.9; }
+
+.axis text {
+  font-family: 'Calibri', cursive;
+  font-size: 10pt;
+}
+.axis .label {
+  font-size: 16pt;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.y.axis path, .y.axis line {
+  stroke: none;
+}
+.tooltip {
+  background: #eee;
+  box-shadow: 0 0 5px #999999;
+  color: #333;
+  display: none;
+  font-family: 'Calibri';
+  font-size: 16px;
+  left: 130px;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  top: 95px;
+  z-index: 10;
+}
+
+.country {
+    font-weight: bold;
+}
+        
+form_doughnutChart {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    }
+        
+ <!-- #  A CSS Key Value Pair as seen above --- is a JavaScript object which is a collection of key-value pairs ------>  
+        
+        
+    </style>
+    
+    
+     
+    
+<body>
+    
+<div class="container"> <!-- # DIV -1 START ------>  
+<left><h3>Robotic Process Automation - CHARTS</h3></left>
+    
+      
+         
+    
+<div id="content"> <!-- # DIV -2 START ------> 
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        
+        <li class="active"><a href="#_A" data-toggle="tab">___TBD_Name from DB TAble_</a></li>
+        <li><a href="#_A_a" data-toggle="tab">___TBD_Name from DB TAble_1</a></li>
+        <li><a href="#_B" data-toggle="tab">___TBD_Name from DB TAble_2</a></li>
+        <li><a href="#_C" data-toggle="tab">Bar Charts-3</a></li>
+        <li><a href="#_D" data-toggle="tab">Bar Charts-4</a></li>
+        <li><a href="#_E" data-toggle="tab">Bar Charts-5</a></li>
+        <li><a href="#_F" data-toggle="tab">Bar Charts-6</a></li>
+    </ul>
+
+<div id="my-tab-content" class="tab-content">  <!-- # DIV-3 START ------> 
+      
+    
+    
+<div class="tab-pane fade in active" id="_A">  <!-- # DIV-4 START ------> 
+    
+      
+       
+
+<div class="row"> <!-- # DIV-5 START ------> 
+    
+               
+            
+<div class="col-sm-3 pull-left"> <!-- # DIV -6 START ------> 
+<h4 class="text-align-center"> DATA CHARTS :-  </h4>
+    <h5 id="_Z" class="text-align-center"> Sales DELHI [0 to 100] </h5>
+    <h5 id="_Z1" class="text-align-center">Sales DELHI [100 to 1000] </h5>
+    <h5 id="_Z2" class="text-align-center"> Sales ANDHRA [0 to 100] </h5>
+    <h5 id="_Z3" class="text-align-center">Sales ANDHRA [100 to 1000] </h5>
+    <h5 id="_Z4" class="text-align-center"> Sales BIHAR [0 to 100] </h5>
+    <h5 id="_Z5" class="text-align-center">Sales BIHAR [100 to 1000] </h5>
+<h4 class="text-align-center"> RAW DATA :-  </h4>
+    <h5 id="_Z6" class="text-align-center">Sales DELHI [100 to 1000]</h5>
+    <h5 id="_Z7" class="text-align-center">Sales ANDHRA PRADESH [100 to 1000]</h5>
+    <h5 id="_Z8" class="text-align-center">Sales BIHAR [100 to 1000] </h5>
+        
+              <br>
+    <input class='btn btn-primary' type='button' value="Reset Charts/Tables" onClick="window.location.reload()" />
+    
+</div> <!-- # DIV-6 STOP ------> 
+          
+ 
+                
+<div class="col-sm-3 pull-right"> <!-- # DIV -6A START ------> 
+<h4 class="text-align-center"> DATA CHARTS :-  </h4>
+    <h5 id="_Z_" class="text-align-center">Sales KARNATAKA [0 to 100] </h5>
+    <h5 id="_Z1_" class="text-align-center"> Sales KARNATAKA [100 to 1000] </h5>
+<h4 class="text-align-center"> RAW DATA :-  </h4>
+    <h5 id="_Z2_" class="text-align-center">Sales KARNATAKA [100 to 1000]</h5>
+    <h5 id="_Z3_" class="text-align-center">Sales GUJARAT [100 to 1000]</h5>
+    <h5 id="_Z4_" class="text-align-center">Sales HARYANA [100 to 1000] </h5>
+        
+          
+    
+</div> <!-- # DIV-6A STOP ------> 
+    
+   
+    
+    
+    
+
+<!-- # Charts have to be inside Tab Pane Imbeding .js doesnt work -->   
+    
+    
+    
+    
+ 
+    
+    
+<!-- # BAR CHART -1 ------>       
+    
+<script>    
+    
+d3.select("#_Z")
+    .on("click",function() {   
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([0,500]); // Actual Input values from DATA ;
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(7)                       // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Count:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";         // Change - VALUE and CUSTID to Whateva ...
+  })
+
+
+
+    
+var svg = d3.select("#_A")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+                               // JSON from DB here ............
+d3.json("{% url "count_b" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = +d.Occurence_Count_Upto_100;         // Change - VALUE and CUSTID to Whateva ...
+    });
+	
+  // scale the range of the data ---- # d.customer_id = d.customer_id;
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y", -30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar1")
+      .attr("x", function(d) { return x(d.customer_id); }) // Change - VALUE and CUSTID to Whateva ...
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })      // Change - VALUE and CUSTID to Whateva ...
+      .attr("height", function(d) { return height - y(d.value); }) // Change - VALUE.......
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_Upto_100;   // Change - VALUE and CUSTID to Whateva ...
+  return d;
+}
+     
+        
+         
+        
+      })();
+         
+    
+    
+  </script> 
+     
+             
+            
+<!-- # BAR CHART -2 ------>                   
+  
+
+    
+    
+    
+    
+    
+ 
+<script>    
+    /// 2ND Graph ------------------------/////
+      
+
+d3.select("#_Z1")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+          .range([height,0])     // The RANGE of Label Y Axis Shown 
+          // .domain([0,500]); // Actual Input values from DATA ;
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Count:</strong> <span style='color:#996300'>" + d.Occurence_Count_100_to_1000 + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_c" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_100_to_1000);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y",  -30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar4")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_100_to_1000;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+    
+
+     
+     </script>    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>    
+    
+      /// 3RD Graph --------ANDHRA----------------/////
+
+d3.select("#_Z2")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([500,700]); // Actual Input values from DATA 
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Counts:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_d" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_Upto_100);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y",-30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar1")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_Upto_100;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+    
+
+     
+     </script>    
+    
+    
+    
+    
+    <script>    
+    
+      /// 4th Graph -------100 to 1000 ANDHRA ----------------/////
+
+d3.select("#_Z3")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([500,700]); // Actual Input values from DATA 
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Count:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_e" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_100_to_1000);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y", -30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text(" Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar4")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_100_to_1000;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+         
+     </script>  
+    
+    
+    
+    
+        
+    <script>    
+    
+      /// 5th Graph ---0 to 100 ----BIHAR -----------------/////
+
+d3.select("#_Z4")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([500,700]); // Actual Input values from DATA 
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Counts:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_f" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_Upto_100);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y",-30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar1")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_Upto_100;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+    
+
+     
+     </script>    
+    
+    
+    
+    
+    <script>    
+    
+      /// 6th Graph -------100 to 1000 BIHAR----------------/////
+
+d3.select("#_Z5")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([500,700]); // Actual Input values from DATA 
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Count:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_g" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_100_to_1000);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y", -30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text(" Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar4")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_100_to_1000;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+         
+     </script>  
+      
+    
+        
+  
+</div> <!-- # DIV-5 END --div class="row"  -------->
+            
+
+
+          
+<div class="row" >   <!-- #DIV-8 START  class="row2 of RAW DAta Tables "-->
+
+<div class='col-sm-3 pull-left'>   <!-- #DIV-9 START  class -- COLUMN 1 - RAW DAta Tables "-->
+    
+ <script type="text/javascript">
+     
+d3.select("#_Z6")
+    .on("click",function()            
+        { 
+
+     var tabulate = function (data,columns) {
+		  		var table = d3.select('#_A').append('table')
+					var thead = table.append('thead')
+					var tbody = table.append('tbody')
+					thead.append('tr')
+			  			.selectAll('th')
+			    		.data(columns)
+			    		.enter()
+				  	.append('th')
+			    		.text(function (d) { return d })
+					var rows = tbody.selectAll('tr')
+					    .data(data)
+					    .enter()
+					  .append('tr')
+					var cells = rows.selectAll('td')
+					    .data(function(row) {
+					    	return columns.map(function (column) {
+					    		return { column: column, value: row[column] }
+					      })
+				      })
+		      	.enter()
+		    	.append('td')
+		      	.text(function (d) { return d.value })
+				return table;
+			}
+			d3.json("{% url "count_c" %}", function(data) {
+                
+                 data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = +d.Occurence_Count_100_to_1000;
+    });
+				var columns = ['customer_id','Occurence_Count_100_to_1000']
+				tabulate(data,columns);
+			});
+               
+
+       })();
+         
+    
+</script> 
+        
+        
+</div> <!-- #DIV-9 END class -- COLUMN 1 - RAW DAta Tables "-->
+    
+    
+    
+    
+    
+    
+       
+    
+<div class='col-sm-5 pull-right'> <!-- ANDHRA ---- 100 to 10000 #DIV-10 START  class -- COLUMN 2 - RAW DAta Tables "-->
+    
+    
+    <script type="text/javascript">
+        
+        d3.select("#_Z7")
+    .on("click",function()     
+       
+       
+        { 
+            
+		    var tabulate = function (data,columns) {
+		  		var table = d3.select('#_A').append('table')
+					var thead = table.append('thead')
+					var tbody = table.append('tbody')
+					thead.append('tr')
+			  			.selectAll('th')
+			    		.data(columns)
+			    		.enter()
+				  	.append('th')
+			    		.text(function (d) { return d })
+					var rows = tbody.selectAll('tr')
+					    .data(data)
+					    .enter()
+					  .append('tr')
+					var cells = rows.selectAll('td')
+					    .data(function(row) {
+					    	return columns.map(function (column) {
+					    		return { column: column, value: row[column] }
+					      })
+				      })
+		      	.enter()
+		    	.append('td')
+		      	.text(function (d) { return d.value })
+				return table;
+			}
+			d3.json("{% url "count_e" %}", function(data) {
+                
+                 data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = d.Occurence_Count_100_to_1000;
+        
+    });
+				var columns = ['customer_id','Occurence_Count_100_to_1000']
+				tabulate(data,columns);
+			});
+            
+            
+       })();
+        
+        
+		</script>
+    
+    </div> <!-- ANDHRA ---- 100 to 10000 #DIV-10 ENDS ---  class -- COLUMN 2 - RAW DAta Tables "-->
+    
+    
+    
+    
+    
+    
+    
+        
+<div class='col-sm-5 pull-right'> <!-- #DIV- Sales BIHAR [100 to 1000]_count_g___- RAW DAta Tables "-->
+    
+    
+    <script type="text/javascript">
+        
+        d3.select("#_Z8")
+    .on("click",function()     
+       
+       
+        { 
+            
+		    var tabulate = function (data,columns) {
+		  		var table = d3.select('#_A').append('table')
+					var thead = table.append('thead')
+					var tbody = table.append('tbody')
+					thead.append('tr')
+			  			.selectAll('th')
+			    		.data(columns)
+			    		.enter()
+				  	.append('th')
+			    		.text(function (d) { return d })
+					var rows = tbody.selectAll('tr')
+					    .data(data)
+					    .enter()
+					  .append('tr')
+					var cells = rows.selectAll('td')
+					    .data(function(row) {
+					    	return columns.map(function (column) {
+					    		return { column: column, value: row[column] }
+					      })
+				      })
+		      	.enter()
+		    	.append('td')
+		      	.text(function (d) { return d.value })
+				return table;
+			}
+			d3.json("{% url "count_g" %}", function(data) {
+                
+                 data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = d.Occurence_Count_100_to_1000;
+        
+    });
+				var columns = ['customer_id','Occurence_Count_100_to_1000']
+				tabulate(data,columns);
+			});
+            
+            
+       })();
+        
+        
+		</script>
+    
+ </div> <!-- #DIV- ENDS --- Sales BIHAR [100 to 1000]_count_g___- RAW DAta Tables "-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class='col-sm-5 pull-right'> <!-- #DIV-Gujarat START  class -- COLUMN 2 - RAW DAta Tables "-->
+    
+    
+    <script type="text/javascript">
+        
+        d3.select("#_Z4_")
+    .on("click",function()     
+       
+       
+        { 
+            
+		    var tabulate = function (data,columns) {
+		  		var table = d3.select('body').append('table')
+					var thead = table.append('thead')
+					var tbody = table.append('tbody')
+					thead.append('tr')
+			  			.selectAll('th')
+			    		.data(columns)
+			    		.enter()
+				  	.append('th')
+			    		.text(function (d) { return d })
+					var rows = tbody.selectAll('tr')
+					    .data(data)
+					    .enter()
+					  .append('tr')
+					var cells = rows.selectAll('td')
+					    .data(function(row) {
+					    	return columns.map(function (column) {
+					    		return { column: column, value: row[column] }
+					      })
+				      })
+		      	.enter()
+		    	.append('td')
+		      	.text(function (d) { return d.value })
+				return table;
+			}
+			d3.json("{% url "count_h" %}", function(data) {
+                
+                 data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = d.Occurence_Count_500_to_999;
+        
+    });
+				var columns = ['customer_id','Occurence_Count_500_to_999']
+				tabulate(data,columns);
+			});
+            
+            
+       })();
+        
+        
+		</script>
+
+     </div> <!-- #DIV-GUJARAT END class -- COLUMN 2 - RAW DAta Tables "-->
+    
+    
+    
+        
+<div class='col-sm-5 pull-right'> <!-- #DIV-HARYANA START  class -- COLUMN 2 - RAW DAta Tables "-->
+    
+    
+    <script type="text/javascript">
+        
+        d3.select("#_Z5_")
+    .on("click",function()     
+       
+       
+        { 
+            
+		    var tabulate = function (data,columns) {
+		  		var table = d3.select('body').append('table')
+					var thead = table.append('thead')
+					var tbody = table.append('tbody')
+					thead.append('tr')
+			  			.selectAll('th')
+			    		.data(columns)
+			    		.enter()
+				  	.append('th')
+			    		.text(function (d) { return d })
+					var rows = tbody.selectAll('tr')
+					    .data(data)
+					    .enter()
+					  .append('tr')
+					var cells = rows.selectAll('td')
+					    .data(function(row) {
+					    	return columns.map(function (column) {
+					    		return { column: column, value: row[column] }
+					      })
+				      })
+		      	.enter()
+		    	.append('td')
+		      	.text(function (d) { return d.value })
+				return table;
+			}
+			d3.json("{% url "count_i" %}", function(data) {
+                
+                 data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = d.Occurence_Count_500_to_999;
+        
+    });
+				var columns = ['customer_id','Occurence_Count_500_to_999']
+				tabulate(data,columns);
+			});
+            
+            
+       })();
+        
+        
+		</script>
+
+    </div> <!-- #DIV-HARYANA ENDs  class -- COLUMN 2 - RAW DAta Tables "-->
+    
+
+</div> <!-- #DIV-8 ENDS  class="row2 of RAW DAta Tables "-->
+</div> <!-- #DIV-4 ENDS ---<div class="tab-pane fade in active" id="_A"> ---> 
+  
+    
+    
+<div class="tab-pane fade" id="_A_a"> <!-- # DIV-11 STARTS---<div class="tab-pane fade in active" id="_A_a"> ---> 
+<h4> Sales Brazil</h4>
+
+        
+    
+<div class="row"> <!-- # DIV-5 START ------> 
+            
+            
+<div class="col-sm-3 pull-left"> <!-- # DIV -6 START ------> 
+<h6 id="_Z_" class="text-align-center">Chart- Sales Sao Paulo -0 to 50 </h6>
+<h6 id="_Z_1" class="text-align-center">Sales Sao Paulo -50 to 100 </h6>
+    <h6 id="_Z_2" class="text-align-center">Sales Sao Paulo -100 to 500 </h6>
+    <h6 id="_Z_3" class="text-align-center">Sales Sao Paulo -500 to 1000 </h6>
+    <h6 id="_Z_4" class="text-align-center">Raw Data - Sales Sao Paulo -0 to 50 </h6>
+    <h6 id="_Z_5" class="text-align-center">Raw Data - Sales Sao Paulo -50 to 100 </h6>
+        
+            
+    <input class='btn btn-primary' type='button' value="Reset Charts/Tables" onClick="window.location.reload()" />
+    
+     </div> <!-- # DIV-6 STOP ------> 
+    
+    <div class="col-sm-3 pull-right"> <!-- # DIV -6 START ------> 
+<h6 id="_Z_a" class="text-align-center">Chart- Sales Sao Paulo -0 to 50 </h6>
+<h6 id="_Z_1a" class="text-align-center">Sales Sao Paulo -50 to 100 </h6>
+    <h6 id="_Z_2a" class="text-align-center">Sales Sao Paulo -100 to 500 </h6>
+    <h6 id="_Z_3a" class="text-align-center">Sales Sao Paulo -500 to 1000 </h6>
+    <h6 id="_Z_4a" class="text-align-center">Raw Data - Sales Sao Paulo -0 to 50 </h6>
+    <h6 id="_Z_5a" class="text-align-center">Raw Data - Sales Sao Paulo -50 to 100 </h6>
+          
+  </div> <!-- # DIV-6 STOP ------> 
+    
+    
+    
+  
+    
+    
+    
+    
+
+<!-- # Charts have to be inside Tab Pane Imbeding .js doesnt work -->   
+    
+ 
+<!-- # BAR CHART -1 ------>        
+            
+    
+<script>    
+
+   
+    
+d3.select("#_Z_")
+    .on("click",function() {   
+    
+          
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([0,500]); // Actual Input values from DATA ;
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(7) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Sales in $'s:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A_a")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_b" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = +d.Occurence_Count_Upto_50;
+    });
+	
+  // scale the range of the data ---- # d.customer_id = d.customer_id;
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y", -30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar1")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_Upto_50;
+  return d;
+}
+     
+      })();
+         
+    
+  </script> 
+     
+             
+            
+            
+  
+    
+ 
+<script>    
+    
+      /// 2ND Graph ------------------------/////
+
+d3.select("#_Z_1")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+          .range([height,0])     // The RANGE of Label Y Axis Shown 
+          // .domain([0,500]); // Actual Input values from DATA ;
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Count:</strong> <span style='color:#996300'>" + d.Occurence_Count_50_to_100 + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A_a")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_c" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_50_to_100);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y",  -30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar2")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_50_to_100;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+    
+
+     
+     </script>    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>    
+    
+      /// 3RD Graph ------------------------/////
+
+d3.select("#_Z_2")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([500,700]); // Actual Input values from DATA 
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Counts:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A_a")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_d" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_100_to_500);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y",-30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar3")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_100_to_500;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+    
+
+     
+     </script>    
+    
+    
+    
+    
+    <script>    
+    
+      /// 4th Graph ------------------------/////
+
+d3.select("#_Z_3")
+    .on("click",function() {     
+    
+    
+var margin = {top: 40, right: 20, bottom: 80, left: 100},
+width = 450 - margin.left - margin.right,
+height = 250 - margin.top - margin.bottom;
+
+var formatYScale = d3.format(".00");
+// var formatXScale = d3.format(".00"); ---- To be used if we want a Numeric X - Horizontal Scale 
+
+var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+            .range([height,0])     // The RANGE of Label Y Axis Shown 
+            //.domain([500,700]); // Actual Input values from DATA 
+    
+/// Earlier --  .range([height, 0])
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+     
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10) // This is Value of HOW Many Tick Marks on Y Scale 
+    .tickFormat(formatYScale);
+    
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Count:</strong> <span style='color:#996300'>" + d.value + ",_for_, "  + d.customer_id + "</span>";
+  })
+
+
+var svg = d3.select("#_A_a")
+  .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.call(tip);
+
+d3.json("{% url "count_e" %}", function(error, data) {
+    
+   data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = Math.round(+d.Occurence_Count_500_to_999);
+    });
+	
+  // scale the range of the data
+  x.domain(data.map(function(d) { return d.customer_id; }));
+  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-50)" 
+                });
+    
+ svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(0)")
+      .attr("y", -30)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text(" Count");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar4")
+      .attr("x", function(d) { return x(d.customer_id); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", 
+            function(d) 
+              { return height - y(d.value);})
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+
+});
+
+function type(d) {
+  d.value = +d.Occurence_Count_500_to_999;
+  return d;
+}
+    
+// -- { return height - y(d.value); })
+     
+      })();
+         
+     </script>    
+        
+  
+</div> <!-- # DIV-5 END --div class="row"  -------->
+            
+
+    
+    
+    
+    
+<div class="row" >   <!-- #DIV-12 START  class="row1 of PIE CHARTS "-->   
+    
+     
+    <script type="text/javascript">
+     
+
+        
+        d3.select("#_Z_aaa-TBD")
+    .on("click",function()    
+       
+        { 
+
+var width = 960,
+    height = 500,
+    radius = Math.min(width, height) / 2;
+
+var color = d3.scale.category20();
+
+var pie = d3.layout.pie()
+    .value(function(d) { return d.apples; })
+    .sort(null);
+
+var arc = d3.svg.arc()
+    .innerRadius(radius - 100)
+    .outerRadius(radius - 20);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+d3.tsv("data.tsv", type, function(error, data) {
+  if (error) throw error;
+
+  var path = svg.datum(data).selectAll("path")
+      .data(pie)
+    .enter().append("path")
+      .attr("fill", function(d, i) { return color(i); })
+      .attr("d", arc)
+      .each(function(d) { this._current = d; }); // store the initial angles
+
+  d3.selectAll("input")
+      .on("change", change);
+
+  var timeout = setTimeout(function() {
+    d3.select("input[value=\"oranges\"]").property("checked", true).each(change);
+  }, 2000);
+
+  function change() {
+    var value = this.value;
+    clearTimeout(timeout);
+    pie.value(function(d) { return d[value]; }); // change the value function
+    path = path.data(pie); // compute the new angles
+    path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
+  }
+});
+
+function type(d) {
+  d.apples = +d.apples;
+  d.oranges = +d.oranges;
+  return d;
+}
+
+// Store the displayed angles in _current.
+// Then, interpolate from _current to the new angles.
+// During the transition, _current is updated in-place by d3.interpolate.
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+  
+            
+		   })();
+         
+     </script>    
+        
+  
+</div>   <!-- #DIV-12 ENDS class="row1 of PIE CHARTS "--> 
+    
+    
+    
+    
+
+          
+<div class="row" >   <!-- #DIV-8 START  class="row2 of RAW DAta Tables "-->
+    <div class='col-sm-3 pull-left'>   <!-- #DIV-9 START  class -- COLUMN 1 - RAW DAta Tables "-->
+
+    
+  
+      
+     
+ <script type="text/javascript">
+     
+d3.select("#_Z_4")
+    .on("click",function()     
+       
+       
+        { 
+
+     var tabulate = function (data,columns) {
+		  		var table = d3.select('#_A_a').append('table')
+					var thead = table.append('thead')
+					var tbody = table.append('tbody')
+					thead.append('tr')
+			  			.selectAll('th')
+			    		.data(columns)
+			    		.enter()
+				  	.append('th')
+			    		.text(function (d) { return d })
+					var rows = tbody.selectAll('tr')
+					    .data(data)
+					    .enter()
+					  .append('tr')
+					var cells = rows.selectAll('td')
+					    .data(function(row) {
+					    	return columns.map(function (column) {
+					    		return { column: column, value: row[column] }
+					      })
+				      })
+		      	.enter()
+		    	.append('td')
+		      	.text(function (d) { return d.value })
+				return table;
+			}
+			d3.json("{% url "count_b" %}", function(data) {
+                
+                 data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = +d.Occurence_Count_Upto_50;
+    });
+				var columns = ['customer_id','Occurence_Count_Upto_50']
+				tabulate(data,columns);
+			});
+            
+    
+
+       })();
+         
+    
+</script> 
+</div> <!-- #DIV-9 END class -- COLUMN 1 - RAW DAta Tables "-->
+       
+    
+<div class='col-sm-5 pull-right'> <!-- #DIV-10 START  class -- COLUMN 2 - RAW DAta Tables "-->
+    
+    
+    <script type="text/javascript">
+        
+        d3.select("#_Z_5")
+    .on("click",function()     
+       
+       
+        { 
+            
+		    var tabulate = function (data,columns) {
+		  		var table = d3.select('#_A_a').append('table')
+					var thead = table.append('thead')
+					var tbody = table.append('tbody')
+					thead.append('tr')
+			  			.selectAll('th')
+			    		.data(columns)
+			    		.enter()
+				  	.append('th')
+			    		.text(function (d) { return d })
+					var rows = tbody.selectAll('tr')
+					    .data(data)
+					    .enter()
+					  .append('tr')
+					var cells = rows.selectAll('td')
+					    .data(function(row) {
+					    	return columns.map(function (column) {
+					    		return { column: column, value: row[column] }
+					      })
+				      })
+		      	.enter()
+		    	.append('td')
+		      	.text(function (d) { return d.value })
+				return table;
+			}
+			d3.json("{% url "count_c" %}", function(data) {
+                
+                 data.forEach(function(d) {
+        d.customer_id = d.customer_id;
+        d.value = d.Occurence_Count_50_to_100;
+        
+    });
+				var columns = ['customer_id','Occurence_Count_50_to_100']
+				tabulate(data,columns);
+			});
+            
+            
+       })();
+        
+        
+		</script>
+    
+</div> <!-- #DIV-10 END class -- COLUMN 2 - RAW DAta Tables "-->
+</div> <!-- #DIV-8 ENDS  class="row2 of RAW DAta Tables "-->
+</div> <!-- # DIV-11 ENDS ---<div class="tab-pane fade in active" id="_A_a"> ---> 
+            
+     
+
+
+
+
+
+     
+        
+        <div class="tab-pane fade" id="_B">
+            <h1>Sales Product_Type_2</h1>
+            <p>$ Sales for Product Category/Type - 2 for - All demographies</p>
+            
+        </div>
+        
+        
+        
+        <div class="tab-pane fade" id="_C">
+            <h1>Combined Sales - Product_Types 1 and 2 </h1>
+            <p> $ Value of Combined Sales of Product Category/Type -1 and 2 for - All demographies</p>
+                           
+        </div>
+        
+              
+        
+        <div class="tab-pane fade" id="_D">
+            <h1>Combined Sales - All Product_Types - India</h1>
+            <p>$ Value of Combined Sales of - All Product_Types - for demography India </p>
+            
+        </div>
+        
+                      
+        <div class="tab-pane fade" id="_E">
+            <h1>Combined Sales - All Product_Types - Sri Lanka</h1>
+            <p>$ Value of Combined Sales of - All Product_Types - for demography SriLanka </p>
+        
+            
+            
+        </div>
+    
+     <div class="tab-pane fade" id="_F">
+            <h1>Combined Sales - LAST CHART TAB -- Sri Lanka</h1>
+            <p>$ Value of Combined Sales of - All Product_Types - for demography SriLanka </p>
+        
+            
+            
+        </div>
+        
+        
+    
+    
+    
+    
+    
+<!--NOT to be Changed beyond here ------>
+</div> <!-- # DIV -3 ENDS ------>
+</div> <!-- # DIV -2 ENDS ------> 
+</div> <!-- # DIV -1 ENDS ------>    
+
+    
+    
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    
+  
+    
+</body>
+</html>

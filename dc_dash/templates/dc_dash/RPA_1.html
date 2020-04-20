@@ -1,0 +1,210 @@
+    {% load static %}
+    {% include 'dc_dash/base.html' %}
+
+    {% load crispy_forms_tags %}
+
+<!-- CSS for LIGHTBOX SLIDESHOW-- LOKESH DHAKAR -->
+<!-- <link href="{% static 'css/lightbox.css' %}" rel="stylesheet">  -->
+  
+
+
+
+<style>
+{% block style %}
+.navbar-static-top {
+	margin-bottom: 0px !important;
+}
+    
+    .jumbotron {
+	background-color:#78bac2;
+    margin-bottom:0;
+	color:white;
+    
+	{% if featured_image.make_image_background %} 
+	background-image: url("{{ featured_image.image.url }}");
+	background-repeat: no-repeat;
+	background-color: #000;
+	background-size: cover;
+	background-position-y: -272px;
+	{% endif %}
+}
+
+.shadow
+    {
+        text-shadow: black 0.3em 0.3em 0.3em;
+    }
+        
+#outer {
+    text-align: center;
+    border-style: solid;
+    border-width: 11px;
+    border-color: #e50000;
+    height: 50px;
+    width:auto;
+    display:inline-block;
+}
+
+#image {
+    float: right;
+    width: 50px;
+}
+
+#element_block {
+    display:block;
+}
+
+{% endblock %}
+    
+    
+</style>
+
+<!-- USER Auth Removed ---- No Registration Required to See Anything on Complete SITE - 13 AUG ! -->
+
+
+     
+{% block jumbotron %}
+ 
+	{% if featured_image %} <!-- IF IMAGE STARTS ! -------------------->
+		<div class="jumbotron" >
+		 <div class="container">
+			<div class="row">
+				<div class='col-sm-12 text-left {% if featured_image.text_right %}  {% endif %}'>
+				<p>
+		<a class="btn btn-lg btn-primary" href="{{ featured_image.product.get_absolute_url }}" role="button">View - Featured Project</a>
+				</p>
+				</div>
+				{% if not featured_image.make_image_background %} 
+				<div class='col-sm-12' >
+					<img src="{{ featured_image.image.url }}" class='img-responsive' />
+		 		</div>
+		 		{% endif %} <!-- Needs Comment ! -------------------->
+				</div>
+			</div>
+		 </div>
+{% else %} <!-- Needs Comment ! -------------------->
+{% endif %} <!-- IF IMAGE STOPS ! -------------------->
+
+
+
+
+{% if request.user.is_authenticated %}
+<!-- Light Green == #78bac2 ! ----Only for Logged in Users------------>
+<div class="jumbotron text-center"   style="background-color:#78bac2;color:white;padding-top:10px;padding-bottom:800px;margin-bottom:0;">
+<div class="container">
+<div class="row">    
+<div class='col-sm-8 text-left' >
+
+<br>
+<br>
+<br>
+<br>
+    
+<a class="navbar-brand shadow" style="color:white;font-weight: 900;font-size: 60px;" href="{% url 'categories' %}"> Categories</a> 
+<br>
+<br>
+<br>
+<br>
+</div>
+</div>
+
+<div class="row">
+<div class='col-sm-8 text-left' >
+<br>
+<br>
+<br>
+<br>
+   
+<a class="navbar-brand shadow" style="color: white;font-weight: 900;font-size: 60px;" href="{% url 'categories' %}"> Locations</a> 
+</div>
+</div>
+
+
+</div>     
+</div>     
+
+{% endif%}<!-- If User Logged In then Sees Content Above! -------------------->
+</div>     
+
+
+
+
+
+
+
+
+{% if not request.user.is_authenticated %} <!-- If User Not Logged In then Sees Content Below  ! -------------------->
+<!-- Light Blue == #07adeb ! -------------------->
+
+
+
+<div class="jumbotron" style="background-color:white;color:orange;padding-top:200px;padding-bottom:5px;margin-bottom:0;">
+ <div class="container">
+	<div class="row">
+        
+        
+        
+				<a href="static/img/2.png" data-lightbox="slidePic" ><img src='{% static "img/2.png" %}' alt="dc img"></a>
+
+				<a href="static/img/3.png" data-lightbox="slidePic"><img src='{% static "img/3.png" %}' alt="dc img"></a>
+		
+        
+        
+        
+		
+    <div class="shadow">            
+    <h1>Robotic Process Automation </h1>
+      </div>                                <!-- SHADOW STOPS ! -------------------->
+        <br>
+      <br>
+    <p>RPA platform designed for the modern enterprise... 
+        <br>
+        Providing bank grade information security. All deployments on premise or on Client hosted Cloud.  
+        <br>
+        Login with Official Email ID : Yahoo,Gmail,Rediff,Hotmail etc Not Allowed. 
+        Registered users proceed to view further info .... </p>
+  
+            
+		</div>
+	</div>
+ </div>
+
+
+
+
+<!-- Light Green == #78bac2 ! -------------------->
+
+<div class="jumbotron text-center"   style="background-color:#78bac2;color:white;padding-top:100px;padding-bottom:5px;margin-bottom:0;">
+<div class="container">
+        
+<!-- REMOVED PICS for LightBox from here ---- TESTING 10 SEP--->                
+
+        
+<div class="shadow">          
+    <h1>Register for a Demo:</h1>
+    </div>   
+      <p>Immediate ROI , cost saving and efficiency.<br> 
+         Help clients re-invest resources.<br>
+          Zero error rates - near perfect process compliance.<br>
+          Substantially decreased costs. <br>
+          
+          ...</p>
+        
+</div>     
+    
+<div class="shadow">          
+    <h3 style="color:blue;">digitalcognition.co.in</h3>
+    </div>   
+      <p>Content is not to be utilized - without permission. <br> ...</p>
+    </div>     
+
+
+{% endif%} <!-- If User Not Logged In then Sees Content above ! -------------------->
+ 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="{% static 'js/lightbox.js' %}"></script> <!--  Dont Go Below this 07 SEP ! -------------------->
+
+
+{% endblock %} <!-- ENDS JUMBOTRON BLOCK -- Dont Go Below this 07 SEP ! -------------------->
+

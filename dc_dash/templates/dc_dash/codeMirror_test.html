@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interpreter</title>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/theme/cobalt.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/lint/lint.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css">
+	<style>
+		.CodeMirror{ height: 500px }
+	</style>
+</head>
+
+
+
+<body>
+	<div class="container">
+		<h1> Code Mirror - SQL 	&ndash; <small><a>Test DC </a></small> </h1>
+		<div class="row">
+			<textarea name="" id="id_code_mirror_textArea" cols="30" rows="20">SELECT * FROM dc_codemirror;</textarea>
+		</div>
+		<hr>
+		<div class="row text-center">
+			<button type="button" class="btn btn-primary" id="compile">Compile and Run</button>
+		</div>
+		<hr>
+		<pre id="result" style="display: none" class="alert alert-success"></pre>
+		<pre id="error" style="display: none" class="alert alert-danger"></pre>
+	</div>
+
+	<!-- <script>
+	editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+
+		mode: "text/x-sql",
+		indentUnit: 4,
+		lineNumbers: true,
+		autoRefresh: false,
+		autofocus: true,
+		});
+
+		// persist the codeMirror DATA - further processing down stream 
+		$('#editor').data('CodeMirrorInstance', editor);
+		alert(data('CodeMirrorInstance', editor))
+	</script>
+	 -->
+
+
+</body>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/lint/lint.js"></script>
+<script src="compiler.js"></script>
+
+<!-- dhankar own imports dc june 19  -->
+
+<link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+<link rel="stylesheet" href="http://codemirror.net/addon/hint/show-hint.css">
+<script src="http://codemirror.net/lib/codemirror.js"></script>
+<script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
+<script src="http://codemirror.net/mode/sql/sql.js"></script>
+<script src="http://codemirror.net/addon/hint/show-hint.js"></script>
+<script src="http://codemirror.net/addon/hint/sql-hint.js"></script>
+<script src="https://codemirror.net/mode/css/css.js"></script>
+
+
+
+
+<script>
+
+	CodeMirror.registerHelper("lint", "sql", function (text, options) {
+		var found = [];
+		try{
+			Parser(Lexer(text)).parse()
+		}catch(e){
+			found.push({
+				from: CodeMirror.Pos(e.line, e.col),
+				to: CodeMirror.Pos(e.line, e.col+1),
+				message: e.message
+			})
+		}
+
+		return found;
+	});
+
+	CodeMirror.defineMode("sql", function () {
+		function words(str) {
+			var obj = {}, words = str.split(" ");
+			for (var i = 0; i < words.length; ++i) obj[words[i]] = true;
+			return obj;
+		}
+
+		var keywords = words("and array begin case const div do downto else end file for forward integer " +
+			"boolean char function goto if in label mod nil not of or packed procedure " +
+			"program record repeat set string then to type until var while with");
+		var atoms = {"null": true};
+
+		var isOperatorChar = /[+\-*&%=<>!?|\/]/;
+
+		function tokenBase(stream, state) {
+			var ch = stream.next();
+			if (ch == "#" && state.startOfLine) {
+				stream.skipToEnd();
+				return "meta";
+			}
+			if (ch == '"' || ch == "'") {
+				state.tokenize = tokenString(ch);
+				return state.tokenize(stream, state);
+			}
+			if (ch == "{") {
+				state.tokenize = tokenComment;
+				return tokenComment(stream, state);
+			}
+			if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
+				return null;
+			}
+			if (/\d/.test(ch)) {
+				stream.eatWhile(/[\w\.]/);
+				return "number";
+			}
+			if (ch == "/") {
+				if (stream.eat("/")) {
+					stream.skipToEnd();
+					return "comment";
+				}
+			}
+			if (isOperatorChar.test(ch)) {
+				stream.eatWhile(isOperatorChar);
+				return "operator";
+			}
+			stream.eatWhile(/[\w\$_]/);
+			var cur = stream.current();
+			if (keywords.propertyIsEnumerable(cur)) return "keyword";
+			if (atoms.propertyIsEnumerable(cur)) return "atom";
+			return "variable";
+		}
+
+		function tokenString(quote) {
+			return function (stream, state) {
+				var escaped = false, next, end = false;
+				while ((next = stream.next()) != null) {
+					if (next == quote && !escaped) {
+						end = true;
+						break;
+					}
+					escaped = !escaped && next == "\\";
+				}
+				if (end || !escaped) state.tokenize = null;
+				return "string";
+			};
+		}
+
+		function tokenComment(stream, state) {
+			var maybeEnd = false, ch;
+			while (ch = stream.next()) {
+				if (ch == "}") {
+					state.tokenize = null;
+					break;
+				}
+				maybeEnd = (ch == "*");
+			}
+			return "comment";
+		}
+
+		// Interface
+
+		return {
+			startState: function () {
+				return {tokenize: null};
+			},
+
+			token: function (stream, state) {
+				if (stream.eatSpace()) return null;
+				var style = (state.tokenize || tokenBase)(stream, state);
+				if (style == "comment" || style == "meta") return style;
+				return style;
+			},
+
+			electricChars: "{}"
+		};
+	});
+
+	CodeMirror.defineMIME("text/x-sql");  // FOO_DHANKAR
+	
+
+	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('id_code_mirror_textArea'), {
+		lineNumbers: true,
+		mode: 'text/x-sql',
+		theme:'cobalt',
+		hint: CodeMirror.hint.sql,
+		hintOptions: {
+            tables: {
+                "table1": [ "col_A", "col_B", "col_C" ],
+                "table2": [ "other_columns1", "other_columns2" ]
+            }
+        },
+		lint: true
+	});
+
+	var $error = $('#error').hide();
+	var $result = $('#result').hide();
+	$(document)
+		.on('click', '#compile', function () {
+			$error.hide();
+			$result.hide();
+			try{
+				var res = Interpreter().run(Parser(Lexer( myCodeMirror.getValue())).parse());
+				$result.html(JSON.stringify(res, null, 3)).show();
+			} catch (e){
+				$error.html(JSON.stringify(e, null, 3)).show();
+			}
+		})
+</script>
+</html>
+

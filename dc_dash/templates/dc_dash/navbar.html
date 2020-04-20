@@ -1,0 +1,69 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+{% load static %}
+
+{% include 'dc_dash/head_css.html' %}    
+{% load static %}
+
+<style>
+    
+.form-group {
+
+     left: 0;
+       right: 0;
+       margin: auto;
+  }
+    
+.form-control {
+     display: block;
+     margin: auto;
+     height: 70px;
+     padding: 12px 12px;
+     width: 500px;
+     border: 4px solid #45416D;
+     border-radius: 19px;
+}
+
+</style>
+
+
+
+   <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+          
+          
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          
+        </div>
+                 
+
+
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+
+
+    
+    
+<div class="form-group">
+
+<form class="form" action="/infoBOT_search/compare_retailers/" method="post" name="new-service" enctype=multipart/form-data>
+{% csrf_token %}
+<input class="form-control input-xlarge search-query text-center center-display" id="your_product" name="your_product"  value = "{{current_name}}" type="text" placeholder="Search specific products, like...iPad Pro"  required="">
+</form> <!-- /.form -->    
+</div> <!-- /.form-group -->    
+
+</div> 
+<!--/.nav-collapse -->
+
+</div>
+</nav>
+
+</html>        

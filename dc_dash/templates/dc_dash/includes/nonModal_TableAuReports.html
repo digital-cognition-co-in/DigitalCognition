@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}    
+
+
+<head>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="/static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+<style>
+/* CSS in dc_customCSS.html == .modal_TableAuReports_content ..etc etc ... */
+
+.tableAu_metricsCSS{
+    color: blue;
+}
+
+.tableAu_dimsCSS{
+    color: green;
+}
+
+</style>
+
+
+<body>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script>
+        $( function() {
+                            $( "#id_draggable" ).draggable();
+                        } );
+        </script>
+
+
+        <div id="checkbox_id_TableAuStyleReports" class="custom-control custom-checkbox mb-3"> 
+                <input type="checkbox" class="custom-control-input" id="modal_TableAuStyleReports" name="modal_TableAuStyleReports">
+                <label class="custom-control-label" for="modal_TableAuStyleReports">TableAu Style Reports</label>
+            </div>
+        
+            <div id="conditional_TableAuStyleReports">
+                <div id="id_modal_TableAuReports_backdrop" class="modal_TableAuReports_backdrop"> <!-- The Modal backDrop-->
+                <div class=" modal_TableAuReports_content"><!-- Modal content -->
+                <div class="modal_TableAuReports_header">
+                <span class="modal_DropDownMenu_close">&times;</span> <!-- SPAN CLASS for the CLOSE CROSS X -->
+                <h2> TableAu Style Reports with auto generated Dimensions and Metrics </h2>
+                </div>
+                <div class="modal-body">
+                <!-- <h3>Reports = TableAu  </h3>
+                <a><i class="fa fa-bug"></i> Report a Bug <span class="fa fa-chevron-down"></span></a> -->
+
+
+                <ul id="tableau_metrics" class="">
+                        <li id = 'id_draggable'> METRICS (NUMERIC DATA TYPES) </li> 
+                </ul>
+
+                <ul id="tableau_dimensions" class="">
+                    <li id = 'id_draggable'> DIMENSIONS (NON NUMERIC DATA TYPES)</li> 
+                </ul>
+
+            </div> <!-- The Modal -->
+            </div> <!-- ENDS ==  conditional_Summary_in_ModalPopUp -->
+
+
+            <script>
+                var myUrl = "{% url 'call_tableAu_reportsDimensions' %}" //call_tableAu_reportsDimensions
+                var dataSet;
+                var newTableau_metricsNode = document.getElementById("tableau_metrics"); 
+                var newTableau_dimsNode = document.getElementById("tableau_dimensions"); 
+                var my_columns = [];
+            
+                $(document).ready(function(){
+                                $.ajax({
+                                    url: myUrl,
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(dict_json_from_py) {
+                                      console.log("--FILE== modal_TableAuReports.html---dict_json_from_py--======--")
+                                      console.log(dict_json_from_py)
+                                    var data_dims = dict_json_from_py.data_json.dims_json; // OK 
+                                    var data_metrics = dict_json_from_py.data_json.metrics_json; // OK 
+                                    console.log("--FILE== modal_TableAuReports.html--Object.values(dict_json_from_py));-======--")
+                                    console.log(Object.values(dict_json_from_py));
+
+                                       $.each(data_metrics, function( key, value ) { 
+                                                    var new_ColName = value;
+                                                    // This is the <ul id="tableau_metrics" class=""> == in which the New Nodes will get created 
+
+                                                    var create_LInode = document.createElement("LI");                        
+                                                    var create_Textnode = document.createTextNode(new_ColName); 
+                                                    // this will take the var new_ColName -- in which text will be entered 
+
+                                                    //create_LInode.setAttribute('draggable', true); // JIRA_ROHIT_PendingTask -- OK Works - Not Required 
+                                                    //create_LInode.setAttribute('','class="fa fa-database');
+                                                    // For above Got --- UNSOLVED YET == (index):76 Uncaught DOMException: Failed to execute 'setAttribute' on 'Element': '<i>' is not a valid attribute name.
+                                                    create_LInode.innerHTML = "<i class='fa fa-database'>";
+                                                    $(create_LInode).addClass("tableAu_metricsCSS")
+                                                    // JIRA_ROHIT_PendingTask --- Above OK but not required yet ... 
+
+                                                    $(create_LInode).draggable({
+                                                        revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                                                        });
+
+                                                    create_LInode.appendChild(create_Textnode);
+                                                    newTableau_metricsNode.appendChild(create_LInode);
+
+
+
+
+                                    // Old dataTable Code beow here --- OK         
+                                    //var my_item = {};
+                                    //my_item.data = key;
+                                    //my_item.title = value;
+                                    //console.log("--FILE== modal_TableAuReports.html---dict_json_from_py--===my_item.data===--")
+                                    //console.log(my_item.data)
+                                    //console.log("--FILE== modal_TableAuReports.html---dict_json_from_py--===my_item.title===--")
+                                    //console.log(my_item.title) // JIRA_ROHIT_PendingTask --- These are the Column Names for the METRICS / DIMENSIONS of the REPORT 
+                                    //my_columns.push(my_item.title); // Can be used ?? 
+                                    //console.log(my_columns)
+                                    //return my_columns // Not Reqd 
+                                  }); // Closes $(each)
+
+
+                                $.each(data_dims, function( key, value ) { 
+                                                    var new_ColName = value;
+                                                    // This is the <ul id="tableau_metrics" class=""> == in which the New Nodes will get created 
+
+                                                    var create_LInode = document.createElement("LI");                        
+                                                    var create_Textnode = document.createTextNode(new_ColName); 
+                                                    // this will take the var new_ColName -- in which text will be entered 
+
+                                                    //create_LInode.setAttribute('draggable', true); // JIRA_ROHIT_PendingTask -- OK Works - Not Required 
+                                                    //create_LInode.setAttribute('','class="fa fa-database');
+                                                    // For above Got --- UNSOLVED YET == (index):76 Uncaught DOMException: Failed to execute 'setAttribute' on 'Element': '<i>' is not a valid attribute name.
+                                                    create_LInode.innerHTML = "<i class='fa fa-pencil'>";
+                                                    $(create_LInode).addClass("tableAu_dimsCSS")
+                                                    // JIRA_ROHIT_PendingTask --- Above OK but not required yet ... 
+
+                                                    $(create_LInode).draggable({
+                                                        revert: true  // this REVERTs to Original Position after DRAG // OK for Now 
+                                                        });
+
+                                                    create_LInode.appendChild(create_Textnode);
+                                                    newTableau_dimsNode.appendChild(create_LInode);
+
+                                  });
+                                 
+
+                                  
+                                }, // Close - success:
+                            })    // Close - "ajax":
+                            
+                }); // Close - // $(document).ready(function(){
+
+                    </script>
+
+
+
+            <script>
+            if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length > 2) {
+                var var_modal_alerts = document.getElementById('modal_alerts');
+                var_modal_alerts.style.display = "block"; 
+                document.getElementById("dynamic_alert_header").innerHTML = "Heads Up !" 
+                document.getElementById("dynamic_alert_text").innerHTML = "TWO Tables Already Selected for MERGE. " 
+                // 
+                //document.getElementById("dynamic_alert_text").innerHTML = " As result of EDA Action - Search and Replace , a New Column =" + new_column_name + " , has been inserted into Dataset = " + new_df_from_eda + " , thanks. " 
+                var delay_modalAlertDisplay = 8000;
+                setTimeout(function() {
+                var_modal_alerts.style.display = "none"; 
+                }, delay_modalAlertDisplay);
+
+            } // Close == if(typeof ....
+        //}); // CLOSE-- Click on CELL FUNCTION == $('#dataTable_psqlTables_merge tbody').on( 'click', 'td', function
+        //} // CLOSE == function assignToEventsColumns === FOO_without this Curly Brace here the Click_Event_Fails == Got this from Above
+    //}); // CLOSE ==  $(document).ready(function(){
+</script>
+
+
+          <script>
+                  // Get the modal
+                  var modal_TableAuReports_backdrop = document.getElementById('id_modal_TableAuReports_backdrop');
+                  // Get the <span> element that closes the modal
+                  var modal_TableAuReports_backdrop_span = document.getElementsByClassName("modal_DropDownMenu_close")[0];
+                  // When the user clicks on <span> (x), close the modal
+                    modal_TableAuReports_backdrop_span.onclick = function() {
+                    id_modal_TableAuReports_backdrop.style.display = "none";
+                    //$('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                    //Summary_in_ModalPopUp1
+                    //$('.Summary_in_ModalPopUp1').prop('checked', false);
+                    //$('.checkbox_for_Summary_in_ModalPopUp1')[0].checked = false;
+                    //$('.modal_TableAuStyleReports').prop('checked', false);
+                    $('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                      
+                  }
+
+                  // FOO_
+                  // When the user clicks anywhere outside of the modal, close it
+                  window.onclick = function(event) {
+                    if (event.target == modal_TableAuReports_backdrop) {
+                        modal_TableAuReports_backdrop.style.display = "none";
+                      //$('.modal_TableAuStyleReports').prop('checked', false);
+                      $('.checkbox_for_Summary_in_ModalPopUp1').prop('checked', false);
+                      //$('.checkbox_for_Summary_in_ModalPopUp1')[0].checked = false;
+                      
+                    }
+                  }
+          </script> <!--  Modal SCRIPT ENDS -->
+
+            <script>
+            $(document).ready(function() {
+                            $('#conditional_TableAuStyleReports').hide();
+                        });
+            </script>
+              
+            <script>
+              var modal_TableAuReports_backdrop = document.getElementById('id_modal_TableAuReports_backdrop');
+
+                $('#modal_TableAuStyleReports').change(function() {
+                  if(this.checked != true){
+                      //alert("----YA---")
+                      $("#conditional_TableAuStyleReports").hide();
+                      modal_TableAuReports_backdrop.style.display = "none"; 
+                      }
+                  else{
+                      $("#conditional_TableAuStyleReports").show();
+                      modal_TableAuReports_backdrop.style.display = "block"; 
+                      //$("body").css("overflow","hidden"); // Make Entire PAGE Unscrollable
+                      //$('html, body').css({ overflow: 'hidden', height: '100%' });
+                      }
+                      });
+            </script> 
+
+
+
+
+
+
+</body>
+</html>

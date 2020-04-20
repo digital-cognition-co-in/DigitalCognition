@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<style> </style>
+    
+<head>
+<meta charset="UTF-8">
+<title> Digital Cognition - CodeMirror_Test_1 </title>
+<link href="/static/CodeMirror_DC_June19/lib/codemirror.css" rel="stylesheet">
+<link href="/static/CodeMirror_DC_June19/theme/abcdef.css" rel="stylesheet">
+<link href="/static/CodeMirror_DC_June19/addon/hint/show-hint.css" rel="stylesheet">
+<!-- FOO _ CHECK TBD  -->
+<!-- Generally, I like the way phpMyAdmin tweaked Codemirror. I think I will dig deeper in how they did it... -->
+<!-- https://bitbucket.org/phpliteadmin/public/issues/313/sql-syntax-highlighting -->
+
+<!-- FOO== for now == jQuery==AUTOCOMPLETE imported as iFrame from standalone page = templates/dc_dash/dc_autoCompleteTest.html== -->
+</head>
+
+<body>
+        <script src="/static/CodeMirror_DC_June19/lib/codemirror.js"></script>
+        <script src="/static/CodeMirror_DC_June19/mode/sql/sql.js"></script>
+        <!-- Read through code of files == sql-hint.js and show-hint.js  -->
+        <script src="/static/CodeMirror_DC_June19/addon/hint/show-hint.js"></script>
+
+        <script src="/static/CodeMirror_DC_June19/addon/hint/sql-hint.js"></script>
+        <script src="/static/CodeMirror_DC_June19/addon/edit/matchbrackets.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <!-- https://github.com/zeroturnaround/sql-formatter -->
+        <script type="text/javascript" src="https://unpkg.com/sql-formatter@latest/dist/sql-formatter.min.js"></script>
+
+
+        {% csrf_token %}
+
+
+    <textarea name="" id="id_textArea_CodeMirror" >  </textarea>
+    <div class="row text-center">
+            <br>
+            <button type="button" class="btn btn-primary" id="clear_editor">Clear Editor </button>
+            <br>
+            <button type="button" class="btn btn-primary" id="cm_editor_submit">Submit SQL Query </button>
+    </div>
+
+    <!-- AutoComplete iFRAME Starts= FOO ==hack for now === -->
+    <div class="bokeh_iframe_in_modal" style ='overflow: hidden;'>
+            <iframe width="220" height="195"  src= "{% url 'autocomplete' %}"  frameborder="0" allowfullscreen></iframe>			
+    </div>
+
+    
+<script>
+        var call_pyTo_codeMirror = "{% url 'call_pyTo_codeMirror' %}" 
+        var array_tables1 = [];
+    
+        $(document).ready(function(){
+                      $.ajax({
+                              url: call_pyTo_codeMirror,
+                              type: 'GET',      
+                              dataType: 'json', 
+                              success: function(dict_json_forCodeMirror) {
+                                    array_tables1 = dict_json_forCodeMirror.tables//
+
+                                    var var_textArea = CodeMirror.fromTextArea(document.getElementById('id_textArea_CodeMirror'),
+                                           {
+                                                mode:'text/x-sql',
+                                                styleActiveLine: true,
+                                                theme:"abcdef",
+                                                lineNumbers:true,
+                                                autoCloseTags: true,
+                                                matchBrackets: true,
+                                                indentWithTabs: true,
+                                                smartIndent: true,
+
+                                                gutters: ["CodeMirror-lint-markers"], 
+                                                lint: true,
+                                                hint: CodeMirror.hint.sql, 
+
+                                                
+                                                extraKeys: {'Ctrl-Space': 'autocomplete',
+                                                'Ctrl-Shift': 'autocomplete'}, 
+
+                                            } // Close - OBJECT == Modes etc ..
+                                            ); // Close - METHOD == .fromTextArea
+
+                                            var_textArea.setSize(800, 300);
+
+                                            console.log("--HardCoded/PlaceHolder---var_textArea",var_textArea)
+                                            var codeValue = var_textArea.doc.getValue();
+                                            console.log("--HardCoded/PlaceHolder---codeValue",codeValue)
+
+                                            var codeMirror_toPy = "{% url 'url_codeMirror_toPy' %}" // EARLIER == cell_getJSVal1
+                                            var csrftoken_for_codeMirror = jQuery("[name=csrfmiddlewaretoken]").val();
+
+                                            $('#cm_editor_submit').on("click",function(codeValue) {
+                                                    var codeValue1 = var_textArea.getValue('new_line_foo'); // TESTING == 'new_line_foo'
+                                                    if (typeof codeValue1 !== 'undefined' && codeValue1.length > 3 ) 
+
+                                                    $.ajax({
+                                                            url:codeMirror_toPy,
+                                                            type: "POST",
+                                                            dataType: 'json', 
+                                                            data: {
+                                                                codeValue_toPy: codeValue1,
+                                                                csrfmiddlewaretoken: csrftoken_for_codeMirror
+                                                                },
+                                                            });
+                                                }); // ENDS -- .on("click",function()
+                                }, // Close - success:
+                             })    // Close - "ajax":
+                        }); // Close - // $(document).ready(function(){
+    </script>
+
+    <script>
+    // Clear editor's code
+    var clr_button_clicked = document.getElementById('clear_editor');
+    clr_button_clicked.onclick = function() {
+
+    var_textArea.setValue("");
+    var_textArea.focus();
+    };
+    </script>
+
+</body>
+</html>

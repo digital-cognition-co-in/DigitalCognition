@@ -1,0 +1,146 @@
+{% csrf_token %}
+{% load static %}
+ 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css"/>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<!-- <script type="text/javascript" src="{% static "js/csrf.js" %}"></script> -->
+
+<script type="text/javascript">
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
+
+
+
+<table id="example" class="display" cellspacing="0" width="100%">
+    
+</table>
+
+<script>
+
+    var myUrl = "{% url 'call_json_for_dt' %}"
+    var dataSet;
+    //var col_names;
+    var my_columns = []; // in this we PUSH a DICT {} named - my_item
+    //var my_cols_n_items = []; // in this we PUSH a DICT {} named - my_item
+    var data_cols_frm_py;
+    //var myresult;
+    //var myDataVar;
+    //var data_json_frm_py;
+
+$(document).ready(function(){
+    var myresult =  $.getJSON(myUrl, function(result){
+                    // return result;
+                    });
+        console.log(myresult);
+        // var response = $.parseJSON(myresult);
+        // console.log(Object.keys(response));
+        //console.log(Object.keys(myresult));
+        
+    $.ajax({
+            url: myUrl,
+            type: 'GET',
+            // data: '',
+            dataType: 'json', 
+            success: function(dict_json_from_py) {
+                //console.log(typeof data[0]);
+                // console.log(dict_json_from_py); // ok
+                // //var data_json_frm_py = [dict_json_from_py.data_json] // NOT OK 
+                // // Below OK but HardCoded 
+                // var data_json_frm_py =  [dict_json_from_py.data_json[0],dict_json_from_py.data_json[1],dict_json_from_py.data_json[2]];
+                // console.log("-----data_json_frm_py BELOW -------------AAA---------------")
+                // console.log(data_json_frm_py); // ok 
+
+                // var data_cols_frm_py = [dict_json_from_py.data_cols[0],dict_json_from_py.data_cols[1],dict_json_from_py.data_cols[2],dict_json_from_py.data_cols[3],dict_json_from_py.data_cols[4]]
+                // console.log("-----data_cols_frm_py BELOW ----------AAA---------------")
+                // console.log(data_cols_frm_py) // OK -- All Cols 
+
+
+            // THIS IS PERFECT for getting COL NAMES ---------------------------
+            
+            var dataSet = dict_json_from_py.data_json[0]
+            //var str_data = "data";
+            //var my_item = $.each(dict_json_from_py.data_cols, function( key, value ) {
+            $.each(dataSet, function( key, value ) {
+                                    var my_item = {};
+                                    my_item.data = key; 
+                                    my_item.title = key;
+                                    my_columns.push(my_item);
+                                    return my_columns
+                            });
+
+            console.log("--- my_columns ---- BELOW -------------AAA---------------")
+            //console.log(my_item); // OK - Colnames stored in this LIST of DICTS - Keys == data , 
+            console.log(my_columns);
+            
+            // testing for format of --- my_item
+
+            //my_cols_n_items = [{"Col_A","Col_B","Col_C"}]
+
+
+
+            //assignToEventsColumns(data_json_frm_py,my_columns,dict_json_from_py);
+            assignToEventsColumns(my_columns,dict_json_from_py);
+                // console.log(data);
+            }, // Close - success:
+            error:function (xhr, ajaxOptions, thrownError) {
+                dir(thrownError);
+                dir(xhr);
+                dir(ajaxOptions);
+            }, // Close - error:
+        })    // Close - "ajax":
+
+
+    function assignToEventsColumns(my_columns,dict_json_from_py) {
+            var table = $('#example').DataTable({
+                "bAutoWidth" : false,
+                "serverSide": false, // FALSE - gets data from within DOM == clientSide
+                "aaData": dict_json_from_py.data_json,
+                //"aaCols": data_cols_frm_py,//dict_json_from_py
+                //"aaCols": ,//dict_json_from_py.data_json
+
+                "columns" : my_columns,
+
+                // "columns" : 
+                // [
+                // {"Cols":dict_json_from_py.data_cols[1]},    // Cols == OK 
+                // {"Data":data_cols_frm_py[2]}    // Data == Ok 
+                // ],
+
+
+                //"dataSrc": data[0],
+             // TBD MAIN       // https://stackoverflow.com/questions/39644079/how-to-display-the-column-headers-dynamically-in-jquery-data-table
+             
+                
+                // "columns" : 
+                // [ 
+                //     {"aaCols" : data_cols_frm_py[0]},
+                //     {"aaCols" : data_cols_frm_py[1]}, 
+                //     {"aaCols" : data_cols_frm_py[2]},
+                //     {"aaCols" : data_cols_frm_py[3]},
+                //     {"aaCols" : data_cols_frm_py[4]}, 
+                    
+                // ]
+
+
+            })
+        }
+
+    }); // Close - // $(document).ready(function(){
+    </script>
+
+
+<!-- 
+
+{"data": 
+[
+{"attributes": 
+{"purchasedate": "04/01/2017", 
+"medication": "meds", 
+"cost": 100.0, 
+"expirydate": "04/03/2017", 
+"quanti 
+
+
+-->

@@ -1,0 +1,183 @@
+<html>      
+{% include 'head_css.html' %}    
+{% include 'navbarTw1.html' %} 
+{% load crispy_forms_tags %}
+{% load micawber_tags %}
+{% block jumbotron %}
+    
+    
+        
+<style>
+    
+    .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ccccff;
+}
+
+    
+    
+body {
+    color: grey;
+}
+    
+
+h1 {
+    text-align: center;
+        color: black;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+    
+    
+table {
+    border-collapse: collapse;
+    width: 100%;        
+}
+
+table, th, td {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid grey;
+    padding: 15px;
+    height: 25px;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    text-align: justify;
+   
+}
+    
+tr:hover {background-color:#ffdb99}
+ 
+th {
+    background-color:#e59400; 
+    color: white;
+}
+    
+    
+</style>
+    
+<body>
+
+
+<!-- Top Pagination OK Dont Change-->    
+{% if is_paginated %}
+<ul class="pagination">
+{% if page_obj.has_previous %}
+<li>
+<span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+</li>
+{% endif %}
+<li class="">
+<span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+</li>
+{% if page_obj.has_next %}
+<li>
+<span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+</li>
+{% endif %}
+</ul>
+{% else %}
+<h3> This Twitter Handle Has Only These Many Tweets  </h3>
+<p> Come back later for more Tweets</p>
+{% endif %}
+    
+
+<div style="overflow-x:auto;">
+<ul>
+    <table id="data_table_1">   
+  <tr>
+  <th>Name</th>
+  <th>2nd Column</th>
+  <th>3rd Column</th>      
+  
+           
+      
+      
+</tr>
+        {% for entry in list_Tweets %}
+  
+        <tr>
+      <td>{{ entry.from_user_screen_name }}</td>
+      <td>{{ entry.text|oembed:"600x600" }}</td>
+      <td>{{ entry.created_at }}</td>                  
+    
+    
+    
+      
+      
+      
+    
+  </tr>
+  {% endfor %}
+</table>
+    
+   
+</ul>
+ 
+</div>
+    
+ {% if is_paginated %}
+<ul class="pagination">
+{% if page_obj.has_previous %}
+    <li>
+        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+    </li>
+{% endif %}
+    <li class="">
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+    </li>
+{% if page_obj.has_next %}
+    <li>
+        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+    </li>
+{% endif %}
+</ul>
+{% else %}
+    <h3> This  Data Table has only these many records... </h3>
+    <p> Come back later for more ...</p>
+{% endif %}
+
+
+</body>
+    
+    {% endblock %}
+</html>

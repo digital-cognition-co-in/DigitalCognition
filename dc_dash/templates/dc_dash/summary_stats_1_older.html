@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    
+{% load static %}
+{% include 'dc_dash/base.html' %}
+
+
+    
+    
+    
+
+        
+<style>
+
+.well {
+    background: rgb(22, 105, 173);
+}    
+
+.well.custom-well-small { 
+    width: 200px; 
+    height: 50px;
+    margin: 0 auto; 
+    /*background: grey;*/
+    /*background: rgb(255, 140, 0); */
+    }    
+    
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ccccff;
+}
+
+    
+    
+body {
+    color: black;
+}
+    
+
+h1 {
+    text-align: center;
+        color: black;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+    
+    
+table {
+    border-collapse: collapse;
+    width: 100%;        
+}
+
+table, th, td {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid grey;
+    padding: 15px;
+    height: 25px;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    text-align: justify;
+   
+}
+    
+tr:hover {background-color:#ffdb99}
+ 
+th {
+    background-color:#e59400; 
+    color: white;
+}
+    
+    
+</style>
+    
+    
+    
+    
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Digital Cognition</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- DHANKAR define paths to local STATIC -->
+    <!-- DHANKAR - All original Comments from Original Boot template have been retained -->
+
+    <link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet">      
+
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">      
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'dist/css/dashboard.css' %}" rel="stylesheet">    
+    
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Robotic Process Automation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" style='color: #fff'>Robotic Process Automation</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" style='color: #fff'>Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#"> Level [#1] Reporting <span class="sr-only">(current)</span></a></li>
+            
+            <li><a href="# Demo App Nothing here yet ...URL">Dashboard</a></li>
+            <li><a href="# Demo App Nothing here yet ...URL">Chart</a></li>
+            
+          </ul>
+            
+          <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">TABLE [#1] Upload Excel <span class="sr-only">(current)</span></a></li>
+
+                    <li><a href="# Demo App Nothing here yet ...URL"></a></li>  
+                    <li><a href="{% url 'chart_1' %}">Create Charts</a></li>   
+                    <li><a href="# Demo App Nothing here yet ...URL"></a></li>    
+                    <li><a href="{% url 'data_del_4' %}">Delete Table</a></li>     
+                    <li><a href="# Demo App Nothing here yet ...URL"></a></li>    
+
+          </ul>
+            
+            
+          <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">TABLE [#2] Upload Excel <span class="sr-only">(current)</span></a></li>
+
+                    <li><a href="# Demo App Nothing here yet ...URL"></a></li>  
+                    <li><a href="# Demo App Nothing here yet ...URL">Create Charts</a></li>    
+                    <li><a href="# Demo App Nothing here yet ...URL"></a></li>    
+                    <li><a href="# Demo App Nothing here yet ...URL">Delete Table</a></li>    
+                    <li><a href="# Demo App Nothing here yet ...URL"></a></li>    
+
+          </ul>
+            
+            
+            
+            
+            
+        </div>
+          
+          
+          
+              
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header"style='color:orange'>Summary Statistics - {{sheet_1_mod4}}</h1>
+            <br>
+            <br>
+<a class="btn btn-success" href="{% url 'index_1' %}" role="button" >MAIN PAGE</a>    
+<br>       
+
+<h1 style='color:orange'> Mean , Median and Mode :- {{col_1_mod4}} </h1>           
+<h4 class="sub-header" style="color:orange; postion: absolute; margin-left: 250px;">{{col_3_mod4}} <div class="well well-sm custom-well-small">{{sum_1}}</div></h4>
+   
+<h4 class="sub-header" style="color:orange; postion: absolute; margin-left: 250px;">{{col_4_mod4}} <div class="well well-sm custom-well-small">{{sum_2}}</div></h4>
+       
+<h4 class="sub-header" style="color:orange; postion: absolute; margin-left: 250px;">{{col_6_mod4}} <div class="well well-sm custom-well-small">{{sum_3}}</div></h4>
+            
+           
+            
+    
+<!-- HTML Table Starts
+    ================================================== -->
+            
+            
+
+          <h2 class="sub-header" style='color:orange'>{{sheet_1_mod4}} </h2>
+            
+                    
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th >VARIABLE NAME</th>
+                  <th >_TOTAL_</th>
+                    <th>_MEAN_</th>
+                    <th>_MEDIAN_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    <th>_TBD_</th>
+                    
+                    
+                </tr>
+              </thead>
+                
+                
+                    
+                
+                
+             <tbody>
+             <tr>
+                  <td>{{col_1_mod4}}</td>
+                  <td>{{sum_obj_0}}</td>
+                  <td>{{mean_obj_0}}</td>
+                    <td>{{sum_obj_0}}</td>
+                    <td>{{sum_obj_0}}</td>
+             </tr>   
+             <tr>   
+                  <td>{{col_2_mod4}}</td>
+                  <td>{{sum_obj_1}}</td>
+                  <td>{{mean_obj_1}}</td>
+                  <td>{{sum_2}}</td>
+                  <td>{{sum_2}}</td>
+             </tr>   
+                 
+             <tr>       
+                  <td>{{col_3_mod4}}</td>
+                  <td>{{sum_obj_2}}</td>
+                  <td>{{mean_obj_2}}</td>
+                  <td>{{sum_3}}</td>
+                  <td>{{sum_3}}</td>
+             </tr>       
+             
+                 
+                 <tr>       
+                  <td>{{col_4_mod4}}</td>
+                  <td>{{sum_obj_3}}</td>
+                  <td>{{mean_obj_3}}</td>
+                  <td>{{sum_obj}}</td>
+                  <td>{{sum_6}}</td>
+             </tr>       
+             
+                 
+                 <tr>       
+                  <td>{{col_5_mod4}}</td>
+                  <td>{{sum_obj_4}}</td>
+                  <td>{{mean_obj_4}}</td>
+                  <td>{{sum_3}}</td>
+                  <td>{{sum_3}}</td>
+             </tr>       
+             
+                 <tr>       
+                  <td>{{col_6_mod4}}</td>
+                  <td>{{sum_obj_5}}</td>
+                  <td>{{mean_obj_5}}</td>
+                  <td>{{sum_3}}</td>
+                  <td>{{sum_3}}</td>
+             </tr>
+                                  
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+      
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+      
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+      
+      
+      <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+      
+      
+      
+    <script src="/dist/js/bootstrap.min.js"></script>
+    <link href="{% static 'assets/js/vendor/jquery.min.js' %}" rel="stylesheet">     
+      
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

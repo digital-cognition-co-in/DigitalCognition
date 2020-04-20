@@ -1,0 +1,35 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | ADMIN DIGITAL COGNITION {% endblock %}
+
+{% block extrastyle %}
+<style>
+#header{
+    background-color: black
+}
+
+.module caption, .inline-group h2 {
+    font-size: 18px;
+    background-color: black;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.test_class{
+    font-size: 80px;
+}
+
+
+
+</style>
+{% endblock %}
+
+{% block branding %}
+<div class = 'test_class'> 
+<h1 id="site-name">  <b>  <a href="{% url 'admin:index' %}"> DIGITAL COGNITION ADMIN </a> </b></h1>
+</div>
+{% endblock %}
+
+
+
+{% block nav-global %}{% endblock %}

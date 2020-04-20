@@ -1,0 +1,78 @@
+Age,Attrition,BusinessTravel,DailyRate,Department,DistanceFromHome,email
+41,Yes,Travel_Rarely,Travel_Rarely,Sales,1,dhankar.rohit@gmail.com
+49,No,Travel_Frequently,Travel_Rarely,Research & Development,8,dhankar.rohit@gmail.com
+37,Yes,Travel_Rarely,Travel_Rarely,Research & Development,2,dhankar.AAAAA@somaDomain.com
+33,No,Travel_Frequently,Travel_Rarely,Research & Development,3,dhankar.rohit@gmail.com
+27,No,Travel_Rarely,Travel_Rarely,Research & Development,2,dhankar.rohit@gmail.com
+32,No,Travel_Frequently,Travel_Rarely,Research & Development,2,dhankar.rohit@gmail.com
+59,No,Travel_Rarely,Travel_Rarely,Research & Development,3,dhankar.rohit@gmail.com
+30,No,Travel_Rarely,Travel_Rarely,Research & Development,24,dhankar.rohit@gmail.com
+38,No,Travel_Frequently,Travel_Rarely,Research & Development,23,dhankar.rohit@gmail.com
+36,No,Travel_Rarely,Travel_Rarely,Research & Development,27,dhankar.rohit@gmail.com
+35,No,Travel_Rarely,Travel_Rarely,Research & Development,16,dhankar.AAAAA@somaDomain.com
+29,No,Travel_Rarely,Travel_Rarely,Research & Development,15,dhankar.rohit@gmail.com
+31,No,Travel_Rarely,Travel_Rarely,Research & Development,26,dhankar.rohit@gmail.com
+34,No,Travel_Rarely,Travel_Rarely,Research & Development,19,dhankar.rohit@gmail.com
+28,Yes,Travel_Rarely,Travel_Rarely,Research & Development,24,dhankar.rohit@gmail.com
+29,No,Travel_Rarely,Travel_Rarely,Research & Development,21,dhankar.rohit@gmail.com
+32,No,Travel_Rarely,Travel_Rarely,Research & Development,5,dhankar.rohit@gmail.com
+22,No,Non-Travel,Travel_Rarely,Research & Development,16,dhankar.rohit@gmail.com
+53,No,Travel_Rarely,Travel_Rarely,Sales,2,dhankar.AAAAA@somaDomain.com
+38,No,Travel_Rarely,Travel_Rarely,Research & Development,2,dhankar.rohit@gmail.com
+24,No,Non-Travel,Travel_Rarely,Research & Development,11,dhankar.rohit@gmail.com
+36,Yes,Travel_Rarely,Travel_Rarely,Sales,9,dhankar.rohit@gmail.com
+34,No,Travel_Rarely,Travel_Rarely,Research & Development,7,dhankar.rohit@gmail.com
+21,No,Travel_Rarely,Travel_Rarely,Research & Development,15,dhankar.rohit@gmail.com
+34,Yes,Travel_Rarely,Travel_Rarely,Research & Development,6,dhankar.AAAAA@somaDomain.com
+53,No,Travel_Rarely,Travel_Rarely,Research & Development,5,dhankar.rohit@gmail.com
+32,Yes,Travel_Frequently,Travel_Rarely,Research & Development,16,dhankar.rohit@gmail.com
+42,No,Travel_Rarely,Travel_Rarely,Sales,8,dhankar.rohit@gmail.com
+44,No,Travel_Rarely,Travel_Rarely,Research & Development,7,dhankar.rohit@gmail.com
+46,No,Travel_Rarely,Travel_Rarely,Sales,2,dhankar.rohit@gmail.com
+33,No,Travel_Rarely,Travel_Rarely,Research & Development,2,dhankar.rohit@gmail.com
+44,No,Travel_Rarely,Travel_Rarely,Research & Development,10,dhankar.rohit@gmail.com
+30,No,Travel_Rarely,Travel_Rarely,Research & Development,9,dhankar.rohit@gmail.com
+39,Yes,Travel_Rarely,Travel_Rarely,Sales,5,dhankar.AAAAA@somaDomain.com
+24,Yes,Travel_Rarely,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+43,No,Travel_Rarely,Travel_Rarely,Research & Development,2,dhankar.rohit@gmail.com
+50,Yes,Travel_Rarely,Travel_Rarely,Sales,3,dhankar.rohit@gmail.com
+35,No,Travel_Rarely,Travel_Rarely,Sales,2,dhankar.rohit@gmail.com
+36,No,Travel_Rarely,Travel_Rarely,Research & Development,5,dhankar.rohit@gmail.com
+33,No,Travel_Frequently,Travel_Rarely,Sales,1,dhankar.AAAAA@somaDomain.com
+35,No,Travel_Rarely,Travel_Rarely,Research & Development,4,dhankar.rohit@gmail.com
+27,No,Travel_Rarely,Travel_Rarely,Research & Development,2,dhankar.rohit@gmail.com
+26,Yes,Travel_Rarely,Travel_Rarely,Research & Development,25,dhankar.rohit@gmail.com
+27,No,Travel_Frequently,Travel_Rarely,Sales,8,dhankar.rohit@gmail.com
+30,No,Travel_Frequently,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+41,Yes,Travel_Rarely,Travel_Rarely,Research & Development,12,dhankar.rohit@gmail.com
+34,No,Non-Travel,Travel_Rarely,Sales,23,dhankar.rohit@gmail.com
+37,No,Travel_Rarely,Travel_Rarely,Research & Development,19,dhankar.rohit@gmail.com
+46,No,Travel_Frequently,Travel_Rarely,Sales,5,dhankar.rohit@gmail.com
+35,No,Travel_Rarely,Travel_Rarely,Research & Development,8,dhankar.rohit@gmail.com
+48,Yes,Travel_Rarely,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+28,Yes,Travel_Rarely,Travel_Rarely,Research & Development,5,dhankar.rohit@gmail.com
+44,No,Travel_Rarely,Travel_Rarely,Sales,1,dhankar.rohit@gmail.com
+35,No,Non-Travel,Travel_Rarely,Research & Development,11,dhankar.rohit@gmail.com
+26,No,Travel_Rarely,Travel_Rarely,Sales,23,dhankar.rohit@gmail.com
+33,No,Travel_Frequently,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+35,No,Travel_Frequently,Travel_Rarely,Sales,18,dhankar.rohit@gmail.com
+35,No,Travel_Rarely,Travel_Rarely,Research & Development,23,dhankar.rohit@gmail.com
+31,No,Travel_Rarely,Travel_Rarely,Research & Development,7,dhankar.rohit@gmail.com
+37,No,Travel_Rarely,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+32,No,Travel_Rarely,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+38,No,Travel_Frequently,Travel_Rarely,Research & Development,29,dhankar.rohit@gmail.com
+50,No,Travel_Rarely,Travel_Rarely,Research & Development,7,dhankar.rohit@gmail.com
+59,No,Travel_Rarely,Travel_Rarely,Sales,25,dhankar.rohit@gmail.com
+36,No,Travel_Rarely,Travel_Rarely,Research & Development,8,dhankar.rohit@gmail.com
+55,No,Travel_Rarely,Travel_Rarely,Research & Development,8,dhankar.rohit@gmail.com
+36,No,Travel_Frequently,Travel_Rarely,Research & Development,11,dhankar.rohit@gmail.com
+45,No,Travel_Rarely,Travel_Rarely,Research & Development,7,dhankar.rohit@gmail.com
+35,No,Travel_Frequently,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+36,Yes,Travel_Rarely,Travel_Rarely,Research & Development,9,dhankar.rohit@gmail.com
+59,No,Travel_Frequently,Travel_Rarely,Sales,1,dhankar.rohit@gmail.com
+29,No,Travel_Rarely,Travel_Rarely,Research & Development,2,dhankar.rohit@gmail.com
+31,No,Travel_Rarely,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+32,No,Travel_Rarely,Travel_Rarely,Research & Development,1,dhankar.rohit@gmail.com
+36,No,Travel_Rarely,Travel_Rarely,Research & Development,6,dhankar.rohit@gmail.com
+31,No,Travel_Rarely,Travel_Rarely,Research & Development,8,dhankar.rohit@gmail.com
+35,No,Travel_Rarely,Travel_Rarely,Sales,1,dhankar.rohit@gmail.com

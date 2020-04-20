@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends "dc_dash/dhankar_fixedSideBar_base.html" %}    
+{% load static %}
+{% include 'dc_dash/base.html' %}
+{% load micawber_tags %} 
+
+{% block title %} Digital Cognition {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- DHANKAR == REPLACED the Original dataTable CSS inserts from here with BELOW  -->
+  <link href="/static/css/dhank_dataTable.css" rel="stylesheet">
+  <!-- DHANKAR == REPLACED the Original dataTable CSS inserts from here with ABOVE  -->
+
+  <!-- jQuery custom content scroller -->
+  <!-- SOURCE == https://github.com/malihu?tab=repositories -->
+  <!-- http://manos.malihu.gr/jquery-custom-content-scroller/ -->
+  <link href="/static/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+{% endblock stylesheets %}
+
+{% block sidebar_class %}
+nav-md menu_fixed
+{% endblock sidebar_class %}
+
+<style>
+/*Dhankar --- */
+
+
+.popover-title {
+    background-color: rgb(143, 197, 150) !important;
+    margin: 0 5px;
+    font-weight: bold;
+    /*color: #505458 !important;*/
+    color:rgb(9, 4, 75) !important;
+    text-align: left;
+    padding: 2px 5px;
+    font-weight: 300;
+    border-bottom: 1px solid #f7f7f7;
+} 
+
+/* Dhankar --- Popover Body */
+.popover-content {
+    background-color:rgb(12, 189, 36) !important;
+    color: rgb(9, 4, 75) !important;
+    padding: 25px;
+}
+    
+body {
+    color: grey;
+}
+
+h1 {
+    text-align: center;
+        color: black;
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: right;
+}
+
+    
+/* table {
+    border-collapse: collapse;
+    width: 100%;        
+}
+
+table, th, td {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid grey;
+    padding: 15px;
+    height: 25px;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    text-align: justify;
+    font-size:13px !important;
+}
+tr:hover {background-color:#ffdb99}
+
+.dataTables_length {
+    background-color: red;
+}
+.dataTables_filter {
+    background-color: blue;
+}
+.dataTables_info {
+    background-color: yellow;
+}
+.dataTables_paginate {
+    background-color: green;
+} */
+
+</style>
+
+
+
+      
+<head>  
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133322875-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-133322875-1');
+</script>
+
+
+
+<link href="{% static 'dist/css/bootstrap.min.css' %}" rel="stylesheet"> 
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="{% static 'css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">      
+<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<!-- DHANKAR NOT USING Custom styles for this template -->
+<!-- <link href="{% static 'dist/css/dashboard.css' %}" rel="stylesheet">     -->
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<!-- PopOver CSS and JS DHANKAR Starts-->       
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- PopOver CSS and JS DHANKAR Ends-->       
+</head>
+
+
+
+
+{% block content %}
+<div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <!-- <div class="title_left"> -->
+
+
+            <h3> DB Tables View <small> listing Tables available to user  <code> trigger EDA actions or DROP / DELETE SQL Tables </code> </small></h3>
+            
+
+            
+          </div>
+
+            <!-- <div class="title_right"> -->
+                    <!-- <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search ..">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">Search</button>
+                        </span>
+                      </div>
+                    </div> -->
+                  <!-- </div> -->
+                
+          
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+
+              {% if messages %}              
+                      <!-- Trigger/Open The Modal -->
+                      <!-- <button id="myBtn"> Data Summary</button> -->
+                      <button type="button" id="modal_messages" class="btn btn-primary">Data Summa </button>
+                      <!-- https://www.w3schools.com/bootstrap/bootstrap_buttons.asp -->
+                      <!-- The Modal -->
+                      <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                          <span class="close">&times;</span>
+
+                          <!--  Modal Text STARTS -->
+                                    <ul class="messages">
+                                      {% for message in messages %}
+                                      <li>{{ message }}</li>
+                                      {% endfor %}
+                                  </ul>
+                          <!--  Modal Text ENDS -->
+
+                        </div>
+                      </div>
+
+              {% endif %}
+
+              <script>
+                        // Get the modal
+                        var modal = document.getElementById('myModal');
+                        // Get the button that opens the modal
+                        var btn = document.getElementById("modal_messages");
+                        // Get the <span> element that closes the modal
+                        var span = document.getElementsByClassName("close")[0];
+                        // When the user clicks the button, open the modal 
+                        btn.onclick = function() {
+                          modal.style.display = "block";
+                        }
+                        // When the user clicks on <span> (x), close the modal
+                        span.onclick = function() {
+                          modal.style.display = "none";
+                        }
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function(event) {
+                          if (event.target == modal) {
+                            modal.style.display = "none";
+                          }
+                        }
+                </script> <!--  Modal SCRIPT ENDS -->
+
+
+
+
+
+              
+              
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            <p class="text-muted font-13 m-b-30">
+
+            <!-- DHANKAR - we can have ParaGraph content here  -->
+
+            </p>
+
+
+
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css"/>
+
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+            
+<script type="text/javascript">
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
+
+
+
+<table id="eda_dataSets_listView" class="display" cellspacing="0" width="100%">
+</table>
+
+<script>
+        var myUrl = "{% url 'call_eda_initList_display' %}"
+        var dataSet;
+        var my_columns = []; // An EMPTY ARRAY 
+
+        $(document).ready(function(){
+            $.ajax({
+                    url: myUrl,
+                    type: 'GET',      // Other Option - POST 
+                    dataType: 'json', 
+                    success: function(dict_json_from_py) {
+                      //console.log("=======BELOW ____dict_json_from_py.temp_dataset_name______")
+                      //console.log(dict_json_from_py.temp_dataset_name)
+                      var new_df_from_eda = dict_json_from_py.temp_dataset_name;
+                      //console.log("=======BELOW ____dict_json_from_py.new_col_name______")
+                      //console.log(dict_json_from_py.new_col_name)
+                      var new_column_name = dict_json_from_py.new_col_name;
+                      //dict_json['temp_dataset_name'] = str(temp_dataset_name) ## _##_
+                      //dict_json['new_col_name'] = str(new_col_name) ## _##_JIRA_ROHIT_PendingTask
+                        var dataSet = dict_json_from_py.data_json.columns;
+
+                        //console.log(dataSet)
+                        //document.getElementById("eda_text1").style.color = "blue";
+                        //document.getElementById("eda_text1").innerHTML = " As result of EDA Action - Search and Replace , a New Column =" + new_column_name + " , has been inserted into Dataset = " + new_df_from_eda + " , thanks. " 
+
+                        //chosenVoice = window.speechSynthesis.getVoices()[3];
+
+
+                        
+
+
+                        //var eda_message_tts = new SpeechSynthesisUtterance("As a result of Action Search and Replace , a New column " + new_column_name + " , has been inserted into Data Set  " + new_df_from_eda + " , see SUMMARY STATISTICS for more. ");
+                        //eda_message_tts.rate = 1.5; // behaves differently on Firefox MALE VOICE and Chrome FEMALE VOICE. 
+                        //eda_message_tts.rate = 0.90; // behaves differently on Firefox and Chrome. 
+                        // eda_message_tts.voice = chosenVoice;
+                        // window.speechSynthesis.speak(eda_message_tts);
+
+                        $.each(dataSet, function( key, value ) {
+                                                var my_item = {};
+                                                my_item.data = key; 
+                                                my_item.title = value;
+                                                my_columns.push(my_item); // We PUSH the DICT Into the EMPTY ARRAY 
+                                                return my_columns
+                                        });
+
+                        assignToEventsColumns(my_columns,dict_json_from_py);
+                    }, // Close - success:
+
+                })    // Close - "ajax":
+
+
+            // Edit record
+            // $('#example').on('click', 'a.editor_edit', function (e) {
+            //     e.preventDefault();
+        
+            //     editor.edit( $(this).closest('tr'), {
+            //         title: 'Edit record',
+            //         buttons: 'Update'
+            //     } );
+            // } );
+
+            function assignToEventsColumns(my_columns,dict_json_from_py) {
+                    var table = $('#eda_dataSets_listView').DataTable({
+                        "bAutoWidth" : false, //bAutoWidth -- b == BOOLEAN
+                        "serverSide": false, // FALSE - As of NOW gets data from within DOM == clientSide
+                        "aaData": dict_json_from_py.data_json.data, 
+                        "columns" : my_columns,
+
+                })// Closes -- .DataTable
+                //} // CLOSED BELOW 
+            //}); // Close - // $(document).ready(function(){ // CLOSED BELOW 
+
+var array_of_clicks = [];
+var cell_data_url1 = "{% url 'cell_getJSVal1' %}" //
+var csrftoken_merge = jQuery("[name=csrfmiddlewaretoken]").val();
+      
+    
+
+$('#eda_dataSets_listView tbody').on( 'click', 'td', function () {
+  var col = $(this).parent().children().index($(this));
+  var row = $(this).parent().parent().children().index($(this).parent());
+  var cell_data=$("#eda_dataSets_listView tbody").find('tr:eq('+ row + ')').find('td:eq(' + col + ')');
+  //alert(cell_data.text());
+  var cell_data_text = cell_data.text()
+  alert(cell_data_text);
+  //array_of_clicks.push(cell_data_text); // TBD -- FOO
+  alert(array_of_clicks);
+  alert(array_of_clicks.length);
+
+  if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length ==2) {
+                    //alert("Got == 2 ")
+                    $.ajax({
+                          url:cell_data_url1,
+                          type: "POST",
+                          dataType: 'json', 
+                          //data: JSON.stringify({
+                            data: {
+                                array_of_clicks: array_of_clicks,
+                                csrfmiddlewaretoken: csrftoken_merge,
+                                },
+                            });
+                  }
+
+                  if (typeof array_of_clicks !== 'undefined' && array_of_clicks.length > 2) {
+                      var var_modal_alerts = document.getElementById('modal_alerts');
+                      var_modal_alerts.style.display = "block"; 
+                      //document.getElementById("dynamic_alert_header").innerHTML = "Heads Up !" 
+                      //document.getElementById("dynamic_alert_text").innerHTML = "TWO Tables Already Selected for MERGE. " 
+                      // 
+                      //document.getElementById("dynamic_alert_text").innerHTML = " As result of EDA Action - Search and Replace , a New Column =" + new_column_name + " , has been inserted into Dataset = " + new_df_from_eda + " , thanks. " 
+                      var delay_modalAlertDisplay = 8000;
+                      setTimeout(function() {
+                      var_modal_alerts.style.display = "none"; 
+                      }, delay_modalAlertDisplay);
+
+                  } // Close == if(typeof ....
+              }); // CLOSE-- Click on CELL FUNCTION == $('#dataTable_psqlTables_merge tbody').on( 'click', 'td', function
+              } // CLOSE == function assignToEventsColumns === FOO_without this Curly Brace here the Click_Event_Fails == Got this from Above
+          }); // CLOSE ==  $(document).ready(function(){
+</script>
+
+
+
+
+</div>
+</div>
+</div>
+
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}
+
+
+
+{% block javascripts %}
+{{ block.super }}
+
+
+
+
+              
+              
+
+           
+
+  
+  <!-- jQuery custom content scroller -->
+  <script src="/static/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+  <!-- Datatables == static_in_pro/our_static/vendors/datatables.net-buttons -->
+  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="/static/vendors/jszip/dist/jszip.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script>
+{% endblock javascripts %}
+
+               
+
+
+
+
+
+
+

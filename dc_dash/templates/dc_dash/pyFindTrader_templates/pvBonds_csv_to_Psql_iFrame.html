@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}    
+{% include 'dc_dash/includes/dc_customCSS.html' %}
+
+
+<head>
+    <!-- JIRA_ROHIT_PendingTask_removed_jquery_4 from here for testing  -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+</head>
+
+<style>
+
+/* below code from So here - it creates a Red Border around all elements within this here iFrame page */
+/* * {  border: 1px solid #f00 !important; } */
+/* * { outline: 1px #f00 solid; } */
+
+
+/* CSS in dc_customCSS.html == .modal_DropDownMenu_header ..etc etc ... */
+body {
+  background-color: rgb(84, 177, 231);
+  font-family: 'Roboto';font-size: 12px;
+      }
+
+::-webkit-scrollbar {
+width: 5px;
+height: 5px; 
+/* outline: 3px  rgb(3, 243, 151) solid; */
+display: block;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(15, 209, 135);
+}
+
+::-webkit-scrollbar-thumb {
+  background:rgb(1, 89, 139) 
+}
+
+
+/* display: none;  */
+</style>
+
+<body>
+
+<!-- pvBonds_dataSet_Upload_inputs_STARTS -->
+
+    <!-- <div id ="id_checkbox_pvBondsDFUpload" class="custom-control custom-checkbox mb-3">  
+        <input type="checkbox" class="custom-control-input" id="id_pvBondsDFUpload" name="id_pvBondsDFUpload">
+        <label id="id_label_pvBondsDFUpload" class="custom-control-label" for="id_pvBondsDFUpload">Bond DataTables</label>
+    </div> -->
+
+    <p> Upload "Bonds" to SQL</p>
+                
+                    <div class="pvBonds_CSV_Upload">
+                        
+                            <form action=/dc/pvBonds_csvToPsql/ method="post" enctype="multipart/form-data">
+                                <!-- JIRA_ROHIT_PendingTask == changed this above to pvBonds_csvToPsql CSV_to_PSQL - but why why not use same CSV_to_PSQL FUNC  -->
+                                {% csrf_token %}
+
+                                 <p>
+                                     <!-- JIRA_ROHIT_PendingTask - had the TEXT areas here like the CODEMIRROR text areas, they didnt take VALUE being INPUT 
+                                     Checkmaybe COdeMirror is also KAPUT 
+                                      -->
+
+                                    <label for="id_pvbondscsv_file_name">CSV File Name:</label>
+                                    <input type="text" name="pvBonds_csv_file_name" maxlength="800" id="id_pvbondscsv_file_name">
+                                    <br>
+                                    <label for="id_pvbondscsv_dataset_name">DataSet Name:</label>
+                                    <input type="text" name="pvBonds_dataset_name" maxlength="800" id="id_pvbondscsv_dataset_name">
+                                  </p>
+                                  
+                              <p>
+                                <input type="file" name="pvBonds_csv_file" maxlength="800" id="id_pvBondscsv_file">
+                              </p>
+                              
+                              <button id="id_pvBondsCSV_submitButton" type="submit">Upload</button>
+                            </form>  <!-- /.form --> 
+
+                            
+                    </div>    
+                    <!-- ENDS class="pvBonds_CSV_Upload" -->
+                    <br>
+
+
+                    <button id="id_pvBondsCSV_cancelButton" type="submit">Cancel Upload</button>
+
+
+                    <script>
+                    var id_pvBondsCSV_cancelButton = document.getElementById('id_pvBondsCSV_cancelButton');
+                    var url_pvBondsCSV_Submit = "{% url 'for_eda_dataset_name_listView' %}" //
+
+                            id_pvBondsCSV_cancelButton.onclick = function() {
+                                alert("User Cancelled the Upload")
+                                //document.location.reload(true) // This RELOADs the 
+                                window.parent.location.reload(true) // OK - Reloads Main Window with Fresh data from SERVER. 
+                                //window.parent.location.reload(false) // OK - Reloads Main Window with NO-Fresh data from SERVER. But data from CACHE
+                                //window.parent.location = for_eda_dataset_name_listView;
+                                //$('#conditionalPart_pvBonds').hide(); 
+                                // Wont Work -- Seems inside iFrame we dont get Communication from parent HTML Page ??
+                            };
+                    </script>
+
+                    <script>
+                        //call_pvbonds_initLandingListView ##
+                        var url_pvBondsCSV_Submit = "{% url 'call_pvbonds_initLandingListView' %}" //
+                        var id_pvBondsCSV_submitButton = document.getElementById('id_pvBondsCSV_submitButton');
+                        
+
+                        id_pvBondsCSV_submitButton.onclick = function() {
+                        window.parent.location = url_pvBondsCSV_Submit;
+                        };
+                    </script>
+    
+           
+</body>
+</html>

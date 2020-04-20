@@ -1,0 +1,145 @@
+{% csrf_token %}
+{% load static %}
+ 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css"/>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<!-- <script type="text/javascript" src="{% static "js/csrf.js" %}"></script> -->
+
+<script type="text/javascript">
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+</script>
+
+
+
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+
+        <th>Col_1</th>
+        <th>Col_2</th>
+        <th>Col_3</th>
+        <th>Col_4</th>
+        <th>Col_5</th>
+        
+        
+        </tr>
+    </thead>
+
+    
+</table>
+
+
+<!--  https://stackoverflow.com/questions/23681221/how-retrieve-responsejson-property-of-a-jquery-ajax-object -->
+
+
+
+<script>
+
+    var myUrl = "{% url 'call_json_for_dt' %}"
+    var col_names;
+
+$(document).ready(function(){
+    var myresult;
+    var myDataVar;
+    var data_json_frm_py;
+
+    var myresult =  $.getJSON(myUrl, function(result){
+                    // return result;
+                    });
+
+        //console.log("TEST_1");
+        console.log(myresult);
+        //console.log("TEST_2");
+
+        // var response = $.parseJSON(myresult);
+        // console.log(Object.keys(response));
+
+        //console.log("TEST_XXX=================");
+
+        //console.log(Object.keys(myresult));
+        //console.log("TEST_3");
+        // console.log(myvalue);
+
+    $.ajax({
+            url: myUrl,
+            type: 'GET',
+            // data: '',
+            dataType: 'json', 
+            success: function(dict_json_from_py) {
+                //console.log(typeof data[0]);
+                console.log(dict_json_from_py); // ok
+                var data_json_frm_py = [dict_json_from_py.data_json]
+                //var data_json_frm_py =  [dict_json_from_py.data_json[0],dict_json_from_py.data_json[1],dict_json_from_py.data_json[2]];
+                console.log("-----data_json_frm_py BELOW -------------AAA---------------")
+                console.log(data_json_frm_py); // ok 
+                
+                //console.log(data); // ok 
+                //console.log(data[0],data[1]); // ok 
+                //var myDataVar = (data[0],data[1]); /// Weird Gives --- B , L , R for BLR --- in each Column ?? 
+                //var myDataVar = [data[0],data[1],data[2]]; // ROW n COL Values are getting SWAPPED ...
+                //console.log("myDataVar BELOW -------------AAA---------------")
+                //console.log(myDataVar)
+
+                //console.log(Object.keys(data));
+                //var col_names = Object.keys(data);
+                //console.log(typeof col_names);
+                
+
+            assignToEventsColumns(data_json_frm_py,col_names);
+                // console.log(data);
+            }, // Close - success:
+            error:function (xhr, ajaxOptions, thrownError) {
+                dir(thrownError);
+                dir(xhr);
+                dir(ajaxOptions);
+            }, // Close - error:
+        })    // Close - "ajax":
+
+    function assignToEventsColumns(data_json_frm_py,col_names) {
+        //var col_names1 = Object.keys(col_names);
+        //console.log("TEST_XXX==============AAAAAAAAAAAAAAAA===");
+        //console.log(col_names1);
+        //console.log(typeof col_names1); // object
+
+            var table = $('#example').DataTable({
+                "bAutoWidth" : false,
+                "serverSide": false, // FALSE - gets data from within DOM == clientSide
+                "aaData": data_json_frm_py,
+                //"dataSrc": data[0],
+                //"aaData" : col_names1, // TBD -----------------===========================================
+                // https://stackoverflow.com/questions/39644079/how-to-display-the-column-headers-dynamically-in-jquery-data-table
+             // TBD MAIN    //https://stackoverflow.com/questions/42397717/converting-pandas-dataframe-to-custom-json-format-then-to-js-object
+
+                //"col_names" : col_names,
+                
+                // "columns" : [ {
+                //     "data" : ""
+                // }, {
+                //     "data" : ""
+                // }, {
+                //     "data" : ""
+                // } ]
+
+
+            })
+        }
+
+    }); // Close - // $(document).ready(function(){
+    </script>
+
+
+<!-- 
+
+{"data": 
+[
+{"attributes": 
+{"purchasedate": "04/01/2017", 
+"medication": "meds", 
+"cost": 100.0, 
+"expirydate": "04/03/2017", 
+"quanti 
+
+
+-->

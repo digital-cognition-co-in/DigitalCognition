@@ -1,0 +1,602 @@
+<!-- FOO_Dhankar ==- Not ok as == localStorage.getItem == used many times but none for JSON.stringified JSON Objects  -->
+
+
+
+@model IEnumerable<REMS.Data.Payment>
+    @{
+        ViewBag.Title = "Search";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    @section topright{
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-building-o"></i>
+                Report
+                <span>
+                    >
+                    Cheque clearance
+                </span>
+            </h1>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <!-- Button trigger modal -->
+        </div>
+    </div>
+    }
+    <div data-ng-app="BIApp" role="main">
+        <!-- RIBBON -->
+       
+        <!-- END RIBBON -->
+        <!-- MAIN CONTENT -->
+        <div id="content" data-ng-controller="ReportController">
+           
+            <div class="row">
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                    <h1 class="page-title txt-color-blueDark"><i class="fa fa-pencil-square-o fa-fw "></i>Search Payments Clearance </h1>
+                </div>
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                    <br />
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-8"><input id="reportmail" placeholder="Enter Email Address......" name="reportmail" class="form-control" type="text" /></div>
+                                <div class="col-md-4">
+                                    <a name="rptSendMail" data-ng-click="ReportSendMail()" id="rptSendMail" class="btn btn-primary" value="Print"><i class="fa fa-envelope"></i> Send Mail</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <a name="rptExport" id="rptExport" data-ng-click="ReportExport()" class="btn btn-info" value="Export"><i class="fa fa-download"></i> Export</a>
+                            <a name="rptPrint" id="rptPrint" data-ng-click="ReportPrint()" class="btn btn-warning" value="Print"><i class="fa fa-print"></i> Print</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- widget grid -->
+            <section id="widget-grid" data-ng-init="RefundInit()">
+                <input type="hidden" id="hidFlatID" name="hidFlatID" value="@ViewBag.ID" />
+                <!-- row -->
+                <div class="row">
+    
+                    <!-- NEW WIDGET START -->
+                    <article class="col-sm-12 col-md-12">
+                        @*@using (Html.BeginForm("Search", "Payment", null))
+                        {*@
+    
+                        <!-- Widget ID (each widget will need unique ID)-->
+                        <div class="jarviswidget" id="wid-id-2" data-widget-editbutton="false" data-widget-deletebutton="false">
+    
+                            <header>
+                                <h2>Search Payments Clearance</h2>
+                            </header>
+    
+                            <!-- widget div-->
+                            <div>
+    
+                                <!-- widget content -->
+                                <div class="widget-body fuelux">
+                                    <div class="step-content">
+                                        <div class="form-horizontal" id="fuelux-wizard">
+                                            <div class="form-content">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <b>Property:</b><br />
+                                                        <select name="TowerID" class="form-control" data-ng-change="TowerChange()" data-ng-model="Flat.TowerID" id="searchby" required>
+                                                            <option data-ng-repeat="pro in TowerList" value="{{ pro.TowerID }}">{{pro.TowerName }}</option>
+                                                            <option value="All" selected="selected">All</option>
+                                                            <option value="ReceiptNo">ReceiptNo</option>
+                                                            <option value="Customer Name">Customer Name</option>                                                       
+                                                            <option value="PaymentDate">Payment Date</option>
+                                                            <option value="This Month">This Month</option>
+                                                            <option value="Last 7 Days">Last 7 Days</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4" id="searchflatname">
+                                                        <b>Search By:</b><br />
+                                                        <select name="FlatID" class="form-control" data-ng-model="Flat.FlatID" id="FlatID" required>
+                                                            <option data-ng-repeat="fl in FlatList" value="{{ fl.FlatID }}">{{ fl.FlatNo }}</option>
+                                                        </select>
+    
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <br />
+                                                        <input type="submit" value="Search" data-ng-click="SearchPayment()" class="btn btn-primary" id="Srch1" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="datediv">
+                                                    <div class="col-md-4">
+                                                        <b>Date From:</b>
+                                                        <input type="date" name="datefrom" id="datefrom" class="form-control" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <b>Date To:</b>
+                                                        <input type="date" name="dateto" id="dateto" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="alldiv">
+                                                    <div class="col-md-8">
+                                                        <b>Enter Search Query</b><br />
+                                                        <input type="text" id="searchtext" name="searchtext" class="form-control" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <br />
+                                                    </div>
+                                                </div>
+                                               
+                                                <input type="hidden" name="hidsortby" id="hidsortby" />
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="table-responsive" id="rptTableContent">
+                                                            <table class="table table-bordered table-striped particular_tbl">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-ng-click="reverse=!reverse;orderSearchList('PaymentDateSt', reverse)" class="pointer">PaymentDate <i class="fa fa-sort-down"></i> </th>
+                                                                        <th data-ng-click="reverse=!reverse;orderSearchList('PaymentNo', reverse)" class="pointer">ReceiptNo <i class="fa fa-sort-down"></i> </th>
+                                                                        <th data-ng-click="reverse=!reverse;orderSearchList('FlatName', reverse)" class="pointer">Flat Name<i class="fa fa-sort-down"></i> </th>
+                                                                        <th data-ng-click="reverse=!reverse;orderSearchList('CustomerName', reverse)" class="pointer">CustomerName <i class="fa fa-sort-down"></i> </th>
+                                                                        <th data-ng-click="reverse=!reverse;orderSearchList('Amount', reverse)" class="pointer">Amount <i class="fa fa-sort-down"></i> </th>
+                                                                        <th data-ng-click="reverse=!reverse;orderSearchList('PaymentStatus', reverse)" class="pointer">Status <i class="fa fa-sort-down"></i> </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr data-ng-repeat="sr in SearchList">
+                                                                        <td>{{sr.PaymentDateSt}}</td>
+                                                                        <td>{{sr.PaymentNo}}</td>
+                                                                        <td>{{sr.FlatName}}</td>
+                                                                        <td>{{sr.CustomerName}}</td>
+                                                                        <td>{{sr.Amount}}</td>
+                                                                        <td>{{sr.PaymentStatus}}</td>
+                                                                    </tr>
+                                                                    <tr><td></td><td></td><td></td><td><b>Total</b></td><td><b>{{TotalSearchAmount}}</b></td><td></td></tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end widget content -->
+                            </div>
+                            <!-- end widget div -->
+                        </div>
+                        <!-- end widget -->
+                        @*}*@
+                    </article>
+                    <!-- WIDGET END -->
+                </div>
+                <!-- end row -->
+            </section>
+            <!-- end widget grid -->
+        </div>
+        <!-- END MAIN CONTENT -->
+       </div>
+    
+    @*<script type="text/javascript">
+            $(function () {
+                $(".datecal").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: '1970:2014'
+                });
+            });
+        </script>*@
+    
+    @section pagespecific {
+        <script src="~/AgController/Reportjs.js"></script>
+        <script type="text/javascript">
+    
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+    
+        </script>
+                          <script>
+                              $(document).ready(function () {
+                                  $("#datediv").hide();
+                                  $("#alldiv").hide();
+                                  $("#searchflatname").hide();
+                                  $scope.Flat.FlatID = 0;
+    
+                                  if (localStorage.getItem("searchby") != null) {
+                                      $("#searchby").val(localStorage.getItem("searchby"));
+                                      $("#sortby").val(localStorage.getItem("sortby"));
+                                      $("#datefrom").val(localStorage.getItem("datefrom"));
+                                      $("#dateto").val(localStorage.getItem("dateto"));
+                                      $("#searchtext").val(localStorage.getItem("stext"));
+    
+    
+                                      var v = $("#sortby").val();
+                                      var vv = $("#searchby").val();
+                                      var df = $("#datefrom").val();
+                                      var dt = $("#dateto").val();
+                                      var stext = $("#searchtext").val();
+                                      if (vv.toString() == "All" || vv.toString() == "This Month" || vv.toString() == "Last 7 Days") {
+                                          $("#alldiv").hide();
+                                          $("#datediv").hide(); $("#subtypediv").hide(); $("#searchflatname").hide();
+                                      }
+                                      else {
+                                          if (vv.toString() == "PaymentDate") {
+                                              $("#datediv").show();
+                                              $("#alldiv").hide(); $("#subtypediv").hide(); $("#searchflatname").hide();
+                                          }
+                                          else if (vv.toString() == "Customer Name" || vv.toString() == "ReceiptNo") {
+                                              $("#alldiv").show();
+                                              $("#datediv").hide();
+                                              $("#searchflatname").hide();
+                                          }
+                                          else {
+                                              $("#alldiv").hide();
+                                              $("#datediv").hide();
+                                              $("#subtypediv").hide(); $("#searchflatname").show();
+                                          }
+                                      }
+                                  }
+                              })
+                              $("#sortby").change(function () {
+                                  var v = $("#sortby").val();
+                                  var vv = $("#searchby").val();
+                                  var df = $("#datefrom").val();
+                                  var dt = $("#dateto").val();
+                                  var stext = $("#searchtext").val();
+                                  localStorage.setItem("searchby", vv);
+                                  localStorage.setItem("sortby", v);
+                                  localStorage.setItem("datefrom", df);
+                                  localStorage.setItem("dateto", dt);
+                                  localStorage.setItem("stext", stext);
+    
+                                  $("#hidsortby").val(v);
+                                  if (vv.toString() == "All" || vv.toString() == "This Month" || vv.toString() == "Last 7 Days") {
+                                      $("#alldiv").hide();
+                                      $("#datediv").hide(); $("#subtypediv").hide(); $("#searchflatname").hide();
+                                  }
+                                  else {
+                                      if (vv.toString() == "CancelDate" || vv.toString() == "PaymentDate") {
+                                          $("#datediv").show();
+                                          $("#alldiv").hide(); $("#subtypediv").hide(); $("#searchflatname").hide();
+                                      }
+                                      else if (vv.toString() == "Customer Name" || vv.toString() == "ReceiptNo") {
+    
+                                          $("#alldiv").show();
+                                          $("#datediv").hide();
+                                          $("#searchflatname").hide();
+                                      }
+                                      else {
+                                          $("#alldiv").hide();
+                                          $("#datediv").hide();
+                                          $("#subtypediv").hide();
+                                          $("#searchflatname").show();
+                                      }
+                                  }
+                              })
+    
+                              $("#searchby").change(function () {
+                                  var v = $("#sortby").val();
+                                  var vv = $("#searchby").val();
+                                  var df = $("#datefrom").val();
+                                  var dt = $("#dateto").val();
+                                  var stext = $("#searchtext").val();
+                                  localStorage.setItem("searchby", vv);
+                                  localStorage.setItem("sortby", v);
+                                  localStorage.setItem("datefrom", df);
+                                  localStorage.setItem("dateto", dt);
+                                  localStorage.setItem("stext", stext);
+    
+                                  $("#hidsortby").val(v);
+                                  if (vv.toString() == "All" || vv.toString() == "This Month" || vv.toString() == "Last 7 Days") {
+                                      $("#alldiv").hide();
+                                      $("#searchflatname").hide();
+                                      $("#datefrom").val("");
+                                      $("#dateto").val("");
+                                      $("#datediv").hide(); $("#subtypediv").hide();
+                                  }
+                                  else {
+                                      if (vv.toString() == "PaymentDate") {
+                                          $("#datediv").show();
+                                          $("#alldiv").hide(); $("#subtypediv").hide(); $("#searchflatname").hide();
+                                      }
+                                      else if (vv.toString() == "Customer Name" || vv.toString() == "ReceiptNo") {
+    
+                                          $("#alldiv").show();
+                                          $("#datediv").hide();
+                                          $("#searchflatname").hide();
+                                      }
+                                      else {
+                                          $("#alldiv").hide();
+                                          $("#datediv").hide();
+                                          $("#subtypediv").hide();
+                                          $("#searchflatname").show();
+                                      }
+                                  }
+                              })
+                              $("#datefrom").blur(function () {
+                                  var df = $("#datefrom").val();
+                                  localStorage.setItem("datefrom", df);
+                              })
+                              $("#dateto").blur(function () {
+                                  var df = $("#dateto").val();
+                                  localStorage.setItem("dateto", df);
+                              })
+                              $("#searchtext").blur(function () {
+                                  var df = $("#searchtext").val();
+                                  localStorage.setItem("stext", df);
+                              })
+                          </script>
+    @*<script>
+        $(document).ready(function () {
+            $("#datediv").hide();
+            $("#alldiv").hide();
+            if (localStorage.getItem("searchby") != null) {
+                $("#searchby").val(localStorage.getItem("searchby"));
+                $("#sortby").val(localStorage.getItem("sortby"));
+                $("#datefrom").val(localStorage.getItem("datefrom"));
+                $("#dateto").val(localStorage.getItem("dateto"));
+                $("#searchtext").val(localStorage.getItem("stext"));
+    
+                if (localStorage.getItem("sortby") == "All") {
+                    $("#datediv").hide();
+                    if (localStorage.getItem("searchby") == "All") {
+                        $("#alldiv").hide();
+                    }
+                    else {
+                        $("#alldiv").show();
+                    }
+                } else {
+                    $("#datediv").show();
+                    if (localStorage.getItem("searchby") == "All") {
+                        $("#alldiv").hide();
+                    }
+                    else {
+                        $("#alldiv").show();
+                    }
+                }
+            }
+        })
+        $("#sortby").change(function () {
+            var v = $("#sortby").val();
+            var vv = $("#searchby").val();
+            var df = $("#datefrom").val();
+            var dt = $("#dateto").val();
+            var stext = $("#searchtext").val();
+            localStorage.setItem("searchby", vv);
+            localStorage.setItem("sortby", v);
+            localStorage.setItem("datefrom", df);
+            localStorage.setItem("dateto", dt);
+            localStorage.setItem("stext", stext);
+    
+            $("#hidsortby").val(v);
+            if (v.toString() == "All") {
+                $("#datediv").hide();
+                if (vv.toString() != "All") {
+                    $("#alldiv").show();
+                }
+            } else {
+                $("#datediv").show();
+                if (vv.toString() == "All") {
+                    $("#alldiv").hide();
+                }
+                else {
+                    $("#alldiv").show();
+                }
+            }
+        })
+        $("#searchby").change(function () {
+            var v = $("#sortby").val();
+            var vv = $("#searchby").val();
+            var df = $("#datefrom").val();
+            var dt = $("#dateto").val();
+            var stext = $("#searchtext").val();
+            localStorage.setItem("searchby", vv);
+            localStorage.setItem("sortby", v);
+            localStorage.setItem("datefrom", df);
+            localStorage.setItem("dateto", dt);
+            localStorage.setItem("stext", stext);
+    
+            $("#hidsortby").val(v);
+            if (v.toString() == "All") {
+                $("#datediv").hide();
+                if (vv.toString() == "All") {
+                    $("#alldiv").hide();
+                }
+                else {
+                    $("#alldiv").show();
+                }
+            } else {
+                $("#datediv").show();
+                if (vv.toString() == "All") {
+                    $("#alldiv").hide();
+                }
+                else {
+                    $("#alldiv").show();
+                }
+            }
+        })
+        $("#datefrom").blur(function () {
+            var df = $("#datefrom").val();
+            localStorage.setItem("datefrom", df);
+        })
+        $("#dateto").blur(function () {
+            var df = $("#dateto").val();
+            localStorage.setItem("dateto", df);
+        })
+        $("#searchtext").blur(function () {
+            var df = $("#searchtext").val();
+            localStorage.setItem("stext", df);
+        })
+        function myserach() {
+            $("#search1").val("1");
+    
+        }
+        function myserachpro() {
+            $("#search1").val("0");
+        }
+    </script>*@
+    
+        <script type="text/javascript">
+    
+            // DO NOT REMOVE : GLOBAL FUNCTIONS!
+    
+            $(document).ready(function () {
+    
+                /* // DOM Position key index //
+    
+                l - Length changing (dropdown)
+                f - Filtering input (search)
+                t - The Table! (datatable)
+                i - Information (records)
+                p - Pagination (paging)
+                r - pRocessing
+                < and > - div elements
+                <"#id" and > - div with an id
+                <"class" and > - div with a class
+                <"#id.class" and > - div with an id and class
+    
+                Also see: http://legacy.datatables.net/usage/features
+                */
+    
+                /* BASIC ;*/
+                var responsiveHelper_dt_basic = undefined;
+                var responsiveHelper_datatable_fixed_column = undefined;
+                var responsiveHelper_datatable_col_reorder = undefined;
+                var responsiveHelper_datatable_tabletools = undefined;
+    
+                var breakpointDefinition = {
+                    tablet: 1024,
+                    phone: 480
+                };
+    
+                $('#dt_basic').dataTable({
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                        "t" +
+                        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_dt_basic) {
+                            responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#dt_basic'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_dt_basic.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_dt_basic.respond();
+                    }
+                });
+    
+                /* END BASIC */
+    
+                /* COLUMN FILTER  */
+                var otable = $('#datatable_fixed_column').DataTable({
+                    //"bFilter": false,
+                    //"bInfo": false,
+                    //"bLengthChange": false
+                    //"bAutoWidth": false,
+                    //"bPaginate": false,
+                    //"bStateSave": true // saves sort state using localStorage
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 hidden-xs'f><'col-sm-6 col-xs-12 hidden-xs'<'toolbar'>>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_fixed_column) {
+                            responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_fixed_column.respond();
+                    }
+    
+                });
+    
+                // custom toolbar
+                $("div.toolbar").html('<div class="text-right"><img src="/Content/img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
+    
+                // Apply the filter
+                $("#datatable_fixed_column thead th input[type=text]").on('keyup change', function () {
+    
+                    otable
+                        .column($(this).parent().index() + ':visible')
+                        .search(this.value)
+                        .draw();
+    
+                });
+                /* END COLUMN FILTER */
+    
+                /* COLUMN SHOW - HIDE */
+                $('#datatable_col_reorder').dataTable({
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'C>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_col_reorder) {
+                            responsiveHelper_datatable_col_reorder = new ResponsiveDatatablesHelper($('#datatable_col_reorder'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_col_reorder.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_col_reorder.respond();
+                    }
+                });
+    
+                /* END COLUMN SHOW - HIDE */
+    
+                /* TABLETOOLS */
+                $('#datatable_tabletools').dataTable({
+    
+                    // Tabletools options:
+                    //   https://datatables.net/extensions/tabletools/button_options
+                    "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'T>r>" +
+                            "t" +
+                            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+                    "oTableTools": {
+                        "aButtons": [
+                        "copy",
+                        "csv",
+                        "xls",
+                           {
+                               "sExtends": "pdf",
+                               "sTitle": "SmartAdmin_PDF",
+                               "sPdfMessage": "SmartAdmin PDF Export",
+                               "sPdfSize": "letter"
+                           },
+                           {
+                               "sExtends": "print",
+                               "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
+                           }
+                        ],
+                        "sSwfPath": "/Scripts/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+                    },
+                    "autoWidth": true,
+                    "preDrawCallback": function () {
+                        // Initialize the responsive datatables helper once.
+                        if (!responsiveHelper_datatable_tabletools) {
+                            responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+                        }
+                    },
+                    "rowCallback": function (nRow) {
+                        responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+                    },
+                    "drawCallback": function (oSettings) {
+                        responsiveHelper_datatable_tabletools.respond();
+                    }
+                });
+    
+                /* END TABLETOOLS */
+    
+            })
+    
+        </script>
+    }
