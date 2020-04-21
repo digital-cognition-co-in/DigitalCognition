@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 #
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('trader/', include('pyfintrader.urls')), # pyfintrader.urls
+    #path('trader/', include('pyfintrader.urls')), # pyfintrader.urls
     #path('analytics/', include('dc_dash.urls')),
     path('dc/', include('dc_dash.urls')), # Trying to save rework -- as lots of URL's already with Prefix - DC 
     #BELOW-- Create own Login - get emails for Password Reset etc WITHOUT== ADMIN Approval - #registration.backends.admin_approval.urls

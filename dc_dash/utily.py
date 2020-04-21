@@ -14,7 +14,7 @@ from .models import *
 # from .calc_2 import*
 from .utily import*
 from .summary_stats_1 import*
-from .predictive_1 import*
+#from .predictive_1 import*
 from .forms import*
 from django.shortcuts import redirect
 
