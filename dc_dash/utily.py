@@ -1047,10 +1047,130 @@ class utily_class():
                 context = {
                     'dataSetName': "DataSetName_Test"
                 }
-                
 
         return render(request,'dc_dash/eda_action_SearchAndReplace.html',context)
 
+
+
+    def eda_ChangetoUpper_outPut(self):  
+        """
+        AVIRUP_CHATTARAJ - Apr2020
+        #
+        EDA_Action_Search and eda_ChangetoUpper --JSON Data >> AJAX in template
+        """
+        from sqlalchemy import create_engine
+        from .dc_eda_funcs import save_postEdaDataSet
+        from .eda_apr_20 import change_to_upper 
+
+        latest_SearchParams = eda_inputs_search_and_replace.objects.all().values('dataset_name','form_input_new_column','column_name','django_form_input_operation_type','str_search','str_replace').order_by('-pk')[0:1]
+        myDict = latest_SearchParams[0]
+        for keys , values in myDict.items():
+            if "form_input_new_column" in keys:
+                new_column = str(values)
+            if "django_form_input_operation_type" in keys:
+                operation_type = str(values)
+            if "str_search" in keys:
+                str_search = str(values)
+            if "str_replace" in keys:
+                str_replace = str(values)
+        
+        user = settings.DATABASES['default']['USER']
+        password = settings.DATABASES['default']['PASSWORD']
+        database_name = settings.DATABASES['default']['NAME']
+        database_url = 'postgresql://{user}:{password}@localhost:5432/{database_name}'.format(
+            user=user,
+            password=password,
+            database_name=database_name,
+        )
+        engine = create_engine(database_url, echo=False)
+        schema_default_public = "public"
+        limit_records = 1500 ## as its EDA 
+        #
+        qs_counter_for_dfFromEDA = temp_dataSetName_dfFromEDA.objects.all().values('counter_for_dfFromEDA').order_by('-pk')[0:1]
+        #print("------QUERY SET--SEARCH_andREPLACE--qs_counter_for_dfFromEDA------------",qs_counter_for_dfFromEDA)
+        ### First RUN ==  EMPTY QUERYSET -- as NO VALUES for COUNTER == <QuerySet []>
+        ### Second RUN ==  <QuerySet [{'counter_for_dfFromEDA': 1}]>
+
+        ## Testing_21MAY19
+        #### JIRA_ROHIT_PendingTask Below Commented Out --- as seems have Disabled the DELETE / CREATE for temp data Sets 
+        ## Testing_21MAY19
+
+
+
+        # if qs_counter_for_dfFromEDA.exists():
+        #     ## We are NOT in FIRST RUN ..
+        #     myDict_counter = qs_counter_for_dfFromEDA[0]
+        #     for keys , values in myDict_counter.items():
+        #         if "counter_for_dfFromEDA" in keys:
+        #             latest_counter_for_dfFromEDA = int(values)
+        #     if latest_counter_for_dfFromEDA > 0: ## THIS will Always be TRUE HERE --- as above we Checked for NOT IN FIRST RUN ...
+        #         ##print("---------GOT COUNTER > 0  latest_counter_for_dfFromEDA======",latest_counter_for_dfFromEDA)
+        #         latest_dataSetName = temp_dataSetName_dfFromEDA.objects.all().values('temp_dataset_name').order_by('-pk')[0:1]
+        #         myDict_dataSetName = latest_dataSetName[0]
+        #         for keys , values in myDict_dataSetName.items():
+        #             if "temp_dataset_name" in keys:
+        #                 dataset_name = str(values)
+        #                 #print("--NOT FIRST RUN as --latest_counter_for_dfFromEDA > 0 --- dataset_name---",dataset_name)
+        # else:
+        """
+        DataSetName from - temp_dataSetName_for_EDALanding
+        """
+        latest_dataSetName = temp_dataSetName_for_EDALanding.objects.all().values('dataset_name').order_by('-pk')[0:1]
+        myDict_dataSetName = latest_dataSetName[0]
+        for keys , values in myDict_dataSetName.items():
+            if "dataset_name" in keys:
+                dataset_name = str(values)
+                #print("FIRST RUN OF DATA SET ___dataset_name_______",dataset_name)
+                #print("     "*90)
+
+        latest_colIndex = temp_colIndex_for_Eda.objects.all().values('column_index_from_dataTables_js').order_by('-pk')[0:1]
+        if latest_colIndex.exists():
+            #print("----------GOT a COL INDEX -----------JIRA_ROHIT_PendingTask get query SET Exists Check here -----")
+            myDict_colIndex = latest_colIndex[0]
+            for keys , values in myDict_colIndex.items():
+                if "column_index_from_dataTables_js" in keys:
+                    column_index = str(values)
+        else:
+            #print("---FROM UTILY.py NO COL INDEX YET ---------") #
+            column_index = int(3)
+            # JIRA_ROHIT_PendingTask Hardcoded below == column_index = int(3)
+            # If USER has Not Clicked on a  COLUMN to Pass in JS >> latest_colIndex 
+            # Just use default COLUMN_Index == 3 
+            # This needs a JavaScript_WARNING - JavaScript_ALERT on the FRONT END. 
+            
+
+        ## JIRA_ROHIT_PendingTask earlier ERROR -- PSQL couldnt find ACTUAL TABLE with == dataset_name in PSQL ...due to Mixed Fonts.
+        sql_command = "SELECT * FROM {}.{} limit {};".format(str(schema_default_public), str(dataset_name),str(limit_records))
+        df_for_eda = pd.read_sql(sql_command,engine)
+        df_from_eda , new_col_name = searchAndReplace(df_for_eda,new_column,column_index,operation_type,str_search,str_replace) ## Order of PARAM's IMPORTANT
+        data = json.loads(df_from_eda.to_json(orient='split'))
+        dict_json = {}
+        dict_json['data_json'] = data
+        #
+        counter_for_dfFromEDA = 0
+        temp_dataset_name = save_postEdaDataSet(df_from_eda,dataset_name) 
+        ## To Show == temp_dataset_name -- In the FrontEnd HTML without the trailing _n_n_n_ etc .
+        ## We need not show these --- trailing _n_n_n_ etc , in the TEMPLATE 
+        ## The == temp_dataset_name -- has the trailing _n_n_n_ appended as we need it for creating New PSQL Tables 
+        temp_dataset_name = str(temp_dataset_name).strip("_n_")
+        #print("------Stripped _n_----temp_dataset_name------------",temp_dataset_name)
+        #print("      "*90)
+
+        dict_json['temp_dataset_name'] = str(temp_dataset_name) ## _##_JIRA_ROHIT_PendingTask
+        #new_col_name --- returned from EDA Action Func Above ...
+        dict_json['new_col_name'] = str(new_col_name) ## _##_JIRA_ROHIT_PendingTask
+
+        ## New dataSet created post EDA Action 
+        # Saved in PSQL with NAME == temp_dataset_name
+        #print("------UTILY---Sent to TEMPLATE FrontEnd ---dict_json['temp_dataset_name']----",temp_dataset_name)
+        if temp_dataset_name != None:
+            counter_for_dfFromEDA += 1
+        model = temp_dataSetName_dfFromEDA()
+        model.counter_for_dfFromEDA = int(counter_for_dfFromEDA)
+        model.temp_dataset_name = str(temp_dataset_name)
+        model.save()
+       
+        return JsonResponse(dict_json, safe= False)
         
 
     def eda_SearchAndReplace_outPut(self):  
