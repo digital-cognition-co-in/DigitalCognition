@@ -45,6 +45,37 @@ def change_to_upper(df,row_p,col_p):
     else:
         df.iloc[row_p,col_p]=upper_value
 
-    # df=pd.DataFrame([['hello','bye','HELLO','good','devil'],['what','is','your','name','PANDAS']])
-    # change_to_upper(df,1,2)
-    # print(df)
+def pattern_matching(data,column,filter_choice,filter_value=''):
+    '''
+    THe function here is going to apply pattern matching using regex on the selected
+    dataframe and returns the dataframe without any null values based on the given predetermined
+    functions
+    1)Manual Regular Expression
+    2)Regular Expression from start
+    3)Regular Expression from end
+    4)Regular Expression from between
+
+    :param data:A dataframe needs to be passed
+    :type data:pandas.core.frame.dataframe
+    :param column:A column name needs to be passed
+    :type column:str
+    :param filter_choice:A option number needs to be passed
+    :type filter_choice:int
+    :param filter_value:A value for the regex engine
+    :type filter_value:str
+
+
+
+    :returns:return_df:A dataframe after the applied expressions
+    :rtype:pandas.core.frame.dataframe
+    '''
+    if filter_choice==1:
+        return_df=data[column].str.extract(r'({})'.format(filter_value)).dropna()
+    elif filter_choice==2:
+        return_df=data[column].str.extract(r'(^{}.+)'.format(filter_value)).dropna()
+    elif filter_choice==3:
+        return_df=data[column].str.extract(r'(.+{}$)'.format(filter_value)).dropna()
+    elif filter_choice==4:
+        return_df=data[column].str.extract(r'(.+{}.+)'.format(filter_value)).dropna()
+
+    return return_df
