@@ -47,9 +47,9 @@ def change_to_upper(df,row_p,col_p):
 
 def pattern_matching(data,column,filter_choice,filter_value=''):
     '''
-    THe function here is going to apply pattern matching using regex on the selected
+    The function here is going to apply pattern matching using regex on the selected
     dataframe and returns the dataframe without any null values based on the given predetermined
-    functions
+    conditions
     1)Manual Regular Expression
     2)Regular Expression from start
     3)Regular Expression from end
