@@ -70,6 +70,8 @@ class utility_eda_only_class():
     
     def showCategoricalCols_view(request):
         """
+        #JIRA_ROHIT_25APR -- Check if this is required - No More Modals ? 
+        #JIRA_ROHIT_25APR -- All - postgresql Conn creation in methods to be deleted - all conns to be created from a central method 
         This Func passes the JSON for AJAX to Modal == modal_CategoricalCols
         """
         user = settings.DATABASES['default']['USER']
