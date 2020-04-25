@@ -108,10 +108,9 @@ INSTALLED_APPS = [
     # 'pyfintrader',
     # 'pricingintell',
     # 'patentspike',
-    # 'digitalcognition',
+    # 'digitalcognition', # Same as == 'dc_dash', #JIRA_ROHIT - will change laters
     'dc_dash',
-    #'churn_app',
-    
+    'churn_app',
 ]
 
 
@@ -157,7 +156,7 @@ DATABASES = {
         'USER': 'dcdbapr20user', ### NO CAPITAL LETTERS in USER NAME for Postgres
         'PASSWORD': 'passdcdbapr20',
         'HOST': 'localhost', ## IF NO == localhost --- then ERROR.
-        'PORT': '',
+        'PORT': '', ## Can be Blank for LocalHost
     }
 }
 
