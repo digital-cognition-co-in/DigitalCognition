@@ -72,6 +72,14 @@ class utility_eda_only_class():
         """
         #JIRA_ROHIT_25APR -- Check if this is required - No More Modals ? 
         #JIRA_ROHIT_25APR -- All - postgresql Conn creation in methods to be deleted - all conns to be created from a central method 
+        ### Can get -- All DF's here --- But how to show in JSON DICT for AJAX ??
+        ## If we create - more than 1 AJAX URL's ???
+        ## To Avoid hitting the DB again and AGAN --- create a PICKLE of the EDA--dataSet --- the TEMP DATASET for EDA ...
+        ##JIRA_ROHIT_25APR - Create a Pickle of the EDA DataSet or better -- Browser storage .. Client-side storage -- 
+        ## https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage
+        
+        ## Use that PICKLE file for ALL KINDS of PROCESSING ---- ?? 
+
         This Func passes the JSON for AJAX to Modal == modal_CategoricalCols
         """
         user = settings.DATABASES['default']['USER']
@@ -104,11 +112,7 @@ class utility_eda_only_class():
         # print("   "*90)
 
         df_with_cat_cols = showCategoricalCols(df_for_cat_cols)
-        ### Can get -- All DF's here --- But how to show in JSON DICT for AJAX ??
-        ## If we create - more than 1 AJAX URL's ???
-        ## To Avoid hitting the DB again and AGAN --- create a PICKLE of the EDA--dataSet --- the TEMP DATASET for EDA ...
-        ## Use that PICKLE file for ALL KINDS of PROCESSING ---- ?? 
-
+        
         #print("----From == UTILY_eda_ONLYutility_eda_only==--df_with_cat_cols--------",df_with_cat_cols)
         #print("   "*90)
         #
