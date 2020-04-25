@@ -110,6 +110,7 @@ INSTALLED_APPS = [
     # 'patentspike',
     # 'digitalcognition',
     'dc_dash',
+    #'churn_app',
     
 ]
 
