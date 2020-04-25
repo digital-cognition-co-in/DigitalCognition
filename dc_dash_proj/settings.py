@@ -151,14 +151,21 @@ WSGI_APPLICATION = 'dc_dash_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dcdbapr20', ### DEFAULT SCHEMA == "public"
-        'USER': 'dcdbapr20user', ### NO CAPITAL LETTERS in USER NAME for Postgres
-        'PASSWORD': 'passdcdbapr20',
-        'HOST': 'localhost', ## IF NO == localhost --- then ERROR.
-        'PORT': '', ## Can be Blank for LocalHost
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dcdbapr20', ### DEFAULT SCHEMA == "public"
+#         'USER': 'dcdbapr20user', ### NO CAPITAL LETTERS in USER NAME for Postgres
+#         'PASSWORD': 'passdcdbapr20',
+#         'HOST': 'localhost', ## IF NO == localhost --- then ERROR.
+#         'PORT': '', ## Can be Blank for LocalHost
+#     }
+# }
 
 
 
