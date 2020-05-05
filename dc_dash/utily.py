@@ -1479,15 +1479,6 @@ class utily_class():
 
 
 
-
-
-
-
-
-
-
-
-
     ### 
     from pandas.api.types import is_string_dtype
     from pandas.api.types import is_numeric_dtype
