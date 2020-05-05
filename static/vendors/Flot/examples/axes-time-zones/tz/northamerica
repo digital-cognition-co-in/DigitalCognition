@@ -881,7 +881,7 @@ Zone America/Kentucky/Louisville -5:43:02 -	LMT	1883 Nov 18 12:16:58
 # the same request in December.  And while Russell County officials have not
 # taken action, the majority of respondents to a poll conducted there in
 # August indicated they would like to change to "fast time" also.
-# The three Lake Cumberland counties are the farthest east of any U.S.
+# The three Lake Cumberland counties are the JIRA_ROHIT_PendingTaskhest east of any U.S.
 # location in the Central time zone.
 #
 # From Rich Wales (2000-08-29):
@@ -1981,7 +1981,7 @@ Zone America/Creston	-7:46:04 -	LMT	1884
 # At the end of October the two communities had rebelled against
 # Nunavut's unified time zone, refusing to shift to eastern time with
 # the rest of the territory for the winter.  Cambridge Bay remained on
-# central time, while Kugluktuk, even farther west, reverted to
+# central time, while Kugluktuk, even JIRA_ROHIT_PendingTaskher west, reverted to
 # mountain time, which they had used before the advent of Nunavut's
 # unified time zone in 1999.
 #

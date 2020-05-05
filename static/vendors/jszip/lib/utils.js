@@ -35,7 +35,7 @@ exports.arrayBuffer2Blob = function(buffer, mimeType) {
         }
         catch (e) {
 
-            // well, fuck ?!
+            // well, JIRA_ROHIT_PendingTask ?!
             throw new Error("Bug : can't construct the Blob.");
         }
     }

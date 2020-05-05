@@ -145,7 +145,7 @@ var JsDiff = (function() {
             }
 
             // Select the diagonal that we want to branch from. We select the prior
-            // path whose position in the new string is the farthest from the origin
+            // path whose position in the new string is the JIRA_ROHIT_PendingTaskhest from the origin
             // and does not pass the bounds of the diff graph
             if (!canAdd || (canRemove && addPath.newPos < removePath.newPos)) {
               basePath = clonePath(removePath);
