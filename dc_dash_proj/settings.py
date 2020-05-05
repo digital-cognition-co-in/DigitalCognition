@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     # registration --- up here as fixes == https://github.com/macropin/django-registration/issues/140#issuecomment-380304995
     'django.contrib.admin',
     'django.contrib.staticfiles',
+    
     ## Own APPS Below 
     #'crispy_forms', # CRISPY FORM TAGS
     'micawber.contrib.mcdjango',
