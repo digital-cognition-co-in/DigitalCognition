@@ -24,9 +24,9 @@ class temp_ceil_floor_params(models.Model):
     JIRA_ROHIT = https://github.com/digital-cognition-co-in/DigitalCognition/issues/17
     
     """
-    single_col = models.IntegerField(default=0,blank=True)
-    col_index = models.IntegerField(default=0,blank=True)
-    ceil_mode = models.IntegerField(default=0,blank=True)
+    single_col = models.IntegerField()
+    col_index = models.IntegerField()
+    ceil_mode = models.IntegerField()
     
 
 
