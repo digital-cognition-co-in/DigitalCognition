@@ -31,6 +31,37 @@ from .sql_queries_all import *
 # from .dc_holoviews import *
 # from .utility_eda_only import *
 
+def eda_MatchSimilarText_formSave(request):
+    """
+    PARAMS from FORM == eda_ceil_floor_form
+    
+    #,besides == dataset_name and COL_NUM 
+    Save FORM to MODEL - render HTML Page in which AJAX URL Call embeded. 
+    https://github.com/digital-cognition-co-in/DigitalCognition/issues/17
+
+    """
+    if request.method == 'POST':
+        eda_ceil_floor_form_valid = eda_ceil_floor_form(request.POST)
+        if eda_ceil_floor_form_valid.is_valid():
+            # below is standard for all such Forms Processing Methods - We need the Current DataSet reffrence == latest_dataSetName
+            latest_dataSetName = temp_dataSetName_for_EDALanding.objects.all().values('dataset_name').order_by('-pk')[0:1]
+            myDict = latest_dataSetName[0]
+            ls_data_set_name = []
+            for keys, values in myDict.items():
+                if "dataset_name" in keys:
+                    ls_data_set_name.append(str(values))
+                    dataset_name = str(ls_data_set_name[0])
+            # below is standard for all such Forms Processing Methods - getting PARAMS from the -- User >> Form >> Here >> Temp_DB        
+            ceil_mode = eda_ceil_floor_form_valid.cleaned_data['ceil_mode'] 
+            col_index = eda_ceil_floor_form_valid.cleaned_data['col_index']
+            single_col = eda_ceil_floor_form_valid.cleaned_data['single_col']
+
+            eda_MatchSimilarText_form_valid_object = eda_MatchSimilarText_form_valid.save()
+            # eda_MatchSimilarText_renderPage()
+            # What are we doig with this OBJECT ?? Will the FORM save if we dont CREATE OBJECT ?? YES ??
+    # return render(request,'dc_dash/eda_action_MatchSimilarText_Fuzz.html') ## JIRA_ROHIT_PendingTask --- earlier Now Changed - AUG 19
+    return render(request, 'dc_dash/includes/modal_EDA_Col_Actions.html')
+
 
 def eda_ceil_and_floor_outPut(self): 
     """
