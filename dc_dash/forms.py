@@ -27,24 +27,18 @@ class eda_MatchSimilarText_form(forms.ModelForm):
 		model = eda_inputs_MatchSimilarText
 		fields = ('fuzziness','str_to_compare_with',)
 
+class eda_ceil_floor_form(forms.ModelForm):
+	class Meta:
+		model = temp_ceil_floor_params
+		fields = ('single_col','col_index','ceil_mode',)
 
 class sql_query_form(forms.ModelForm):
 	class Meta:
 		model = SqlQueryStr
 		fields = ('table_name','limit_records','new_table_name','sql_query_input',)
 
-class initSearchTracxn(forms.Form):
-	initSearchStrTracxn = forms.CharField(max_length=1000)
-	#name="initSearchStrTracxn" value = "{{initStrTracxn}}" type="text" placeholder="Initial Search.."  
-	
-class initSearch_Portal_form(forms.Form):
-	#print("FORMS.py HIT -------------------------")
-	Designation = forms.CharField(max_length=1000 , required=False)
-	Organization_Name = forms.CharField(max_length=1000 , required=False)
-	Geo_City = forms.CharField(max_length=1000 , required=False)
-	Geo_Country = forms.CharField(max_length=1000 , required=False)
-	college = forms.CharField(max_length=1000 , required=False)
-	university = forms.CharField(max_length=1000 , required=False)
+
+
 
 
 """
