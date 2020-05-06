@@ -18,6 +18,18 @@ If field has blank=False, the field will be required.
 SO == https://stackoverflow.com/questions/34954631/django-empty-form-field-validation-is-not-working-with-clean-method
 """
 
+#
+class temp_ceil_floor_params(models.Model):
+    """
+    JIRA_ROHIT = https://github.com/digital-cognition-co-in/DigitalCognition/issues/17
+    
+    """
+    single_col = models.IntegerField(default=0,blank=True)
+    col_index = models.IntegerField(default=0,blank=True)
+    ceil_mode = models.IntegerField(default=0,blank=True)
+    
+
+
 class temp_tableName_forMerge(models.Model):
     temp_tableName = models.CharField(max_length=255, blank=True)
     temp_tableName1 = models.CharField(max_length=255, blank=True)
