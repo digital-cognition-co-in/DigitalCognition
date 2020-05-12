@@ -828,17 +828,14 @@ class utily_class():
                 model.save()
         return render(request, 'dc_dash/eda_sidebar.html')
 
-    def renderPage_extractEmailPart(request):
+    def renderPage_extractEmailPart(request): ## ayush
         if request.method == 'POST':
-            #print("========GOT POST =========")
-            #print("                "*90)
-            emailPartsButtonClicked = request.POST.get(
-                'emailPartsButtonClicked')
-            #print("========GOT POST =====",emailPartsButtonClicked)
-            #print("                "*90)
-
-        # /templates/dc_dash/eda_action_ExtractEmailParts.html
-        return render(request, 'dc_dash/eda_action_ExtractEmailParts.html')
+            emailPartsButtonClicked = request.POST.get('emailPartsButtonClicked')
+            context = {
+                    'pyMethod': "extractEmailPart"
+                      }
+        #return render(request, 'dc_dash/eda_action_ExtractEmailParts.html',context)
+        return render(request, 'dc_dash/A.html',context)
 
     def extractEmailPart_outPut(request):
         #

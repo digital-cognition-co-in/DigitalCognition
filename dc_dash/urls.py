@@ -37,7 +37,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 urlpatterns = [
 
     #for_eda_dataset_name_listView
-    # FOO-SEP19___THE DC LANDING PAGE -- without LINKEDIN / TRACXN.
     # This has the link to URL === EDA>>Go! 
     #http://localhost:8000/dc/datasets_listView
 
@@ -316,11 +315,9 @@ urlpatterns = [
 
 
     #data_ListView_index
-    # Not being used -- was used for TRACXN ??
+    
     url(r'^$',  data_ListView_index.as_view(), name='data_ListView_index'),  #
     # 
-    url(r'^data_ListView1/', data_ListView_scrapTracxn_view.as_view() , name='data_ListView_scrapTracxn_view'), #.as_view() -as its a -CLASS BASED VIEW -ListView 
-    #initSearchTracxn_view ## data_ListView_initSearch
     #initSearchTerms_ListView
     #url(r'^initSearchTerms/', initSearchTerms_ListView.as_view() , name='initSearchTerms_ListView'), #.as_view() -as its a -CLASS BASED VIEW -ListView 
     url(r'^form_view/', views.form_view , name='call_form_view'),
@@ -330,11 +327,8 @@ urlpatterns = [
     url(r'^initSearchTerms/', views.initSearchTerms_ListView , name='initSearchTerms_ListView'),
     #url(r'^init_PortalSearchTerms/', views.initSearch_LinkedIn_view , name='initSearch_LinkedIn_view'),
     #init_scrap_linkedin
-    url(r'^tgt_PortalSearchTerms/', utily.utily_class.scrapLnkd_view, name='call_scrapLnkd_view'),
+    #url(r'^tgt_PortalSearchTerms/', utily.utily_class.scrapLnkd_view, name='call_scrapLnkd_view'),
     #
-    # url(r'^initSearch/', utily.utily_class.initSearchTracxn_view , name='initSearch_view'),
-    #scrapTracxn_view
-    url(r'^initScrape/', utily.utily_class.scrapTracxn_view , name='initScrape_view'),
     #deduplicate_data_view
     url(r'^url_deduplicate_data_view/', views.deduplicate_data_view , name='call_deduplicate_data_view'), 
     #TREE-d3Js - view_d3jsTree
@@ -347,11 +341,6 @@ urlpatterns = [
     url(r'^upload_csv_page/$', views.upload_csv_page, name='upload_csv_page'),      ## 
     #
     
-
-
-
-
-
     #JIRA_ROHIT_PendingTask--Above Class Based Views- VIEWNAME.as_view()  --- defined in the Views.py 
 
     #url(r'^data_from_model/$', utily.utily_class.all_DataListView, name='data_from_model'), # data_from_model
@@ -360,7 +349,6 @@ urlpatterns = [
     #url(r'^$', views.index, name='index'), # Index.html includes - base1.html and NOT base.html as it has NAVBAR in it 
     #url(r'^crawl_clear/$', views.hot_crawl_view, name='crawl_clear'), # Uncomment to get Hotels data into DB by CRAWL
     
-    ##### Digital Cognition --------------------
     ### Bokeh --- https://github.com/bokeh/bokeh/tree/0.12.2
     #vbar_chart_bokeh
     #url(r'^bokeh_vbar/$', bokeh_views.vbar_chart_bokeh, name='vbar_chart_bokeh'), ## vbar_chart_bokeh
@@ -372,7 +360,6 @@ urlpatterns = [
     #url(r'^bokeh_pivot_table/$', bokeh_views.bokeh_pivot_table, name='bokeh_pivot_table'), ## 
     #
     
-    #JIRA_ROHIT_PendingTask CHECK --- url(r'^pred_1/$', pred_views.pred_anal, name='pred_anal'), ## 
     #
     #Bokeh_1 --- ### Not Ok -- 22 Jan 18 --- probably needs New Bokeh 
     #url(r'^bokeh_1/$', views.bokeh_1, name='bokeh_1'), ## Bokeh_1    
@@ -386,13 +373,6 @@ urlpatterns = [
     #url(r'^bokeh_area_chart/$', views.bokeh_area_chart, name='bokeh_area_chart'), ## bokeh_area_chart
     #
     
-    ### HTML Table Display 
-    #
-    
-    # Rename Field - testing 
-    
-    url(r'^pred_df_1/$', views.pred_df_1, name='pred_df_1'),     ## pred_df_1 - Testing
-    # url(r'^index_1/$', views.index_1, name='index_1'),       ## Step-1- Landing page with Links 
     
     
     
@@ -400,53 +380,7 @@ urlpatterns = [
     
     
     
-    ##### Old Dummy URL's 
-    #
-    #
-    #url(r'^uploads/home/$', views.home, name='home'), 
-    #url(r'^uploads/simple/$', views.simple_upload, name='simple_upload'),  
-    #url(r'^uploads/form/$', views.model_form_upload, name='model_form_upload'), 
-    #url(r'^index_1/$', views.list_csv, name='list_csv'),      ## Step-1- Landing page with Links 
-    #url(r'^selected/$', views.selected, name='selected'),     ## Step-1- Shows All File Objects from the MODEL Document
-    #url(r'^calc_1/$', views.computation, name='computation'), ## Step-1- Computation
-    #url(r'^visualisation/$', views.visualisation, name='visualisation'), ## Step-1- Computation
-    #url(r'^graph/$', views.graph, name='graph'), ## Step-1- graph
-    #url(r'^learning/$', views.learning, name='learning'), ## Step-1- Computation
     
-
-    
-    url(r'^chart_1/$', utily.utily_class.chart_1, name='chart_1'),   ## Step-3- Chart_1 
-    url(r'^summary_stats_index/$', utily.utily_class.summary_stats_index, name='summary_stats_index'),#Sumry_stats_index
-    url(r'^data_del_index/$', utily.utily_class.data_del_index, name='data_del_index'),  ## data_del_index
-    url(r'^data_del_1/$', views.data_del_1, name='data_del_1'),      
-    url(r'^data_del_2/$', views.data_del_2, name='data_del_2'),      
-    url(r'^data_del_3/$', views.data_del_3, name='data_del_3'),      
-    url(r'^data_del_4/$', views.data_del_4, name='data_del_4'),      
-    
-    
-    
-    
-    #summary_stats_1 --- In these --- utily.utily_class. ---- we have BYPASSED the views.py file ...
-
-    url(r'^summary_stats_1/$', utily.utily_class.summary_stats_1, name='summary_stats_1'), ## summary_stats_1 --- Model ==1
-    url(r'^summary_stats_2/$', utily.utily_class.summary_stats_2, name='summary_stats_2'), ## summary_stats_2 --- Model ==2
-    url(r'^summary_stats_3/$', utily.utily_class.summary_stats_3, name='summary_stats_3'), ## summary_stats_3 --- Model ==3
-    url(r'^summary_stats_4/$', utily.utily_class.summary_stats_4, name='summary_stats_4'), ## summary_stats_3 --- Model ==4
-    url(r'^summary_stats_5/$', utily.utily_class.summary_stats_5, name='summary_stats_5'), ## summary_stats_3 --- Model ==5
-    
-    
-    
-    
-    
-    #url(r'^data_create_model4/$', views.data_create_model4, name='data_create_model4'), #Step-5-Create Table- again 
-    
-    #url(r'^calc_a/$', views.calc_a, name='calc_a'), ## Ok Uncomment
-    #url(r'^calc_b/$', views.calc_b, name='calc_b'), ## TBD
-    #url(r'^calc_c/$', views.calc_c, name='calc_c'), ## Ok Uncomment
-    #url(r'^calc_c/$', views.calc_d, name='calc_d'),  ## TBD
-    #url(r'^dash/$', views.dash_1, name='dash_1'),
-    
-
     #url(r'^login/', views.dcdash_login, name='call_dvcad_loginIndex'), ## no DOLLAR after / 
     #url(r'^index/', views.dcdash_landing, name='call_dvcad_landing'), ## JIRA_ROHIT_PendingTask FAILS == decorators=['django.contrib.auth.decorators.login_required'] 
     
