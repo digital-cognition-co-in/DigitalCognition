@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}    
+{% include 'dc_dash/includes/dc_customCSS.html' %}
+{% include 'dc_dash/base.html' %}
+{% csrf_token %}
+
+
+
+<head>
+    
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+<!-- /home/dhankar/_dc_main/dc_dev/DigitalCognition/static_digitalcog/css/jsPlumbCSS -->
+
+<link href="/static/css/jsPlumbCSS/jsplumb.css" rel="stylesheet">
+<link href="/static/css/jsPlumbCSS/jsplumbtoolkit-defaults.css" rel="stylesheet">
+<link href="/static/css/jsPlumbCSS/jsplumbtoolkit-demo.css" rel="stylesheet">
+<link href="/static/css/jsPlumbCSS/main.css" rel="stylesheet">
+
+
+<link href="/static/css/dhank_dataTable.css" rel="stylesheet">
+
+
+</head>
+
+
+
+<style>
+
+/* STARTS CSS from Blog  */    
+
+.custom{
+    position: absolute;
+    z-index: 5;
+}
+ 
+#canvas{
+    z-index: 1;
+}
+
+
+
+
+.start{
+    border-radius: 40px;
+    text-align: center;
+}
+
+.diamond{
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+ 
+.desc-text{
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.step{
+    border-radius: 0.5em;
+    width: 80px;
+    height: 80px;
+}
+.window.jsplumb-connected-step {
+    border: 2px solid #29e;
+}
+
+.window.jsplumb-connected-end {
+    border: 2px solid orangered;
+}
+	
+/* Ends CSS from Blog  */
+
+
+
+
+
+/* Below CSS from JSPlumb demo CSS == https://github.com/jsplumb/jsplumb/blob/master/demo/flowchart/demo.css */
+.demo {
+    /* for IE10+ touch devices */
+    touch-action:none;
+}
+
+.flowchart-demo .window {
+    border: 1px solid #346789;
+    box-shadow: 2px 2px 19px #aaa;
+    -o-box-shadow: 2px 2px 19px #aaa;
+    -webkit-box-shadow: 2px 2px 19px #aaa;
+    -moz-box-shadow: 2px 2px 19px #aaa;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+    opacity: 0.8;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    z-index: 20;
+    position: absolute;
+    background-color: #eeeeef;
+    color: black;
+    font-family: helvetica, sans-serif;
+    padding: 0.5em;
+    font-size: 0.9em;
+    -webkit-transition: -webkit-box-shadow 0.15s ease-in;
+    -moz-transition: -moz-box-shadow 0.15s ease-in;
+    -o-transition: -o-box-shadow 0.15s ease-in;
+    transition: box-shadow 0.15s ease-in;
+}
+
+.flowchart-demo .window:hover {
+    box-shadow: 2px 2px 19px #444;
+    -o-box-shadow: 2px 2px 19px #444;
+    -webkit-box-shadow: 2px 2px 19px #444;
+    -moz-box-shadow: 2px 2px 19px #444;
+    opacity: 0.6;
+}
+
+.flowchart-demo .active {
+    border: 1px dotted green;
+}
+
+.flowchart-demo .hover {
+    border: 1px dotted red;
+}
+
+#flowchartWindow1 {
+    top: 34em;
+    left: 5em;
+}
+
+#flowchartWindow2 {
+    top: 7em;
+    left: 36em;
+}
+
+#flowchartWindow3 {
+    top: 27em;
+    left: 48em;
+}
+
+#flowchartWindow4 {
+    top: 23em;
+    left: 22em;
+}
+
+.flowchart-demo .jtk-connector {
+    z-index: 4;
+}
+
+.flowchart-demo .jtk-endpoint, .endpointTargetLabel, .endpointSourceLabel {
+    z-index: 21;
+    cursor: pointer;
+}
+
+.flowchart-demo .aLabel {
+    background-color: white;
+    padding: 0.4em;
+    font: 12px sans-serif;
+    color: #444;
+    z-index: 21;
+    border: 1px dotted gray;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.flowchart-demo .aLabel.jtk-hover {
+    background-color: #5C96BC;
+    color: white;
+    border: 1px solid white;
+}
+
+.window.jtk-connected {
+    border: 1px solid green;
+}
+
+.jtk-drag {
+    outline: 4px solid pink !important;
+}
+
+path, .jtk-endpoint {
+    cursor: pointer;
+}
+
+.jtk-overlay {
+    background-color:transparent;
+}
+
+</style>
+
+
+
+<body>
+
+<div id="flowChartView" style="display:block;">
+    <br>
+    <button class="btn btn-success" id="flowchartSaveBtn" onclick="" style="margin-left: 15px">Save</button><br><br>
+    <div style="width:100%; height: 50%; white-space:nowrap;">
+        <span style="display: inline-block; vertical-align: top; padding: 5px; width:15%">
+            <div id="myPalette" style="border: solid 1px gray; height: auto"><p></p><center><strong>Palette</strong></center><p></p>
+                <div class="jtk-demo-main" style="margin-top: 20px;">
+                    <div class="jtk-demo-canvas canvas-wide flowchart-demo" id="canvas1">
+                        <div class="window start jsplumb-connected" id="startEv"><strong><p>start</p></strong></div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
+                        <div class="window step jsplumb-connected-step" id="stepEv"><strong><p>step</p></strong></div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
+                        <div class="window diamond jsplumb-connected-step" id="descEv"><strong><p class="desc-text">decision</p></strong></div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="window start jsplumb-connected-end" id="endEv"><strong><p>end</p></strong></div>
+                    </div>
+                </div>
+            </div>
+        </span>
+ 
+        <span style="display: inline-block; vertical-align: top; padding: 5px; width:85%">
+          <div id="myDiagram" style="border: solid 1px gray;;"><p></p><center><strong>Drawing</strong></center><p></p>
+              <div class="jtk-demo-main" style="margin-top: 20px;">
+                  <div class="jtk-demo-canvas canvas-wide flowchart-demo jtk-surface  jtk-surface-nopan" id="canvas">
+                  </div>
+              </div>
+          </div>
+        </span>
+    </div>
+</div>
+
+
+
+{% block javascripts %}
+
+<!-- https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js -->
+<!-- https://github.com/jsplumb/jsplumb/tree/master/dist/js -->
+
+<script src="/static/js/jsPlumbJS_May2020/jsplumb.js"></script>
+<script src="/static/js/jsPlumbJS_May2020/jsplumb.min.js"></script>
+<script src="/static/js/jsPlumbJS_May2020/jquery-ui.js"></script>
+<script src="/static/js/jsPlumbJS_May2020/flowchart.js"></script>
+
+
+<script src="/static/vendors/jszip/dist/jszip.min.js"></script>
+
+
+{% endblock javascripts %}
+
+
+
+
+
+
+
+</body>
+</html>

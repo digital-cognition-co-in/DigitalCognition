@@ -1,6 +1,0 @@
-#MAIN SOURCE ---> https://getbootstrap.com/docs/3.3/examples/dashboard/
-
-# DIR NAME == less === DIR PATH ===  /home/dhankar/Desktop/dc_own/aa____infoBOT_v2/static_in_pro/our_static/css/less
-DIR PATH ON Twitter_BootStrap BRANCH -->>v3-dev
-GITHUB ---> https://github.com/twbs/bootstrap/tree/v3-dev/less
-
