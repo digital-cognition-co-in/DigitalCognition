@@ -161,6 +161,9 @@ urlpatterns = [
     #url(r'^cell_getJSVal1/',utily.utily_class.psql_tableNames_from_js_for_merge, name='cell_getJSVal1'), # 
     url(r'^cell_getJSVal1/',utily.utily_class.psql_tableNames_js_to_py, name='cell_getJSVal1'), # 
     #
+    #jsPlumbTest_1
+    url(r'^url_jsPlumbTest_1/',utily.utily_class.jsPlumbTest_1, name='call_jsPlumbTest_1'), # 
+
     #CodeMirror
     #view_pyTo_codeMirror
     url(r'^url_pyTo_codeMirror/',utily.utily_class.view_pyTo_codeMirror, name='call_pyTo_codeMirror'), # 

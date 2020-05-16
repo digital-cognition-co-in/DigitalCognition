@@ -80,6 +80,17 @@ class utily_class():
     import io
     import os
 
+
+    def jsPlumbTest_1(request):
+        """
+        jsPlumbTest_1 == dc_dash/templates/dc_dash/includes/jsPlumbTest_1.html
+        """
+        
+        return render(request, 'dc_dash/includes/jsPlumbTest_1.html')
+
+
+
+
     def modalSimpleTest(request):
         return render(request, 'dc_dash/includes/modalSimpleTest.html')
 
