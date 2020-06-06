@@ -1,7 +1,7 @@
 asgiref==3.2.7
 bokeh==2.0.2
 certifi==2020.4.5.1
-Django==3.0.5
+Django==3.0.7
 django-registration-redux==2.7
 Jinja2==2.11.2
 MarkupSafe==1.1.1
