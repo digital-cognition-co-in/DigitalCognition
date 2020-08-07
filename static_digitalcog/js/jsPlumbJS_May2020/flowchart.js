@@ -13,10 +13,10 @@ jsPlumb.ready(function () {
             ["Arrow", {
                 location: 1,
                 visible: true,
-                id: "ARROW";
+                id: "ARROW",
             }]
         ],
-        Container: "canvas";
+        Container: "canvas",
     });
  
     //define basic connection type
@@ -86,6 +86,7 @@ jsPlumb.ready(function () {
     };
 
 function makeDraggable(id, className, text){
+    alert(text)
     $(id).draggable({
         helper: function(){
             return $("<div/>",{
@@ -109,5 +110,4 @@ $("#canvas").droppable({
          ui.helper.clone().appendTo(this);
      }
 });
-
 
