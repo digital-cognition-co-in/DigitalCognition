@@ -1,8 +1,12 @@
 ### DigitalCognition
 DigitalCognition - a Master Data Management System with built-in capability for Business Analytics and creating out of the box Machine Learning models and pipelines. 
 
+##### Existing product demo videos are here - feel free to go through the entire PlayList of Videos
 
-### Business Offerings 
+- YouTube link of Demo Videos - https://www.youtube.com/watch?v=DTAgjm3VOjQ&list=PLLpHcww3qjp5DGRe_OTVO94n7i13bvTdV&index=9
+- YouTube link of Demo Videos - https://www.youtube.com/watch?v=zydsrBWTbEA&list=PLLpHcww3qjp5DGRe_OTVO94n7i13bvTdV&index=5
+
+### Highly Customizable SaaS product with high level features as enlisted below 
 
 > Disparate Data Sources - Data integration involves combining data from several disparate sources, which are stored using various technologies and provide a unified view of the data.   
 
@@ -12,6 +16,24 @@ DigitalCognition - a Master Data Management System with built-in capability for 
 
 #
 
+<br/>
+
+
+### Features and Offerings
+
+> Kindly consider this is a work in progress project . As listed below we mention our features to be ```Tableau like``` , this does not in any manner mean we are Copying from Tableau or any such other BI tools etc . We are just very highly inspired by them and others in this niche. 
+
+- [X] `EDA- Exploratory Data Analysis - Work in Progress` 
+- [X] `Tableau like MetaData Management - Work in Progress` 
+- [X] `Tableau like Drag and Drop widgets - Work in Progress` 
+- [X] `Tableau like Forms and Reports - Work in Progress` 
+- [X] `Tableau like Executive Dashboards - Work in Progress`
+- [X] `Work in Progress` 
+
+<br/>
+
+
+#
 
 
 
