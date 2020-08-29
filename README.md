@@ -1,3 +1,14 @@
+### MOVED HERE -- https://github.com/RohitDhankar/digitalCognition
+
+
+
+
+
+
+#
+
+</br>
+
 ### DigitalCognition
 DigitalCognition - a Master Data Management System with built-in capability for Business Analytics and creating out of the box Machine Learning models and pipelines. 
 
